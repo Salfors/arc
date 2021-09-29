@@ -76,14 +76,14 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 # mount target
 #mkdir /mnt
 mount -t ext4 "${DISK}2" /mnt
-#mkdir /mnt/boot
+mkdir /mnt/boot
 mkdir /mnt/boot/efi
-mount "${DISK}1" /mnt/boot/efi
+mount -t fat "${DISK}1" /mnt/boot/efi
 
 if [ $answer == "yes" ]
 then
     mkdir /mnt/home
-    mount "${DISK}3" /mnt/home
+    mount -t ext4 "${DISK}3" /mnt/home
 
 else 
  
@@ -92,10 +92,10 @@ fi
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-#pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
-#genfstab -U /mnt >> /mnt/etc/fstab
-mv /arc/step2.sh/ /mnt
-chmod a+x /mnt/arc/step2.sh
+pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
+genfstab -U /mnt >> /mnt/etc/fstab
+mv ~/arc/step2.sh /mnt/
+chmod a+x /mnt/step2.sh
 arch-chroot /mnt 
 
 umount -R /mnt
