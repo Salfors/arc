@@ -28,7 +28,7 @@ if [ $answer == "yes" ]
 then
     echo -e "\nEnter your /home partition size please"
     read Homep   
-    echo sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
+    sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
     echo -e 
 
 else 
@@ -43,7 +43,7 @@ if [ $answer2 == "yes" ]
 then
     echo -e "\nEnter your Swap partition size please"
     read Swap
-    echo sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
+    sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
     echo -e 
 
 else 
