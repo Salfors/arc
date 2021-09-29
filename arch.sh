@@ -16,11 +16,11 @@ sgdisk -Z ${DISK} # zap all on disk
 sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
 # create partitions
-sgdisk -n 1:0:+1000M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
+sgdisk -n 0:0:+1000M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
 echo "Please enter size for root partition"
 read RooP
 
-sgdisk -n 0:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
+sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
 
 echo -e "\nPlease do you want create home part or not "
 read  -p "your answer " answer
@@ -28,7 +28,7 @@ if [ $answer == "yes" ]
 then
     echo -e "\nEnter your /home partition size please"
     read Homep   
-    echo sgdisk -n 0:0:"+"$Homep"" ${DISK} #partition 3 (/home)
+    echo sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
     echo -e 
 
 else 
@@ -43,7 +43,7 @@ if [ $answer2 == "yes" ]
 then
     echo -e "\nEnter your Swap partition size please"
     read Swap
-    echo sgdisk -n 0:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
+    echo sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
     echo -e 
 
 else 
