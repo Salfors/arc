@@ -92,8 +92,10 @@ fi
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
-genfstab -U /mnt >> /mnt/etc/fstab
+#pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
+#genfstab -U /mnt >> /mnt/etc/fstab
+mv /arc/step2.sh/ /mnt
+chmod a+x /mnt/arc/step2.sh
 arch-chroot /mnt 
 
 umount -R /mnt
