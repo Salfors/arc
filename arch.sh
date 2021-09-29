@@ -20,7 +20,7 @@ sgdisk -n 0:0:+1000M ${DISK} # partition 1 (UEFI SYS), default start block, 512M
 echo "Please enter size for root partition"
 read RooP
 
-sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
+sgdisk -n 1:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
 
 echo -e "\nPlease do you want create home part or not "
 read  -p "your answer " answer
@@ -28,7 +28,7 @@ if [ $answer == "yes" ]
 then
     echo -e "\nEnter your /home partition size please"
     read Homep   
-    sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
+    sgdisk -n 2:0:"+"$Homep"" ${DISK} #partition 3 (/home)
     echo -e 
 
 else 
@@ -43,7 +43,7 @@ if [ $answer2 == "yes" ]
 then
     echo -e "\nEnter your Swap partition size please"
     read Swap
-    sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
+    sgdisk -n 3:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
     echo -e 
 
 else 
