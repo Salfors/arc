@@ -53,6 +53,7 @@ then
     echo -e 
     sgdisk -c :"Swap" ${DISK}
     mkswap -L "Swap" "${DISK}4"
+    swapon "Swap" "${DISK}4"
 
 else 
  
@@ -73,11 +74,11 @@ mkfs.fat -F32 -n "UEFISYS" "${DISK}1"
 mkfs.ext4 -L "ROOT" "${DISK}2"
 
 # mount target
-mkdir /mnt
+#mkdir /mnt
 mount -t ext4 "${DISK}2" /mnt
-mkdir /mnt/boot
+#mkdir /mnt/boot
 mkdir /mnt/boot/efi
-mount "${DISK}1" /mnt/boot/
+mount "${DISK}1" /mnt/boot/efi
 
 if [ $answer == "yes" ]
 then
@@ -91,9 +92,9 @@ fi
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-pacstrap /mnt base base-devel linux linux-firmware vim nano sudo --noconfirm --n
+pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
 genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt /bin/bash
+arch-chroot /mnt 
 echo "en_US.UTF-8 UTF-8" >> /etc/local.gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
