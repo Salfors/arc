@@ -16,11 +16,11 @@ sgdisk -Z ${DISK} # zap all on disk
 sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
 # create partitions
-sgdisk -n 0:0:+1000M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
+sgdisk -n 1:0:+1000M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
 echo "Please enter size for root partition"
 read RooP
 
-sgdisk -n 1:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
+sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
 
 echo -e "\nPlease do you want create home part or not "
 read  -p "your answer " answer
@@ -28,8 +28,14 @@ if [ $answer == "yes" ]
 then
     echo -e "\nEnter your /home partition size please"
     read Homep   
-    sgdisk -n 2:0:"+"$Homep"" ${DISK} #partition 3 (/home)
+    echo sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
     echo -e 
+    sgdisk -c 3:"Home" ${DISK}
+    mkfs.ext4 -L "Home" "${DISK}3"
+
+
+
+
 
 else 
  
@@ -43,8 +49,10 @@ if [ $answer2 == "yes" ]
 then
     echo -e "\nEnter your Swap partition size please"
     read Swap
-    sgdisk -n 3:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
+    echo sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
     echo -e 
+    sgdisk -c :"Swap" ${DISK}
+    mkswap -L "Swap" "${DISK}4"
 
 else 
  
@@ -52,3 +60,75 @@ else
     echo "Ok no problem " 
   
 fi
+
+# label partitions
+sgdisk -c 1:"UEFISYS" ${DISK}
+sgdisk -c 2:"ROOT" ${DISK}
+
+# make filesystems
+echo -e "\nCreating Filesystems...\n"
+
+
+mkfs.fat -F32 -n "UEFISYS" "${DISK}1"
+mkfs.ext4 -L "ROOT" "${DISK}2"
+
+# mount target
+mkdir /mnt
+mount -t ext4 "${DISK}2" /mnt
+mkdir /mnt/boot
+mkdir /mnt/boot/efi
+mount "${DISK}1" /mnt/boot/
+
+if [ $answer == "yes" ]
+then
+    mkdir /mnt/home
+    mount "${DISK}3" /mnt/home
+
+else 
+ 
+    echo "" 
+fi 
+echo "--------------------------------------"
+echo "-- Arch Install on Main Drive       --"
+echo "--------------------------------------"
+pacstrap /mnt base base-devel linux linux-firmware vim nano sudo --noconfirm --n
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt /bin/bash
+echo "en_US.UTF-8 UTF-8" >> /etc/local.gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+echo "--------------------------------------"
+echo "--          Host Setup           --"
+echo "--------------------------------------"
+
+echo -e "\nEnter your Host name (Ex:archPc) :"
+read HostN
+echo "$HostN" > /etc/hostname
+echo "127.0.1.1	  localhost.localdomin	  $HostN" > /etc/hosts
+
+echo "--------------------------------------"
+echo "--          Network Setup           --"
+echo "--------------------------------------"
+
+pacman -S networkmanager dhclient --noconfirm --needed
+systemctl enable --now NetworkManager
+
+echo "--------------------------------------"
+echo "-- Bootloader Systemd Installation  --"
+echo "--------------------------------------"
+pacman -S --noconfirm efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --removable
+grub-makconfig -o /boot/grub/grub.cfg
+
+echo "--------------------------------------"
+echo "--      Set Password for Root       --"
+echo "--------------------------------------"
+echo "Enter password for root user: "
+passwd root
+exit
+umount -R /mnt
+
+echo "--------------------------------------"
+echo "--   SYSTEM READY FOR FIRST BOOT    --"
+echo "--------------------------------------"
+echo "--          reboot now              --"
