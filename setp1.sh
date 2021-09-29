@@ -78,7 +78,7 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
-mount -t fat "${DISK}1" /mnt/boot/efi
+mount "${DISK}1" /mnt/boot/efi
 
 if [ $answer == "yes" ]
 then
