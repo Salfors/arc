@@ -140,6 +140,8 @@ pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
 genfstab -U /mnt >> /mnt/etc/fstab
 mv ~/arc/step2.sh /mnt/
 chmod a+x /mnt/step2.sh
+echo "$DISK" > /mnt/ID
+echo "$Mode" > /mnt/GrubID
 clear
 echo "-------------------------------------------------------------"
 echo "--    you should run step 2 after it be ready (./step2)  --"
