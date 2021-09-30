@@ -1,35 +1,69 @@
+clear
 echo -e "\nInstalling git (for next steups)...\n"
 pacman -S --noconfirm git
 
 echo "en_US.UTF-8 UTF-8" >> /etc/local.gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
-
+clear
 echo "--------------------------------------"
-echo "--          Host Setup           --"
+echo "--          Host Setup              --"
 echo "--------------------------------------"
 
-echo -e "\nEnter your Host name (Ex:archPc) :"
-read HostN
-echo "$HostN" > /etc/hostname
-echo "127.0.1.1	  localhost.localdomin	  $HostN" > /etc/hosts
+while true
+do
+read  -p "Enter your Host name (default==archPc) :" HostN
+if [ "$HostN" != "" ]
+    then
+    echo "127.0.1.1	  localhost.localdomin	  $HostN" 
+    break
+    elif [ "$HostN" == "" ]
+    then 
+    echo "127.0.1.1	  localhost.localdomin	  archPc" 
+    break
+     
+fi
 
+done
+
+clear
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
 
 pacman -S networkmanager dhclient --noconfirm --needed
 systemctl enable --now NetworkManager
-
-echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
-echo "--------------------------------------"
-pacman -S --noconfirm efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --removable
-grub-makconfig -o /boot/grub/grub.cfg
-
+clear
 echo "--------------------------------------"
 echo "--      Set Password for Root       --"
 echo "--------------------------------------"
 echo "Enter password for root user: "
 passwd root
+clear
+
+echo "--------------------------------------"
+echo "-- Bootloader Systemd Installation  --"
+echo "--------------------------------------"
+pacman -S --noconfirm efibootmgr
+
+ID="`cat /mnt/ID`"
+GrubID="`cat /mnt/GrubID`"
+
+if [ "$GrubID" == "1" ]
+    then
+    grub-install --boot-directory=/mnt/boot $ID 
+    elif [ "$GrubID" == "2" ]
+    then
+    grub-install --target=x86_64-efi --efi--directory=/boot/efi --bootloader-id=GRUB --removable 
+    else
+    echo ""
+    
+fi
+grub-mkconfig -o /boot/grub/grub.cfg
+clear
+echo "-------------------------------------------------------------"
+echo "-----   If auto-exit does not work after 5 seconds     -----"
+echo -e "                                                  "
+echo "-- do it manually via the 'exit' command and let it finish --"
+echo "-------------------------------------------------------------"
+sleep 5 
 exit
