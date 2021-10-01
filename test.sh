@@ -33,8 +33,8 @@ read -p  "Enter Number : " Mode
 if [ "$Mode" == "$N1" ]  ######### if Bios #######
     then
     sgdisk -n 1:0:+512M ${DISK}
-    sgdisk -c 1:"BIOSSYS" ${DISK}
-    mkfs.ext2 "BIOSSYS" "${DISK}1"
+    ##sgdisk -c 1:"BIOSSYS" ${DISK}
+    mkfs.ext2 "${DISK}1"
     #mkdir /mnt/boot
     #mount "${DISK}1" /mnt/boot/
 
@@ -44,11 +44,11 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     read -p "Please enter size for root partition : " RooP
     sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
-    sgdisk -c 2:"ROOT" ${DISK}
-    mkfs.ext4  "ROOT" "${DISK}2"
-    mount -t "${DISK}2" /mnt
+    ##sgdisk -c 2:"ROOT" ${DISK}
+    mkfs.ext4 "${DISK}2"
+    mount "${DISK}2" /mnt
     mkdir /mnt/boot
-    mount -t "${DISK}1" /mnt/boot/
+    mount  "${DISK}1" /mnt/boot/
     clear
     #____Determine the size of the home partition___#
     while true
@@ -61,8 +61,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         read Homep   
         sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
         echo -e 
-        sgdisk -c 3:"Home" ${DISK}
-        mkfs.ext4 "Home" "${DISK}3"
+        ##sgdisk -c 3:"Home" ${DISK}
+        mkfs.ext4 "${DISK}3"
         mkdir /mnt/home
         mount -t "${DISK}3" /mnt/home
         break
