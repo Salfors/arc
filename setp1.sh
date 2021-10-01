@@ -33,8 +33,6 @@ read -p  "Enter Number : " Mode
 
 if [ "$Mode" == "$N1" ]  #if Bios
     then
-    sgdisk -Z ${DISK} # zap all on disk
-    sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
     sgdisk -n 1:0:+512M ${DISK}
     sgdisk -c 1:"BIOSSYS" ${DISK}
     mkfs.ext2 -L "BIOSSYS" "${DISK}1"
