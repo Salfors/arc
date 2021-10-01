@@ -35,8 +35,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     sgdisk -n 1:0:+512M ${DISK}
     sgdisk -c 1:"BIOSSYS" ${DISK}
     mkfs.ext2 "BIOSSYS" "${DISK}1"
-    mkdir /mnt/boot
-    mount "${DISK}1" /mnt/boot/
+    #mkdir /mnt/boot
+    #mount "${DISK}1" /mnt/boot/
 
     clear
     #_____Determine the size of the root partition____#
