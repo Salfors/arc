@@ -84,6 +84,7 @@ if [ $answer == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
     else 
 	echo  "[+]Enter yes or no (y/n)[+]"
 fi
+done
 #_____Determine the size of the swap partition__#
 
 while true
