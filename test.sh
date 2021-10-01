@@ -46,9 +46,9 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
     sgdisk -c 2:"ROOT" ${DISK}
     mkfs.ext4  "ROOT" "${DISK}2"
-    mount "${DISK}2" /mnt
+    mount -t "${DISK}2" /mnt
     mkdir /mnt/boot
-    mount "${DISK}1" /mnt/boot/
+    mount -t "${DISK}1" /mnt/boot/
     clear
     #____Determine the size of the home partition___#
     while true
@@ -64,7 +64,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         sgdisk -c 3:"Home" ${DISK}
         mkfs.ext4 "Home" "${DISK}3"
         mkdir /mnt/home
-        mount "${DISK}3" /mnt/home
+        mount -t "${DISK}3" /mnt/home
         break
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
