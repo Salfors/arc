@@ -44,6 +44,9 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     read -p "Please enter size for root partition : " RooP
     sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
+    sgdisk -c 2:"ROOT" ${DISK}
+    mkfs.ext4 -L "ROOT" "${DISK}2"
+    mount -t ext4 "${DISK}2" /mnt
     clear
     #____Determine the size of the home partition___#
     while true
@@ -58,6 +61,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         echo -e 
         sgdisk -c 3:"Home" ${DISK}
         mkfs.ext4 -L "Home" "${DISK}3"
+        mkdir /mnt/home
+        mount -t ext4 "${DISK}3" /mnt/home
         break
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
@@ -93,27 +98,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     done
 
-    # label partitions
-    sgdisk -c 2:"ROOT" ${DISK}
 
-    # make filesystems
-    echo -e "\nCreating Filesystems...\n"
-
-    mkfs.ext4 -L "ROOT" "${DISK}2"
-
-    # mount target
-
-    mount -t ext4 "${DISK}2" /mnt
-
-    if [ $answer == "yes" ]
-        then
-        mkdir /mnt/home
-        mount -t ext4 "${DISK}3" /mnt/home
-
-        else 
-    
-        echo "" 
-    fi 
     clear
 
     echo "--------------------------------------"
@@ -164,6 +149,10 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     read -p "Please enter size for root partition : " RooP
     sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
+    sgdisk -c 2:"ROOT" ${DISK}
+    mkfs.ext4 -L "ROOT" "${DISK}2"
+    mount -t ext4 "${DISK}2" /mnt
+    
     clear
     #____Determine the size of the home partition___#
     while true
@@ -178,6 +167,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         echo -e 
         sgdisk -c 3:"Home" ${DISK}
         mkfs.ext4 -L "Home" "${DISK}3"
+        mkdir /mnt/home
+        mount -t ext4 "${DISK}3" /mnt/home
         break
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
@@ -214,26 +205,12 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     done
 
     # label partitions
-    sgdisk -c 2:"ROOT" ${DISK}
+    
 
     # make filesystems
     echo -e "\nCreating Filesystems...\n"
 
-    mkfs.ext4 -L "ROOT" "${DISK}2"
 
-    # mount target
-
-    mount -t ext4 "${DISK}2" /mnt
-
-    if [ $answer == "yes" ]
-        then
-        mkdir /mnt/home
-        mount -t ext4 "${DISK}3" /mnt/home
-
-        else 
-    
-        echo "" 
-    fi 
     clear
 
     echo "--------------------------------------"
@@ -249,7 +226,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "-------------------------------------------------------------"
     echo "--    you should run step 2 after it be ready (./step2)  --"
     echo "-------------------------------------------------------------"
-    sleep 8
+    sleep 5
     echo -e "\n----------------------------"
     echo    "------   it ready !!    ----"
     echo    "----------------------------"
