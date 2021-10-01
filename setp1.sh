@@ -33,7 +33,9 @@ read -p  "Enter Number : " Mode
 
 if [ "$Mode" == "$N1" ]  #if Bios
     then
-	sgdisk -n 1:0:+512M ${DISK}
+    sgdisk -Z ${DISK} # zap all on disk
+    sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
+    sgdisk -n 1:0:+512M ${DISK}
     sgdisk -c 1:"BIOSSYS" ${DISK}
     mkfs.ext2 -L "BIOSSYS" "${DISK}1"
     mkdir /mnt/boot
@@ -42,6 +44,8 @@ if [ "$Mode" == "$N1" ]  #if Bios
     ######################################## 
     elif [ "$Mode" == "$N2" ] #if UFI
     then
+    sgdisk -Z ${DISK} # zap all on disk
+    sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
     sgdisk -n 1:0:+512M ${DISK}
     sgdisk -c 1:"UEFISYS" ${DISK}
     mkfs.fat -F32 -n "UEFISYS" "${DISK}1"
@@ -93,7 +97,7 @@ echo -e ""
 read  -p "Please did you want create swap part or not (y/n) : " answer2
 if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] #if "Yes"
     then
-	echo -e "\nEnter your Swap partition size please"
+    echo -e "\nEnter your Swap partition size please"
     read Swap
     sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
     echo -e 
@@ -124,11 +128,11 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 mount -t ext4 "${DISK}2" /mnt
 
 if [ $answer == "yes" ]
-then
+    then
     mkdir /mnt/home
     mount -t ext4 "${DISK}3" /mnt/home
 
-else 
+    else 
  
     echo "" 
 fi 
