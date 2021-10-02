@@ -53,12 +53,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     #____Determine the size of the home partition___#
     while true
     do
-    echo -e ""
+    echo -e 
     read  -p "Please do you want create home part or not (y/n) : " answer
     if [ $answer == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
         then
-        echo -e "\nEnter your /home partition size please"
-        read Homep   
+        echo -e 
+        read -p "Enter your /home partition size please :" Homep
+        #read Homep   
         #!sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
         echo -e 
         ##sgdisk -c 3:"Home" ${DISK}
@@ -68,12 +69,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         break
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
-        echo "Ok no problem"
+        
         break
         else 
         echo  "[+]Enter yes or no (y/n)[+]"
     fi
     done
+    clear
     #_____Determine the size of the swap partition__#
 
     while true
@@ -82,8 +84,9 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     read  -p "Please did you want create swap part or not (y/n) : " answer2
     if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] #if "Yes"
         then
-        echo -e "\nEnter your Swap partition size please"
-        read Swap
+        echo -e 
+        read -p "Enter your Swap partition size please : " Swap
+        #read Swap
         #!sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
         echo -e 
         #sgdisk -c :"Swap" ${DISK}
@@ -92,7 +95,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         break
         elif [ $answer2 == "no" ] ||  [ "$answer2" == "n" ] #if "No"
         then
-        echo "Ok no problem"
+        
         break
         else 
         echo  "[+]Enter yes or no (y/n)[+]"
