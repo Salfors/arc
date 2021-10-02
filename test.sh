@@ -34,7 +34,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     then
     sgdisk -n 1:0:+512M ${DISK}
     ##sgdisk -c 1:"BIOSSYS" ${DISK}
-    mkfs.ext2 "${DISK}1"
+    ##mkfs.ext2 "${DISK}1"
     #mkdir /mnt/boot
     #mount "${DISK}1" /mnt/boot/
 
@@ -45,10 +45,10 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     read -p "Please enter size for root partition : " RooP
     sgdisk -n 2:0:"+"$RooP""   ${DISK} # partition 2 (Root), default start, remaining
     ##sgdisk -c 2:"ROOT" ${DISK}
-    mkfs.ext4 "${DISK}2"
-    mount "${DISK}2" /mnt
-    mkdir /mnt/boot
-    mount  "${DISK}1" /mnt/boot/
+    ##mkfs.ext4 "${DISK}2"
+    ##mount "${DISK}2" /mnt
+    ##mkdir /mnt/boot
+    ##mount  "${DISK}1" /mnt/boot/
     clear
     #____Determine the size of the home partition___#
     while true
@@ -62,9 +62,9 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         sgdisk -n 3:0:"+"$Homep"" ${DISK} #partition 3 (/home)
         echo -e 
         ##sgdisk -c 3:"Home" ${DISK}
-        mkfs.ext4 "${DISK}3"
-        mkdir /mnt/home
-        mount -t "${DISK}3" /mnt/home
+        ##mkfs.ext4 "${DISK}3"
+        ##mkdir /mnt/home
+        ##mount -t "${DISK}3" /mnt/home
         break
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
@@ -86,9 +86,9 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         read Swap
         sgdisk -n 4:0:"+"$Swap"" ${DISK} #partition 4 (Swap)
         echo -e 
-        sgdisk -c :"Swap" ${DISK}
-        mkswap "Swap" "${DISK}4"
-        swapon "Swap" "${DISK}4"
+        #sgdisk -c :"Swap" ${DISK}
+        ##mkswap "Swap" "${DISK}4"
+        ##swapon "Swap" "${DISK}4"
         break
         elif [ $answer2 == "no" ] ||  [ "$answer2" == "n" ] #if "No"
         then
