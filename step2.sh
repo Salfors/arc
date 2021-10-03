@@ -45,8 +45,8 @@ echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 pacman -S --noconfirm efibootmgr grub
 
-ID="`cat /mnt/ID`"
-GrubID="`cat /mnt/GrubID`"
+ID="`cat ID`"
+GrubID="`cat GrubID`"
 
 if [ "$GrubID" == "1" ]
     then
