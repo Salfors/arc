@@ -43,7 +43,7 @@ clear
 echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
-pacman -S --noconfirm efibootmgr
+pacman -S --noconfirm efibootmgr grub
 
 ID="`cat /mnt/ID`"
 GrubID="`cat /mnt/GrubID`"
