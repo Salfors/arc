@@ -139,7 +139,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mount "${DISK}2" /mnt/home
         fi
 
-            
+    lsblk
+    sleep 15
     clear
 
     echo "--------------------------------------"
