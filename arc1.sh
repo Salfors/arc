@@ -86,7 +86,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 ########## CREAT PARTION BIOS ########
 
     clear
-    echo ';' | sfdisk ${DISK}
+    #echo ';' | sfdisk ${DISK}
     echo "
     n
     p
