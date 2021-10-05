@@ -136,9 +136,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         +${Swap} ######################## Swap part
         w
         " | fdisk ${DISK}
-        
-        
-    fi ## answer1 
+        fi ## answer1 
     break
          
            
