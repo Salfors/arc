@@ -98,38 +98,48 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     " | fdisk ${DISK}
     #sgdisk -n 1:0:+512M ${DISK}
     #sgdisk -n 2:0:"+"$RooP""  ${DISK} 
-    if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ]
+    if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
         then
+        echo "n
+        p
+        1
+    
+        +${RooP} ############# root part
+        w
+        " | fdisk ${DISK}
         echo "n
         p
         2
         
-        +${HomeP}
+        +${HomeP} ############### home part
         w
         " | fdisk ${DISK}
-        if [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
-        then
         echo "n
         p
         3
         
-        +${Swap}
+        +${Swap} ############## swap part
         " | fdisk ${DISK}
-        fi
-        fi
-    if [ "$answer" == "no" ] ||  [ "$answer" == "n" ]
-    then
-    if [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
-    then 
-    echo "n
-    p
-    2
+        elif [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ] && [ "$answer" == "no" ] ||  [ "$answer" == "n" ] #if "No"
+        then
+        echo "n
+        p
+        1
+    
+        +${RooP} ########################### root part without  home 
+        w
+        " | fdisk ${DISK}
+        echo "n
+        p
+        2
         
-    +${Swap}
-    " | fdisk ${DISK}
-    fi  ## answer2
+        +${Swap} ######################## Swap part
+        w
+        " | fdisk ${DISK}
+        
+        
     fi ## answer1 
-
+    break
          
            
 
