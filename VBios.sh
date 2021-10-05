@@ -96,21 +96,21 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     " | fdisk ${DISK}
     #echo ';' | sfdisk ${DISK}
     if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
-        then
+       then
         
-        echo "n
-        p
-        2
-        
-        +${HomeP} ############### home part
-        w
-        " | fdisk ${DISK}
-        echo "n
-        p
-        3
-        
-        +${Swap} ############## swap part
-        " | fdisk ${DISK}
+       echo "n
+       p
+       2
+       
+       +${HomeP} ############### home part
+       w
+       " | fdisk ${DISK}
+       echo "n
+       p
+       3
+       
+       +${Swap} ############## swap part
+       " | fdisk ${DISK}
         elif [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ] && [ "$answer" == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
         echo "n
