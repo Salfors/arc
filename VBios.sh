@@ -101,13 +101,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     #sgdisk -n 2:0:"+"$RooP""  ${DISK} 
     if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
         then
-        echo "n
-        p
-        1
-    
-        +${RooP} 
-        w
-        " | fdisk ${DISK}
+        
         echo "n
         p
         2
