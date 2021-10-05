@@ -92,7 +92,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo 
     echo "n
     p
-    
+    1
     
     +${RooP}
     w
@@ -103,7 +103,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         then
         echo "n
         p
-        
+        2
         
         +${HomeP}
         w
@@ -113,7 +113,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         then
         echo "n
         p
-        
+        3
         
         +${Swap}
         w
