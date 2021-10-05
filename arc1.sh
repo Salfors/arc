@@ -117,7 +117,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         +${Swap}
         w
         " | fdisk ${DISK}
-        elif [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] && [ $answer == "no" ] ||  [ "$answer" == "n" ] 
+        elif  [ $answer == "no" ] ||  [ "$answer" == "n" ]  && [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] 
         then
         echo "n
         p
