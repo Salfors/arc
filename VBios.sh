@@ -87,6 +87,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     clear
     echo "w
     " | fdisk ${DISK}
+    echo "n
+    p
+    1
+    
+    +${RooP}
+    w
+    " | fdisk ${DISK}
     #echo ';' | sfdisk ${DISK}
      
 
