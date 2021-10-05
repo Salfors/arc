@@ -44,14 +44,14 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e 
     read  -p "Please do you want create home part or not (y/n) : " answer
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
+    if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
         then
         echo -e 
         read -p "Enter your /home partition size please :" Homep
         echo -e 
 
         break
-        elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
+        elif [ "$answer" == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
         
         break
@@ -66,14 +66,14 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e ""
     read  -p "Please did you want create swap part or not (y/n) : " answer2
-    if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] #if "Yes"
+    if [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ] #if "Yes"
         then
         echo -e 
         read -p "Enter your Swap partition size please : " Swap
         echo -e 
 
         break
-        elif [ $answer2 == "no" ] ||  [ "$answer2" == "n" ] #if "No"
+        elif [ "$answer2" == "no" ] ||  [ "$answer2" == "n" ] #if "No"
         then
         
         break
@@ -98,7 +98,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     " | fdisk ${DISK}
     #sgdisk -n 1:0:+512M ${DISK}
     #sgdisk -n 2:0:"+"$RooP""  ${DISK} 
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ]
+    if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ]
         then
         echo "n
         p
@@ -107,30 +107,31 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         +${HomeP}
         w
         " | fdisk ${DISK}
+        if [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
+        then
+        echo "n
+        p
+        3
+        
+        +${Swap}
+        " | fdisk ${DISK}
         fi
-    
+        fi
+    if [ "$answer" == "no" ] ||  [ "$answer" == "n" ]
+    then
+    if [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
+    then 
+    echo "n
+    p
+    2
+        
+    +${Swap}
+    " | fdisk ${DISK}
+    fi  ## answer2
+    fi ## answer1 
+
          
-            #### make file system for partion
-    mkfs.ext4 "${DISK}1"
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ]
-        then
-        mkfs.ext4 "${DISK}2"
-        fi
-    
-            #### mount point
-    mount "${DISK}1" /mnt
-    #mkdir /mnt/boot
-    #mount "${DISK}1" /mnt/boot
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ]
-        then
-        mkdir /mnt/home
-        mount "${DISK}2" /mnt/home
-        fi
-
-    lsblk
-    sleep 15
-    clear
-
+           
 
     
 fi
