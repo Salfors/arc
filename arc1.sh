@@ -1,4 +1,3 @@
-
 #------In order to partition a disk----#
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm gptfdisk btrfs-progs
@@ -109,7 +108,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         w
         " | fdisk ${DISK}
         fi
-    if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] || [ $answer == "yes" ] ||  [ "$answer" == "y" ] 
+    if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] && [ $answer == "yes" ] ||  [ "$answer" == "y" ] 
         then
         echo "n
         p
@@ -118,7 +117,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         +${Swap}
         w
         " | fdisk ${DISK}
-        elif [ $answer == "no" ] ||  [ "$answer" == "n" ]
+        elif [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] && [ $answer == "no" ] ||  [ "$answer" == "n" ] 
         then
         echo "n
         p
@@ -134,7 +133,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         then
         mkfs.ext4 "${DISK}2"
         fi
-    if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] 
+    if [ $answer == "yes" ] ||  [ "$answer" == "y" ] 
         then
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
@@ -307,4 +306,3 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 fi
 
 done
-
