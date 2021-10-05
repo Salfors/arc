@@ -139,6 +139,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ]
+        then
         mkswap "${DISK}2" #partition 4 (Swap)
         swapon "${DISK}2"
         fi 
