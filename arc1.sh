@@ -86,12 +86,14 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 ########## CREAT PARTION BIOS ########
 
     clear
+    echo "w
+    " | fdisk ${DISK}
     #echo ';' | sfdisk ${DISK}
-    echo "
-    n
+    echo 
+    echo "n
     p
-    1
-
+    
+    
     +${RooP}
     w
     " | fdisk ${DISK}
@@ -99,23 +101,30 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     #sgdisk -n 2:0:"+"$RooP""  ${DISK} 
     if [ $answer == "yes" ] ||  [ "$answer" == "y" ]
         then
-        echo "
-        n
+        echo "n
         p
-        2
-
+        
+        
         +${HomeP}
         w
         " | fdisk ${DISK}
         fi
-    if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] 
+    if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] || [ $answer == "yes" ] ||  [ "$answer" == "y" ] 
         then
-        echo "
-        n
+        echo "n
         p
-        3
-
+        
+        
         +${Swap}
+        w
+        " | fdisk ${DISK}
+        elif [ $answer == "no" ] ||  [ "$answer" == "n" ]
+        echo "n
+        p
+        2
+        
+        +${Swap}
+        w
         " | fdisk ${DISK}
         fi 
             #### make file system for partion
@@ -128,9 +137,12 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         then
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
+        elif [ $answer == "no" ] ||  [ "$answer" == "n" ]
+        mkswap "${DISK}2" #partition 4 (Swap)
+        swapon "${DISK}2"
         fi 
             #### mount point
-    mount "${DISK}2" /mnt
+    mount "${DISK}1" /mnt
     #mkdir /mnt/boot
     #mount "${DISK}1" /mnt/boot
     if [ $answer == "yes" ] ||  [ "$answer" == "y" ]
