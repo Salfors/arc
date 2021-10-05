@@ -98,7 +98,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         p
         1
     
-        +${RooP} ############# root part
+        +${RooP} 
         w
         " | fdisk ${DISK}
         echo "n
