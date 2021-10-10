@@ -93,6 +93,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "n 
     p 
     1
+    
     +${RooP}
     w
     " | fdisk ${DISK}
