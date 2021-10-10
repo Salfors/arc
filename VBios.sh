@@ -109,6 +109,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         n
         p
         
+        
         +${Swap}
         w
         " | fdisk ${DISK}
@@ -117,6 +118,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         echo "
         n
         p
+        
         
         +${Swap}
         w
