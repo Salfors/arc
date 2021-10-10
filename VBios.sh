@@ -87,48 +87,55 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     clear
     echo "w
     " | fdisk ${DISK}
-    echo "n
-    p
+    #echo ';' | sfdisk ${DISK}
+     
+    echo "n 
+    p 
     1
-    
+
     +${RooP}
     w
     " | fdisk ${DISK}
-    #echo ';' | sfdisk ${DISK}
-    if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
-       then
-        
-       echo "n
-       p
-       2
-       
-       +${HomeP} ############### home part
-       w
-       " | fdisk ${DISK}
-       echo "n
-       p
-       3
-       
-       +${Swap}
-       w     ############## swap part
-       " | fdisk ${DISK}
-        elif [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ] && [ "$answer" == "no" ] ||  [ "$answer" == "n" ] #if "No"
-        then
-        echo "n
-        p
-        1
-    
-        +${RooP} ########################### root part without  home 
-        w
-        " | fdisk ${DISK}
+    if [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
+        then 
         echo "n
         p
         2
         
-        +${Swap} ######################## Swap part
+        +${Homep}
         w
         " | fdisk ${DISK}
-        fi ## answer1 
+        echo "
+        n
+        p
+        
+        +${Swap}
+        w
+        " | fdisk ${DISK}
+        elif [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
+        then 
+        echo "
+        n
+        p
+        
+        +${Swap}
+        w
+        " | fdisk ${DISK}
+        elif [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "no" ] || [ "$answer2" == "n" ]
+        then 
+        echo "
+        n
+        p
+        
+        
+        +${Homep}
+        w
+        " | fdisk ${DISK}
+        fi
+
+        
+        
+    fi ## answer1 
     break
          
            
