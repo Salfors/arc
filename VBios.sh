@@ -141,6 +141,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
            
 
     
-fi
+#fi
 
 done
