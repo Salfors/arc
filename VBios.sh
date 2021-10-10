@@ -109,7 +109,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
        p
        3
        
-       +${Swap} ############## swap part
+       +${Swap}
+       w     ############## swap part
        " | fdisk ${DISK}
         elif [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ] && [ "$answer" == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then
