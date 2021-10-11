@@ -60,10 +60,10 @@ if [ "$GrubID" == "1" ]
 fi
 grub-mkconfig -o /boot/grub/grub.cfg
 clear
-echo "-------------------------------------------------------------"
-echo "-----   If auto-exit does not work after 5 seconds     -----"
-echo -e "                                                  "
-echo "-- do it manually via the 'exit' command and let it finish --"
-echo "-------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
+echo "--                                                                   ----"
+echo "      Now enter the exit command because it is the installation          "
+echo "--                                                                   ----"
+echo "-------------------------------------------------------------------------"
 sleep 5 
 exit
