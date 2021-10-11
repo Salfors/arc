@@ -161,9 +161,10 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     lsblk
     echo -e "\n"
     echo "----------------------------------------------------------"
-    echo "-- If you did not do the division correctly        -------"
-    echo "---       Stop Script with (CTRL + Z)              -------"
+    echo "--   If you did not do the division correctly      -------"
+    echo "--           Stop Script with (CTRL + Z)           -------"
     echo " Then enter the command 'umount -R' and try again   ------"
+    echo "               Or reboot and try again ..            -----"
     echo "----------------------------------------------------------"
     sleep 20
     clear
