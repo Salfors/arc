@@ -13,7 +13,6 @@ echo -e "\nFormatting disk...\n"
 echo "--------------------------------------"
 # disk prep
 sgdisk -Z ${DISK} # zap all on disk
-#sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 clear
 #------create partitions------#
 
@@ -89,7 +88,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "o
     w
     " | fdisk ${DISK}
-    #echo ';' | sfdisk ${DISK}
      
     echo "n 
     p 
@@ -137,9 +135,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         " | fdisk ${DISK}
         fi
 
-    
-    ##########################
-                #### make file system for partion
+    #### make file system for partion
     mkfs.ext4 "${DISK}1"
     if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
         then
@@ -163,7 +159,12 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         fi
 
     lsblk
-    sleep 15
+    echo "------------------------------------------------------"
+    echo "-- If you did not do the division correctly   -------"
+    echo "---     Stop Script with (CTRL + Z)           -------"
+    echo " Enter the command 'umount -R' and try again   ------"
+    echo "-----------------------------------------------------"
+    sleep 30
     clear
 
     echo "--------------------------------------"
@@ -180,6 +181,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--    you should run step 2 after it be ready (./step2)  --"
     echo "-------------------------------------------------------------"
     sleep 5
+    clear
     echo -e "\n----------------------------"
     echo    "------   it ready !!    ----"
     echo    "----------------------------"
@@ -187,7 +189,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     #---After arch-chroot---#
     umount -R /mnt
-
+    clear
     echo "--------------------------------------"
     echo "--   SYSTEM READY FOR FIRST BOOT    --"
     echo "--------------------------------------"
@@ -280,30 +282,37 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mount "${DISK}3" /mnt/home
         fi
 
-            
+    lsblk
+    echo "------------------------------------------------------"
+    echo "-- If you did not do the division correctly   -------"
+    echo "---     Stop Script with (CTRL + Z)           -------"
+    echo " Enter the command 'umount -R' and try again   ------"
+    echo "-----------------------------------------------------"            
+    sleep 30
     clear
 
-    #echo "--------------------------------------"
-    #echo "-- Arch Install on Main Drive       --"
-    #echo "--------------------------------------"
-    #pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
-    #genfstab -U /mnt >> /mnt/etc/fstab
-    #mv ~/arc/step2.sh /mnt/
-    #chmod a+x /mnt/step2.sh
-    #echo "$DISK" > /mnt/ID
-    #echo "$Mode" > /mnt/GrubID
-    #clear
-    #echo "-------------------------------------------------------------"
-    #echo "--    you should run step 2 after it be ready (./step2)  --"
-    #echo "-------------------------------------------------------------"
-    #sleep 8
-    #echo -e "\n----------------------------"
-    #echo    "------   it ready !!    ----"
-    #echo    "----------------------------"
-    #arch-chroot /mnt 
+    echo "--------------------------------------"
+    echo "-- Arch Install on Main Drive       --"
+    echo "--------------------------------------"
+    pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
+    genfstab -U /mnt >> /mnt/etc/fstab
+    mv ~/arc/step2.sh /mnt/
+    chmod a+x /mnt/step2.sh
+    echo "$DISK" > /mnt/ID
+    echo "$Mode" > /mnt/GrubID
+    clear
+    echo "-------------------------------------------------------------"
+    echo "--    you should run step 2 after it be ready (./step2)  --"
+    echo "-------------------------------------------------------------"
+    sleep 3
+    echo -e "\n----------------------------"
+    echo    "------   it ready !!    ----"
+    echo    "----------------------------"
+    arch-chroot /mnt 
 
     #---After arch-chroot---#
-    #umount -R /mnt
+    umount -R /mnt
+    clear
 
     echo "--------------------------------------"
     echo "--   SYSTEM READY FOR FIRST BOOT    --"
