@@ -6,7 +6,7 @@ echo "-------------------------------------------------"
 echo "-------select your disk to format----------------"
 echo "-------------------------------------------------"
 lsblk
-echo -e "\nPlease enter disk: (example /dev/sda)"
+echo -e "\nPlease enter disk: (example /dev/sda)\n"
 read DISK
 echo "--------------------------------------"
 echo -e "\nFormatting disk...\n"
