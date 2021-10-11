@@ -14,10 +14,12 @@ do
 read  -p "Enter your Host name (default==archPc) :" HostN
 if [ "$HostN" != "" ]
     then
-    echo "127.0.1.1	  localhost.localdomin	  $HostN" 
+    echo "$HostN" >> /etc/hostname
+    echo "127.0.1.1	  localhost.localdomin	  $HostN" >> /etc/hosts
     break
     elif [ "$HostN" == "" ]
     then 
+    echo "archPc" >> /etc/hostname
     echo "127.0.1.1	  localhost.localdomin	  archPc" 
     break
      
