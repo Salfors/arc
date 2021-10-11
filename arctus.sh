@@ -13,7 +13,7 @@ echo -e "\nFormatting disk...\n"
 echo "--------------------------------------"
 # disk prep
 sgdisk -Z ${DISK} # zap all on disk
-sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
+#sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 clear
 #------create partitions------#
 
@@ -86,7 +86,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 ########## CREAT PARTION BIOS ########
 
     clear
-    echo "w
+    echo "o
+    w
     " | fdisk ${DISK}
     #echo ';' | sfdisk ${DISK}
      
