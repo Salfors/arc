@@ -6,8 +6,17 @@ echo "-------------------------------------------------"
 echo "-------select your disk to format----------------"
 echo "-------------------------------------------------"
 lsblk
-echo -e "\nPlease enter disk: (example /dev/sda)\n"
+while true
+do
+read -e "\nPlease enter disk: (example /dev/sda)\n"
 read DISK
+if [ "$DISK" == "" ] 
+    then
+    echo -e "\n[+]Choose the disk to install to !!![+]\n"
+    else 
+    break
+fi
+done
 echo "--------------------------------------"
 echo -e "\nFormatting disk...\n"
 echo "--------------------------------------"
