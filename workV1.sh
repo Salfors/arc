@@ -8,7 +8,7 @@ echo "-------------------------------------------------"
 lsblk
 while true
 do
-read -e "\nPlease enter disk: (example /dev/sda)\n"
+echo -e "\nPlease enter disk: (example /dev/sda)\n"
 read DISK
 if [ "$DISK" == "" ] 
     then
