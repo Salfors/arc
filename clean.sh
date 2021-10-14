@@ -92,7 +92,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         if [ "$count" -eq "$max" ]
         then
         clear
-        count=`expr $count - 4`
+        count=`expr $count - 3`
         fi
     fi
     done
@@ -119,7 +119,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         if [ "$count" -eq "$max" ]
         then
         clear
-        count=`expr $count - 4`
+        count=`expr $count - 3`
         fi
     fi
 
@@ -374,7 +374,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         if [ "$count" -eq "$max" ]
         then
         clear
-        count=`expr $count - 4`
+        count=`expr $count - 3`
         fi
     fi
     done
@@ -400,7 +400,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         if [ "$count" -eq "$max" ]
         then
         clear
-        count=`expr $count - 4`
+        count=`expr $count - 3`
         fi
     fi
     done
@@ -518,7 +518,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     if [ "$count" -eq "$max" ]
     then
     clear
-    count=`expr $count - 4`
+    count=`expr $count - 3`
     fi        
 fi
 done
