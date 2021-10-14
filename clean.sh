@@ -57,6 +57,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     while true
     do
+    echo -e ""
     read -p "Please enter size for root partition : " RooP
     if [ "$RooP" == "" ] #if "Yes"
         then
