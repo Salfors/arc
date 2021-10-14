@@ -62,13 +62,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         then
         echo -e "\n[+]You must enter root partition size !!![+]\n"
         count=`expr $count + 1`
-        else 
-        break
         if [ "$count" -eq "$max" ]
         then
         clear
-        count=`expr $count - 4`
+        count=`expr $count - 3`
         fi
+        else 
+        break        
     fi
     done
 
