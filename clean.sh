@@ -16,13 +16,14 @@ if [ "$DISK" == "" ]
     then
     echo -e "\n[+]Choose the disk to install to !!![+]\n"
     count=`expr $count + 1`
-    else 
-    break
     if [ "$count" -eq "$max" ]
     then
     clear
     count=`expr $count - 4`
     fi
+    else 
+    break
+    
 fi
 done
 echo "--------------------------------------"
