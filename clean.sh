@@ -49,11 +49,9 @@ read -p  "Enter Number : " Mode
 
 if [ "$Mode" == "$N1" ]  ######### if Bios #######
     then
-
     clear
     #_____Determine the size of the root partition____#
     echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step\n "
-
     while true
     do
     echo -e ""
@@ -108,7 +106,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         echo -e 
         read -p "Enter your Swap partition size please : " Swap
         echo -e 
-
         break
         elif [ "$answer2" == "no" ] ||  [ "$answer2" == "n" ] #if "No"
         then        
@@ -122,7 +119,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         count=`expr $count - 3`
         fi
     fi
-
     done
 ########## CREAT PARTION BIOS ########
 
@@ -279,7 +275,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mkfs.ext4 "${DISK}2"
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
-
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
         then
         mkswap "${DISK}2" #partition 4 (Swap)
@@ -303,7 +298,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "----------------------------------------------------------"
     sleep 20
     clear
-
     echo "--------------------------------------"
     echo "-- Arch Install on Main Drive       --"
     echo "--------------------------------------"
