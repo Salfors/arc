@@ -3,18 +3,18 @@ echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm gptfdisk btrfs-progs
 clear
 echo "-------------------------------------------------"
-echo "-------select your disk to format----------------"
+echo "-------Select Your Disk To Format----------------"
 echo "-------------------------------------------------"
 lsblk
 count=0
 max=3
 while true
 do
-echo -e "\nPlease enter disk: (example /dev/sda)\n"
+echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
 read DISK
 if [ "$DISK" == "" ] 
     then
-    echo -e "\n[+]Choose the disk to install to !!![+]\n"
+    echo -e "\n[+]Choose The Disk To Install To !!![+]\n"
     count=`expr $count + 1`
     if [ "$count" -eq "$max" ]
     then
@@ -23,12 +23,11 @@ if [ "$DISK" == "" ]
     lsblk
     fi
     else 
-    break
-    
+    break    
 fi
 done
 echo "--------------------------------------"
-echo -e "\nFormatting disk...\n"
+echo -e "\nFormatting Disk...\n"
 echo "--------------------------------------"
 # disk prep
 sgdisk -Z ${DISK} # zap all on disk
@@ -38,7 +37,7 @@ clear
 #-----Select live boot type------#
 
 echo "-------------------------------------------------"
-echo "----------Select your boot type -----------------"
+echo "----------Select Your Boot Type -----------------"
 echo "-------------------------------------------------"
 while true
 do
@@ -53,15 +52,15 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     clear
     #_____Determine the size of the root partition____#
-    echo -e "\nNote: Enter values in 'MB' or 'GB' on next step\n "
+    echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step\n "
 
     while true
     do
     echo -e ""
-    read -p "Please enter size for root partition : " RooP
+    read -p "Please Enter Size For Root Partition : " RooP
     if [ "$RooP" == "" ] #if "Yes"
         then
-        echo -e "\n[+]You must enter root partition size !!![+]\n"
+        echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
         count=`expr $count + 1`
         if [ "$count" -eq "$max" ]
         then
@@ -72,7 +71,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         break        
     fi
     done
-
     clear
     #____Determine the size of the home partition___#
     while true
@@ -116,7 +114,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         then        
         break
         else 
-        echo  "[+]Enter yes or no (y/n)[+]"
+        echo -e "\n[+]Enter yes or no (y/n)[+]"
         count=`expr $count + 1`
         if [ "$count" -eq "$max" ]
         then
@@ -317,11 +315,11 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "$Mode" > /mnt/GrubID
     clear
     echo "-------------------------------------------------------------"
-    echo "--    you should run step 2 after it be ready (./step2)  --"
+    echo "--    You Should Run Step 2 After It Be Ready (./step2)  --"
     echo "-------------------------------------------------------------"
     sleep 4
     echo -e "\n----------------------------"
-    echo    "------   it ready !!    ----"
+    echo    "------   It Ready !!    ----"
     echo    "----------------------------"
     arch-chroot /mnt 
 
@@ -331,29 +329,28 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--------------------------------------"
     echo "--   SYSTEM READY FOR FIRST BOOT    --"
     echo "--------------------------------------"
-    echo "--          reboot now              --"
+    echo "--          Reboot Now              --"
     break
     elif [ "$Mode" == "$N2" ] # ----------if UFI-------------- ----------------------------------------------#
     then
     clear
     #_____Determine the size of the root partition____#
-    echo -e "\nNote: Enter values in MB or GB on next step\n "
-
+    echo -e "\nNote: Enter values in MB or GB on Next step\n "
     while true
     do
-    read -p "Please enter size for root partition : " RooP
+    echo -e 
+    read -p "Please Enter Size For Root Partition : " RooP
     if [ "$RooP" == "" ] #if "Yes"
         then
-        echo -e "\n[+]You must enter root partition size !!![+]\n"
+        echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
         count=`expr $count + 1`
         if [ "$count" -eq "$max" ]
         then
         clear
-        count=`expr $count - 4`
+        count=`expr $count - 3`
         fi
         else 
-        break
-        
+        break        
     fi
     done
     clear
@@ -361,18 +358,18 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     while true
     do
     echo -e 
-    read  -p "Please do you want create home part or not (y/n) : " answer
+    read  -p "Please Do You Want Create Home Part Or Not (y/n) : " answer
     if [ $answer == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
         then
         echo -e 
-        read -p "Enter your /home partition size please :" Homep
+        read -p "Enter Your Home Partition Size Please :" Homep
         echo -e 
         break
         elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
         then        
         break
         else 
-        echo  "[+]Enter yes or no (y/n)[+]"
+        echo -e "\n[+]Enter yes or no (y/n)[+]"
         count=`expr $count + 1`
         if [ "$count" -eq "$max" ]
         then
@@ -383,26 +380,29 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     done
     clear
     #_____Determine the size of the swap partition__#
-
+    
     while true
     do
-    echo -e ""
-    read  -p "Please did you want create swap part or not (y/n) : " answer2
+    echo -e 
+    read  -p "Please Did You Want Create Swap Part Or Not (y/n) : " answer2
     if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] #if "Yes"
         then
         echo -e 
-        read -p "Enter your Swap partition size please : " Swap
+        read -p "Enter Your Swap Partition Size Please : " Swap
         echo -e 
-
         break
         elif [ $answer2 == "no" ] ||  [ "$answer2" == "n" ] #if "No"
-        then
-        
+        then        
         break
         else 
-        echo  "[+]Enter yes or no (y/n)[+]"
+        echo -e "\n[+]Enter yes or no (y/n)[+]"
+        count=`expr $count + 1`
+        if [ "$count" -eq "$max" ]
+        then
+        clear
+        count=`expr $count - 4`
+        fi
     fi
-
     done
     clear
     sgdisk -n 1:0:+512M ${DISK}
@@ -476,7 +476,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mkdir /mnt/home
         mount "${DISK}3" /mnt/home
         fi
-
     lsblk
     echo -e "\n"
     echo "----------------------------------------------------------"
@@ -487,7 +486,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "----------------------------------------------------------"
     sleep 20
     clear
-
     echo "--------------------------------------"
     echo "-- Arch Install on Main Drive       --"
     echo "--------------------------------------"
@@ -499,25 +497,28 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "$Mode" > /mnt/GrubID
     clear
     echo "-------------------------------------------------------------"
-    echo "--    you should run step 2 after it be ready (./step2)  --"
+    echo "--    You Should Run Step 2 After It Be Ready (./step2)  --"
     echo "-------------------------------------------------------------"
     sleep 3
     echo -e "\n----------------------------"
-    echo    "------   it ready !!    ----"
+    echo    "------   It Ready !!    ----"
     echo    "----------------------------"
     arch-chroot /mnt 
-
     #---After arch-chroot---#
     umount -R /mnt
     clear
-
     echo "--------------------------------------"
     echo "--   SYSTEM READY FOR FIRST BOOT    --"
     echo "--------------------------------------"
     echo "--          reboot now              --"
     break
-
-    
+    else
+    echo -e "\n[+]Choose Number One Or Two [+]"
+    count=`expr $count + 1`
+    if [ "$count" -eq "$max" ]
+    then
+    clear
+    count=`expr $count - 4`
+    fi        
 fi
-
 done
