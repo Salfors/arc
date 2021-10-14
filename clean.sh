@@ -75,13 +75,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e 
     read  -p "Please do you want create home part or not (y/n) : " answer
-    if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
+    if [ "$answer" == "Yes" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "y" ] #if "Yes"
         then
         echo -e 
         read -p "Enter your /home partition size please :" Homep
         echo -e 
         break
-        elif [ "$answer" == "no" ] ||  [ "$answer" == "n" ] #if "No"
+        elif [ "$answer" == "No" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "n" ] #if "No"
         then
         break
         else 
@@ -101,13 +101,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e ""
     read  -p "Please did you want create swap part or not (y/n) : " answer2
-    if [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ] #if "Yes"
+    if [ "$answer2" == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ] #if "Yes"
         then
         echo -e 
         read -p "Enter your Swap partition size please : " Swap
         echo -e 
         break
-        elif [ "$answer2" == "no" ] ||  [ "$answer2" == "n" ] #if "No"
+        elif [ "$answer2" == "No" ] ||  [ "$answer2" == "no" ] ||  [ "$answer2" == "N" ] ||  [ "$answer2" == "n" ] #if "No"
         then        
         break
         else 
@@ -147,7 +147,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     " | fdisk ${DISK}
     fi
 
-    if [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
+    if [ "$answer" == "Yes" ] || [ "$answer" == "yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "y" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then ########for check input if is string or int (10GB) or (10)only
         if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ];
             then       
@@ -219,7 +219,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             " | fdisk ${DISK}
             fi #####if  
 ##################
-        elif [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
+        elif [ "$answer" == "No" ] || [ "$answer" == "no" ] || [ "$answer" == "N" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then 
         if  [ -z "${Swap##*[!0-9]*}" ]; 
             then       
@@ -243,7 +243,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             " | fdisk ${DISK}
             fi ########if 
         ######
-        elif [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "no" ] || [ "$answer2" == "n" ]
+        elif [ "$answer" == "Yes" ] || [ "$answer" == "yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "y" ] && [ "$answer2" == "No" ] || [ "$answer2" == "no" ] || [ "$answer2" == "N" ] || [ "$answer2" == "n" ]
         then 
         if  [ -z "${Homep##*[!0-9]*}" ]; ##########str
             then       
@@ -270,19 +270,19 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 
     #### make file system for partion
     mkfs.ext4 "${DISK}1"
-    if [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
+    if [ "$answer" == "Yes" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
         then
         mkfs.ext4 "${DISK}2"
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
-        elif [ $answer == "no" ] ||  [ "$answer" == "n" ] && [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
+        elif [ $answer == "No" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
         then
         mkswap "${DISK}2" #partition 4 (Swap)
         swapon "${DISK}2"
         fi 
             #### mount point
     mount "${DISK}1" /mnt
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ]
+    if [ $answer == "Yes" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "y" ]
         then
         mkdir /mnt/home
         mount "${DISK}2" /mnt/home
@@ -301,7 +301,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--------------------------------------"
     echo "-- Arch Install on Main Drive       --"
     echo "--------------------------------------"
-    pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
+    pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo micro
     genfstab -U /mnt >> /mnt/etc/fstab
     mv ~/arc/step2.sh /mnt/
     chmod a+x /mnt/step2.sh
@@ -353,13 +353,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e 
     read  -p "Please Do You Want Create Home Part Or Not (y/n) : " answer
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
+    if [ $answer == "Yes" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "y" ] #if "Yes"
         then
         echo -e 
         read -p "Enter Your Home Partition Size Please :" Homep
         echo -e 
         break
-        elif [ $answer == "no" ] ||  [ "$answer" == "n" ] #if "No"
+        elif [ $answer == "No" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "n" ] #if "No"
         then        
         break
         else 
@@ -379,13 +379,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e 
     read  -p "Please Did You Want Create Swap Part Or Not (y/n) : " answer2
-    if [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ] #if "Yes"
+    if [ $answer2 == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ] #if "Yes"
         then
         echo -e 
         read -p "Enter Your Swap Partition Size Please : " Swap
         echo -e 
         break
-        elif [ $answer2 == "no" ] ||  [ "$answer2" == "n" ] #if "No"
+        elif [ $answer2 == "No" ] ||  [ "$answer2" == "no" ] ||  [ "$answer2" == "N" ] ||  [ "$answer2" == "n" ] #if "No"
         then        
         break
         else 
@@ -402,7 +402,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     sgdisk -n 1:0:+512M ${DISK}
     sgdisk -n 2:0:"+"$RooP""  ${DISK} 
     ####
-    if [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
+    if [ "$answer" == "Yes" ] || [ "$answer" == "yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "y" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then ########for check input if is string or int (10GB) or (10)only
         if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ];
             then  
@@ -425,7 +425,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             sgdisk -n 4:0:+${Swap}GB ${DISK}
             fi #####if  
         ##################
-        elif [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
+        elif [ "$answer" == "No" ] || [ "$answer" == "no" ] || [ "$answer" == "N" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then 
         if  [ -z "${Swap##*[!0-9]*}" ]; 
             then  
@@ -436,7 +436,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             sgdisk -n 3:0:+${Swap}GB ${DISK}    
             fi 
         ######
-        elif [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "no" ] || [ "$answer2" == "n" ]
+        elif [ "$answer" == "Yes" ] || [ "$answer" == "yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "y" ] && [ "$answer2" == "No" ] || [ "$answer2" == "no" ] || [ "$answer2" == "N" ] || [ "$answer2" == "n" ]
         then 
         if  [ -z "${Homep##*[!0-9]*}" ]; ##########str
             then  
@@ -450,12 +450,12 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             #### make file system for partion
     mkfs.fat -F32 "${DISK}1"
     mkfs.ext4 "${DISK}2"
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ] && [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ]
+    if [ $answer == "Yes" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "y" ] && [ $answer2 == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
         then
         mkfs.ext4 "${DISK}3"
         mkswap "${DISK}4" #partition 4 (Swap)
         swapon "${DISK}4"
-        elif [ $answer == "no" ] ||  [ "$answer" == "n" ] && [ $answer2 == "yes" ] ||  [ "$answer2" == "y" ]
+        elif [ $answer == "No" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "n" ] && [ $answer2 == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
         then
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
@@ -465,7 +465,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     mkdir /mnt/boot
     mkdir /mnt/boot/efi
     mount "${DISK}1" /mnt/boot/efi
-    if [ $answer == "yes" ] ||  [ "$answer" == "y" ]
+    if [ $answer == "Yes" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "y" ]
         then
         mkdir /mnt/home
         mount "${DISK}3" /mnt/home
