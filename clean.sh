@@ -89,7 +89,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         then
         break
         else 
-        echo  "[+]Enter yes or no (y/n)[+]"
+        echo -e "\n[+]Enter yes or no (y/n)[+]"
         count=`expr $count + 1`
         if [ "$count" -eq "$max" ]
         then
