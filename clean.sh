@@ -6,8 +6,8 @@ echo "-------------------------------------------------"
 echo "-------select your disk to format----------------"
 echo "-------------------------------------------------"
 lsblk
-count=1
-max=4
+count=0
+max=3
 while true
 do
 echo -e "\nPlease enter disk: (example /dev/sda)\n"
@@ -19,7 +19,8 @@ if [ "$DISK" == "" ]
     if [ "$count" -eq "$max" ]
     then
     clear
-    count=`expr $count - 4`
+    count=`expr $count - 3`
+    lsblk
     fi
     else 
     break
