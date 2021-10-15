@@ -404,7 +404,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     clear
     sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
     sgdisk -n 1:0:+512M ${DISK}     
-    if  [ -z "${RooP##*[!0-9]*}" ]; 
+    if  [ -z "${RooP##*[!0-9]*}" ];
     then       
     sgdisk -n 2:0:+$RooP  ${DISK} 
     elif [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; 
