@@ -402,18 +402,11 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
 ########## CREAT PARTION UFI ########
 
     clear
-    echo "g
-    n
-    1
-
-    +512M
-    w
-    " | fdisk ${DISK}
-     
+    sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
+    sgdisk -n 1:0:+512M ${DISK}     
     if  [ -z "${RooP##*[!0-9]*}" ]; 
     then       
     sgdisk -n 2:0:+$RooP  ${DISK} 
-
     elif [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; 
     then 
     sgdisk -n 2:0:+${RooP}  ${DISK}
@@ -425,17 +418,14 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             then       
             sgdisk -n 3:0:+${Homep} ${DISK}    ####### 
             sgdisk -n 4:0:+${Swap} ${DISK}
-
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ];
             then 
             sgdisk -n 3:0:+${Homep}GB ${DISK} 
             sgdisk -n 4:0:+${Swap}GB ${DISK}
-
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap##*[!0-9]*}" ];
             then 
             sgdisk -n 3:0:+${Homep}GB ${DISK}
             sgdisk -n 4:0:+${Swap} ${DISK}
-
             elif  [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ] && [ -z "${Homep##*[!0-9]*}" ];
             then 
             sgdisk -n 3:0:+${Homep} ${DISK}
@@ -458,7 +448,6 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         if  [ -z "${Homep##*[!0-9]*}" ]; ##########str
             then       
             sgdisk -n 3:0:+${Homep} ${DISK}
-
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; 
             then 
             sgdisk -n 3:0:+${Homep}GB ${DISK}
