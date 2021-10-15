@@ -79,7 +79,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     if [ "$answer" == "YES" ] ||  [ "$answer" == "Yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
         then
         echo -e 
-        read -p "Enter your /home partition size please :" Homep
+        read -p "Enter your /home partition size please : " Homep
         echo -e 
         break
         elif [ "$answer" == "NO" ] ||  [ "$answer" == "No" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "n" ]  #if "No"
@@ -304,7 +304,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--------------------------------------"
     pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo micro
     genfstab -U /mnt >> /mnt/etc/fstab
-    mv ~/arc/step2.sh /mnt/
+    cp ~/arc/step2.sh /mnt/
     chmod a+x /mnt/step2.sh
     echo "$DISK" > /mnt/ID
     echo "$Mode" > /mnt/GrubID
@@ -357,7 +357,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     if [ "$answer" == "YES" ] ||  [ "$answer" == "Yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] #if "Yes"
         then
         echo -e 
-        read -p "Enter your /home partition size please :" Homep
+        read -p "Enter your /home partition size please : " Homep
         echo -e 
         break
         elif [ "$answer" == "NO" ] ||  [ "$answer" == "No" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "n" ]  #if "No"
@@ -412,142 +412,56 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
      
     if  [ -z "${RooP##*[!0-9]*}" ]; 
     then       
-    echo "n 
-    p 
-    2   
-    
-    +${RooP}
-    w
-    " | fdisk ${DISK}
+    sgdisk -n 2:0:+$RooP  ${DISK} 
+
     elif [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; 
     then 
-    echo "n 
-    p 
-    2
-    
-    +${RooP}GB
-    w
-    " | fdisk ${DISK}
+    sgdisk -n 2:0:+${RooP}  ${DISK}
     fi
 
     if [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "YES" ] || [ "$answer2" == "Yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
         then ########for check input if is string or int (10GB) or (10)only
         if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ];
             then       
-            echo "n
-            p
-            3
-                        
-            +${Homep}
-            w
-            " | fdisk ${DISK}
-            echo "
-            n
-            p
-            4
-                        
-            +${Swap}
-            w
-            " | fdisk ${DISK}
+            sgdisk -n 3:0:+${Homep} ${DISK}    ####### 
+            sgdisk -n 4:0:+${Swap} ${DISK}
+
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ];
             then 
-            echo "n
-            p
-            3
-                        
-            +${Homep}GB
-            w
-            " | fdisk ${DISK}  
-            echo "
-            n
-            p
-            4
-                        
-            +${Swap}GB
-            w
-            " | fdisk ${DISK}
+            sgdisk -n 3:0:+${Homep}GB ${DISK} 
+            sgdisk -n 4:0:+${Swap}GB ${DISK}
+
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap##*[!0-9]*}" ];
             then 
-            echo "n
-            p
-            3
-                        
-            +${Homep}GB
-            w
-            "  | fdisk ${DISK}
-            echo "
-            n
-            p
-            4
-                        
-            +${Swap}
-            w
-            "  | fdisk ${DISK}
+            sgdisk -n 3:0:+${Homep}GB ${DISK}
+            sgdisk -n 4:0:+${Swap} ${DISK}
+
             elif  [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ] && [ -z "${Homep##*[!0-9]*}" ];
             then 
-            echo "n
-            p
-            3
-                        
-            +${Homep}
-            w
-            "  | fdisk ${DISK}
-            echo "
-            n
-            p
-            4
-                        
-            +${Swap}GB
-            w
-            " | fdisk ${DISK}
+            sgdisk -n 3:0:+${Homep} ${DISK}
+            sgdisk -n 4:0:+${Swap}GB ${DISK}
+
             fi #####if  
 ##################
         elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then 
         if  [ -z "${Swap##*[!0-9]*}" ]; 
             then       
-            echo "
-            n
-            p
-            3
-                
-            +${Swap}
-            w
-            " | fdisk ${DISK}
+            sgdisk -n 3:0:+${Swap} ${DISK}     
             elif [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; 
             then 
-            echo "
-            n
-            p
-            3
-                
-            +${Swap}GB  
-            w
-            " | fdisk ${DISK}
+            sgdisk -n 3:0:+${Swap}GB ${DISK}
             fi ########if 
         ######
         elif [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "NO" ] || [ "$answer2" == "No" ] || [ "$answer2" == "N" ] || [ "$answer2" == "no" ] || [ "$answer2" == "n" ]
         then 
         if  [ -z "${Homep##*[!0-9]*}" ]; ##########str
             then       
-            echo "
-            n
-            p
-            3
-                
-            +${Homep}
-            w
-            " | fdisk ${DISK}
+            sgdisk -n 3:0:+${Homep} ${DISK}
+
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; 
             then 
-            echo "
-            n
-            p
-            3
-                
-            +${Homep}GB
-            w
-            " | fdisk ${DISK}
+            sgdisk -n 3:0:+${Homep}GB ${DISK}
             fi
         fi
 
@@ -574,7 +488,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mkdir /mnt/home
         mount "${DISK}3" /mnt/home
         fi
-
+    clear
     lsblk
     echo -e "\n"
     echo "----------------------------------------------------------"
@@ -590,7 +504,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--------------------------------------"
     pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo
     genfstab -U /mnt >> /mnt/etc/fstab
-    mv ~/arc/step2.sh /mnt/
+    cp ~/arc/step2.sh /mnt/
     chmod a+x /mnt/step2.sh
     echo "$DISK" > /mnt/ID
     echo "$Mode" > /mnt/GrubID
@@ -612,7 +526,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--          reboot now              --"
     break
     else
-    echo -e "\n[+]Choose Number One Or Two [+]"
+    echo -e "\n[+]Choose Number One Or Two [+]\n"
     count=`expr $count + 1`
     if [ "$count" -eq "$max" ]
     then
