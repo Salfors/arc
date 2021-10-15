@@ -404,56 +404,151 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     clear
     sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
     sgdisk -n 1:0:+512M ${DISK}     
-    if  [ -z "${RooP##*[!0-9]*}" ];
+    clear
+    #echo "g
+    #w
+    #" | fdisk ${DISK}
+     
+    if  [ -z "${RooP##*[!0-9]*}" ]; 
     then       
-    sgdisk -n 2:0:+$RooP  ${DISK} 
+    echo "n 
+    p 
+    2   
+    
+    +${RooP}
+    w
+    " | fdisk ${DISK}
     elif [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; 
     then 
-    sgdisk -n 2:0:+${RooP}GB ${DISK}
+    echo "n 
+    p 
+    2
+    
+    +${RooP}GB
+    w
+    " | fdisk ${DISK}
     fi
 
     if [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "YES" ] || [ "$answer2" == "Yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
         then ########for check input if is string or int (10GB) or (10)only
         if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ];
             then       
-            sgdisk -n 3:0:+${Homep} ${DISK}    ####### 
-            sgdisk -n 4:0:+${Swap} ${DISK}
+            echo "n
+            p
+            3
+                        
+            +${Homep}
+            w
+            " | fdisk ${DISK}
+            echo "
+            n
+            p
+            4
+                        
+            +${Swap}
+            w
+            " | fdisk ${DISK}
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ];
             then 
-            sgdisk -n 3:0:+${Homep}GB ${DISK} 
-            sgdisk -n 4:0:+${Swap}GB ${DISK}
+            echo "n
+            p
+            3
+                        
+            +${Homep}GB
+            w
+            " | fdisk ${DISK}  
+            echo "
+            n
+            p
+            4
+                        
+            +${Swap}GB
+            w
+            " | fdisk ${DISK}
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap##*[!0-9]*}" ];
             then 
-            sgdisk -n 3:0:+${Homep}GB ${DISK}
-            sgdisk -n 4:0:+${Swap} ${DISK}
+            echo "n
+            p
+            3
+                        
+            +${Homep}GB
+            w
+            "  | fdisk ${DISK}
+            echo "
+            n
+            p
+            4
+                        
+            +${Swap}
+            w
+            "  | fdisk ${DISK}
             elif  [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ] && [ -z "${Homep##*[!0-9]*}" ];
             then 
-            sgdisk -n 3:0:+${Homep} ${DISK}
-            sgdisk -n 4:0:+${Swap}GB ${DISK}
-
+            echo "n
+            p
+            3
+                        
+            +${Homep}
+            w
+            "  | fdisk ${DISK}
+            echo "
+            n
+            p
+            4
+                        
+            +${Swap}GB
+            w
+            " | fdisk ${DISK}
             fi #####if  
 ##################
         elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then 
         if  [ -z "${Swap##*[!0-9]*}" ]; 
             then       
-            sgdisk -n 3:0:+${Swap} ${DISK}     
+            echo "
+            n
+            p
+            3
+                
+            +${Swap}
+            w
+            " | fdisk ${DISK}
             elif [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; 
             then 
-            sgdisk -n 3:0:+${Swap}GB ${DISK}
+            echo "
+            n
+            p
+            3
+                
+            +${Swap}GB  
+            w
+            " | fdisk ${DISK}
             fi ########if 
         ######
         elif [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "NO" ] || [ "$answer2" == "No" ] || [ "$answer2" == "N" ] || [ "$answer2" == "no" ] || [ "$answer2" == "n" ]
         then 
         if  [ -z "${Homep##*[!0-9]*}" ]; ##########str
             then       
-            sgdisk -n 3:0:+${Homep} ${DISK}
+            echo "
+            n
+            p
+            3
+                
+            +${Homep}
+            w
+            " | fdisk ${DISK}
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; 
             then 
-            sgdisk -n 3:0:+${Homep}GB ${DISK}
+            echo "
+            n
+            p
+            3
+                
+            +${Homep}GB
+            w
+            " | fdisk ${DISK}
             fi
         fi
-
     #### make file system for partion
     mkfs.fat -F32 "${DISK}1"
     mkfs.ext4 "${DISK}2"
