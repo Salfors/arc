@@ -409,7 +409,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     sgdisk -n 2:0:+$RooP  ${DISK} 
     elif [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; 
     then 
-    sgdisk -n 2:0:+${RooP}GB  ${DISK}
+    sgdisk -n 2:0:+${RooP}GB ${DISK}
     fi
 
     if [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "YES" ] || [ "$answer2" == "Yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
