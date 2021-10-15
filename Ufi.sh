@@ -2,14 +2,15 @@
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm gptfdisk btrfs-progs
 clear
-echo "-------------------------------------------------"
-echo "-------Select Your Disk To Format----------------"
-echo "-------------------------------------------------"
+
 lsblk
 count=0
 max=3
 while true
 do
+echo "-------------------------------------------------"
+echo "-------Select Your Disk To Format----------------"
+echo "-------------------------------------------------"
 echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
 read DISK
 if [ "$DISK" == "" ] 
