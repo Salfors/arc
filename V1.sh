@@ -12,19 +12,6 @@ do
 os=$(lsb_release -ds | sed 's/"//g')
 if [ "${os}" != "Arch Linux" ]; then
     echo "You must be using Arch Linux to execute this script."
-    function trap_ctrlc () #if ctrl^c 
-    {
-        echo -e "\n"
-        echo "-------------------------------------------------------------------"
-        echo "--     if you mount points Run Command 'umount -R /mnt'          --"
-        echo "--       And turn off Your Swap partition if you have            --"
-        echo -e "                        with 'swapoff'                             \n"
-        echo "--                 [+]  And Try Again  [+]                       --"
-        echo "-------------------------------------------------------------------"
-        exit 2
-    }
-    
-    trap "trap_ctrlc" 2 
     break
     elif [ "${os}" == "Arch Linux" ]; then
     echo "........."
