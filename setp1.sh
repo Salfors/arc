@@ -156,7 +156,7 @@ if [ "${os}" != "Arch Linux" ]; then
         then       
         echo "n 
         p 
-        1   
+           
         
         +${RooP}
         w
@@ -165,7 +165,7 @@ if [ "${os}" != "Arch Linux" ]; then
         then 
         echo "n 
         p 
-        1
+        
         
         +${RooP}GB
         w
@@ -177,7 +177,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 then       
                 echo "n
                 p
-                2
+                
                             
                 +${Homep}
                 w
@@ -185,7 +185,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                3
+                
                             
                 +${Swap}
                 w
@@ -194,7 +194,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 then 
                 echo "n
                 p
-                2
+                
                             
                 +${Homep}GB
                 w
@@ -202,7 +202,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                3
+                
                             
                 +${Swap}GB
                 w
@@ -211,7 +211,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 then 
                 echo "n
                 p
-                2
+                
                             
                 +${Homep}GB
                 w
@@ -219,7 +219,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                3
+                
                             
                 +${Swap}
                 w
@@ -228,7 +228,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 then 
                 echo "n
                 p
-                2
+                
                             
                 +${Homep}
                 w
@@ -236,7 +236,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                3
+                
                             
                 +${Swap}GB
                 w
@@ -249,7 +249,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                2
+                
                     
                 +${Swap}
                 w
@@ -259,7 +259,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                2
+                
                     
                 +${Swap}GB  
                 w
@@ -272,7 +272,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                2
+                
                     
                 +${Homep}
                 w
@@ -282,7 +282,7 @@ if [ "${os}" != "Arch Linux" ]; then
                 echo "
                 n
                 p
-                2
+                
                     
                 +${Homep}GB
                 w
