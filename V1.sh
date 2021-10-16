@@ -550,20 +550,7 @@ if [ "${os}" != "Arch Linux" ]; then
         then
         clear
         count=`expr $count - 3`
-        fi 
-        function trap_ctrlc () #if ctrl^c 
-        {
-            echo -e "\n"
-            echo "-------------------------------------------------------------------"
-            echo "--     if you mount points Run Command 'umount -R /mnt'          --"
-            echo "--       And turn off Your Swap partition if you have            --"
-            echo -e "                        with 'swapoff'                             \n"
-            echo "--                 [+]  And Try Again  [+]                       --"
-            echo "-------------------------------------------------------------------"
-        }
-        
-        trap "trap_ctrlc" 2 
-        
+        fi                 
     fi
     done
     
