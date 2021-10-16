@@ -8,6 +8,7 @@ echo "
 " 
 ##_________________________________________WELCOM TO "ARCTUS" __________________________________________________________________##
 
+pacman -S --noconfirm lsb-release 
 os=$(lsb_release -ds | sed 's/"//g')
 if [ "${os}" != "Arch Linux" ]; then
     echo "You must be using Arch Linux to execute this script."
