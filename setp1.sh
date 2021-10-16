@@ -15,9 +15,6 @@ if [ "${os}" != "Arch Linux" ]; then
     echo "You must be using Arch Linux to execute this script."
     break
     elif [ "${os}" == "Arch Linux" ]; then
-    
-    while true
-    do
     sleep 3
     #------In order to partition a disk----#
     echo -e "\nInstalling prereqs...\n"
@@ -31,6 +28,8 @@ if [ "${os}" != "Arch Linux" ]; then
     ### to make clean screen with limit trying 
     count=0
     max=3
+    while true
+    do
     echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
     read DISK
     if [ "$DISK" == "" ] 
