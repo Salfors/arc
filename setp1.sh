@@ -461,11 +461,11 @@ if [ "${os}" != "Arch Linux" ]; then
                 sgdisk -n 3:0:+$Homep ${DISK}
                 sgdisk -n 4:0:+${Swap}GB ${DISK}
                 fi   
-            elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
+            elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ] || [ "$answer2" == "YES" ]
             then 
             if  [ -z "${Swap##*[!0-9]*}" ]; 
                 then       
-                sgdisk -n 3:0:+"${Swap}" ${DISK}     
+                sgdisk -n 3:0:+${Swap ${DISK}     
                 elif [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; 
                 then 
                 sgdisk -n 3:0:+${Swap}GB ${DISK}
