@@ -296,12 +296,12 @@ if [ "${os}" != "Arch Linux" ]; then
         mkfs.ext4 "${DISK}1"
         if [ "$answer" == "YES" ] ||  [ "$answer" == "Yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "YES" ] ||  [ "$answer2" == "Yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
             then
-            mkfs.ext4 "${DISK}2" #partition 4 (Home)
-            mkswap "${DISK}3" #partition 4 (Swap)
+            mkfs.ext4 "${DISK}2" #partition 3 (Home)
+            mkswap "${DISK}3" #partition 3 (Swap)
             swapon "${DISK}3"
             elif [ $answer == "NO" ] ||  [ "$answer" == "No" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
             then
-            mkswap "${DISK}2" #partition 4 (Swap)
+            mkswap "${DISK}2" #partition 2 (Swap)
             swapon "${DISK}2"
             fi 
 
@@ -447,8 +447,8 @@ if [ "${os}" != "Arch Linux" ]; then
             then ######## for check input if is string or int, example : (10GB) or (10) only
             if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ]; #str
                 then       
-                sgdisk -n 3:0:+${Homep} ${DISK}   
-                sgdisk -n 4:0:+${Swap} ${DISK}
+                sgdisk -n 3:0:+$Homep ${DISK}   
+                sgdisk -n 4:0:+$Swap ${DISK}
                 elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; #int
                 then 
                 sgdisk -n 3:0:+${Homep}GB ${DISK} 
@@ -459,14 +459,14 @@ if [ "${os}" != "Arch Linux" ]; then
                 sgdisk -n 4:0:+${Swap} ${DISK}
                 elif  [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ] && [ -z "${Homep##*[!0-9]*}" ];
                 then 
-                sgdisk -n 3:0:+${Homep} ${DISK}
+                sgdisk -n 3:0:+$Homep ${DISK}
                 sgdisk -n 4:0:+${Swap}GB ${DISK}
                 fi   
             elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
             then 
             if  [ -z "${Swap##*[!0-9]*}" ]; 
                 then       
-                sgdisk -n 3:0:+${Swap} ${DISK}     
+                sgdisk -n 3:0:+$Swap ${DISK}     
                 elif [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; 
                 then 
                 sgdisk -n 3:0:+${Swap}GB ${DISK}
@@ -493,7 +493,7 @@ if [ "${os}" != "Arch Linux" ]; then
             swapon "${DISK}4"
             elif [ $answer == "NO" ] ||  [ "$answer" == "No" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
             then
-            mkswap "${DISK}3" #partition 4 (Swap)
+            mkswap "${DISK}3" #partition 3 (Swap)
             swapon "${DISK}3"
             fi 
                 
