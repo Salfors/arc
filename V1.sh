@@ -21,6 +21,7 @@ if [ "${os}" != "Arch Linux" ]; then
         echo -e "                        with 'swapoff'                             \n"
         echo "--                 [+]  And Try Again  [+]                       --"
         echo "-------------------------------------------------------------------"
+        exit 2
     }
     
     trap "trap_ctrlc" 2 
