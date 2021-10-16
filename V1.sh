@@ -1,15 +1,33 @@
+echo "
+ █████╗ ██████╗  ██████╗████████╗██╗   ██╗███████╗
+██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██║   ██║██╔════╝
+███████║██████╔╝██║        ██║   ██║   ██║███████╗
+██╔══██║██╔══██╗██║        ██║   ██║   ██║╚════██║
+██║  ██║██║  ██║╚██████╗   ██║   ╚██████╔╝███████║
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝
+" 
+sleep 3
+while true
+do
+os=$(lsb_release -ds | sed 's/"//g')
+if [ "${os}" != "Arch Linux" ]; then
+    echo "You must be using Arch Linux to execute this script."
+    break
+    elif [ "${os}" == "Arch Linux" ]; then
+    echo "........."
+    fi
 #------In order to partition a disk----#
 echo -e "\nInstalling prereqs...\n"
 pacman -S --noconfirm gptfdisk btrfs-progs
 clear
+#------      disc selection   ---------# 
 echo "-------------------------------------------------"
 echo "-------Select Your Disk To Format----------------"
 echo "-------------------------------------------------"
 lsblk
+### to make clean screen with limit trying 
 count=0
 max=3
-while true
-do
 echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
 read DISK
 if [ "$DISK" == "" ] 
@@ -32,10 +50,8 @@ echo "--------------------------------------"
 # disk prep
 sgdisk -Z ${DISK} # zap all on disk
 clear
-#------create partitions------#
 
 #-----Select live boot type------#
-
 
 while true
 do
@@ -48,7 +64,7 @@ echo -e "\n+[1] Bios Mode" # BIOS
 echo -e  "+[2] UFI Mode\n" # UFI
 read -p  "Enter Number : " Mode
 
-if [ "$Mode" == "$N1" ]  ######### if Bios #######
+if [ "$Mode" == "$N1" ]  ######### iIF IS BIOS MODE #######
     then
     clear
     #_____Determine the size of the root partition____#
@@ -57,7 +73,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e ""
     read -p "Please Enter Size For Root Partition : " RooP
-    if [ "$RooP" == "" ] #if "Yes"
+    if [ "$RooP" == "" ] 
         then
         echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
         count=`expr $count + 1`
@@ -121,7 +137,14 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         fi
     fi
     done
-########## CREAT PARTION BIOS ########
+#------    CREATE PARTITIONS ON BIOS MODE -------#
+
+#####################################################################################################################
+
+#  NOTE: Every line Here Is Important Even If It Is Empty. If You Delete Any Line Here, It Will Be A Problem
+#               You Must Understand How the "FDISK" Partition Works To Understand It
+
+################################################################################################################## 
 
     clear
     echo "o
@@ -147,10 +170,9 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     w
     " | fdisk ${DISK}
     fi
-
     if [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "YES" ] || [ "$answer2" == "Yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
-        then ########for check input if is string or int (10GB) or (10)only
-        if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ];
+        then ######## for check input if is string or int, example : (10GB) or (10) only
+        if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ]; #str
             then       
             echo "n
             p
@@ -167,7 +189,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             +${Swap}
             w
             " | fdisk ${DISK}
-            elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ];
+            elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; #int
             then 
             echo "n
             p
@@ -218,8 +240,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             +${Swap}GB
             w
             " | fdisk ${DISK}
-            fi #####if  
-##################
+            fi 
         elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then 
         if  [ -z "${Swap##*[!0-9]*}" ]; 
@@ -242,11 +263,10 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             +${Swap}GB  
             w
             " | fdisk ${DISK}
-            fi ########if 
-        ######
+            fi 
         elif [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "NO" ] || [ "$answer2" == "No" ] || [ "$answer2" == "N" ] || [ "$answer2" == "no" ] || [ "$answer2" == "n" ]
         then 
-        if  [ -z "${Homep##*[!0-9]*}" ]; ##########str
+        if  [ -z "${Homep##*[!0-9]*}" ];
             then       
             echo "
             n
@@ -269,11 +289,12 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             fi
         fi
 
-    #### make file system for partion
+    #------ Make File System For Partition -----#
+
     mkfs.ext4 "${DISK}1"
     if [ "$answer" == "YES" ] ||  [ "$answer" == "Yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "YES" ] ||  [ "$answer2" == "Yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
         then
-        mkfs.ext4 "${DISK}2"
+        mkfs.ext4 "${DISK}2" #partition 4 (Home)
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
         elif [ $answer == "NO" ] ||  [ "$answer" == "No" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
@@ -281,22 +302,25 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mkswap "${DISK}2" #partition 4 (Swap)
         swapon "${DISK}2"
         fi 
-            #### mount point
+
+        #---------  mount the points partitions  --------------#
+
     mount "${DISK}1" /mnt
     if [ $answer == "YES" ] ||  [ "$answer" == "Yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "y" ]
         then
         mkdir /mnt/home
         mount "${DISK}2" /mnt/home
         fi
-
     lsblk
     echo -e "\n"
-    echo "----------------------------------------------------------"
-    echo "--   If you did not do the division correctly      -------"
-    echo "--           Stop Script with (CTRL + Z)           -------"
-    echo " Then enter the command 'umount -R' and try again   ------"
-    echo "               Or reboot and try again ..            -----"
-    echo "----------------------------------------------------------"
+    echo "----------------------------------------------------------------"
+    echo "--   If you did not do the division correctly      -------------"
+    echo "--           Stop Script with (CTRL + Z)           -------------"
+    echo "           And run the script 'help.sh'             ------------"
+    echo "----------------------------------------------------------------"
+    echo "or read the steps mentioned in it and execute them manually  ---"
+    echo "--                and try again                           ------"
+    echo "----------------------------------------------------------------"
     sleep 20
     clear
     echo "--------------------------------------"
@@ -304,6 +328,8 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--------------------------------------"
     pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo micro
     genfstab -U /mnt >> /mnt/etc/fstab
+
+    #### To prepare step 2 ####
     cp ~/arc/step2.sh /mnt/
     chmod a+x /mnt/step2.sh
     echo "$DISK" > /mnt/ID
@@ -326,7 +352,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     echo "--------------------------------------"
     echo "--          Reboot Now              --"
     break
-    elif [ "$Mode" == "$N2" ] # ----------if UFI-------------- ----------------------------------------------#
+    elif [ "$Mode" == "$N2" ] # ---------- IF IS UEFI MODE ---------#
     then
     clear
     #_____Determine the size of the root partition____#
@@ -335,7 +361,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     do
     echo -e ""
     read -p "Please Enter Size For Root Partition : " RooP
-    if [ "$RooP" == "" ] #if "Yes"
+    if [ "$RooP" == "" ] 
         then
         echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
         count=`expr $count + 1`
@@ -399,7 +425,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         fi
     fi
     done
-########## CREAT PARTION UFI ########
+#---------- CREATE PARTITIONS UEFI ---------#
 
     clear
     sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
@@ -413,12 +439,12 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     fi
 
     if [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "YES" ] || [ "$answer2" == "Yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "y" ]
-        then ########for check input if is string or int (10GB) or (10)only
-        if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ];
+        then ######## for check input if is string or int, example : (10GB) or (10) only
+        if  [ -z "${Homep##*[!0-9]*}" ] && [ -z "${Swap##*[!0-9]*}" ]; #str
             then       
-            sgdisk -n 3:0:+${Homep} ${DISK}    ####### 
+            sgdisk -n 3:0:+${Homep} ${DISK}   
             sgdisk -n 4:0:+${Swap} ${DISK}
-            elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ];
+            elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ] && [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; #int
             then 
             sgdisk -n 3:0:+${Homep}GB ${DISK} 
             sgdisk -n 4:0:+${Swap}GB ${DISK}
@@ -430,9 +456,7 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             then 
             sgdisk -n 3:0:+${Homep} ${DISK}
             sgdisk -n 4:0:+${Swap}GB ${DISK}
-
-            fi #####if  
-##################
+            fi   
         elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
         then 
         if  [ -z "${Swap##*[!0-9]*}" ]; 
@@ -441,11 +465,10 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             elif [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; 
             then 
             sgdisk -n 3:0:+${Swap}GB ${DISK}
-            fi ########if 
-        ######
+            fi 
         elif [ "$answer" == "YES" ] || [ "$answer" == "Yes" ] || [ "$answer" == "Y" ] || [ "$answer" == "yes" ] || [ "$answer" == "y" ] && [ "$answer2" == "NO" ] || [ "$answer2" == "No" ] || [ "$answer2" == "N" ] || [ "$answer2" == "no" ] || [ "$answer2" == "n" ]
         then 
-        if  [ -z "${Homep##*[!0-9]*}" ]; ##########str
+        if  [ -z "${Homep##*[!0-9]*}" ]; 
             then       
             sgdisk -n 3:0:+${Homep} ${DISK}
             elif [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; 
@@ -454,12 +477,13 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
             fi
         fi
 
-    #### make file system for partion
+    #------ Make File System For Partition -----#
+
     mkfs.fat -F32 "${DISK}1"
     mkfs.ext4 "${DISK}2"
     if [ "$answer" == "YES" ] ||  [ "$answer" == "Yes" ] ||  [ "$answer" == "Y" ] ||  [ "$answer" == "yes" ] ||  [ "$answer" == "y" ] && [ "$answer2" == "YES" ] ||  [ "$answer2" == "Yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "y" ]
         then
-        mkfs.ext4 "${DISK}3"
+        mkfs.ext4 "${DISK}3" #partition 4 (Home)
         mkswap "${DISK}4" #partition 4 (Swap)
         swapon "${DISK}4"
         elif [ $answer == "NO" ] ||  [ "$answer" == "No" ] ||  [ "$answer" == "N" ] ||  [ "$answer" == "no" ] ||  [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] ||  [ "$answer2" == "yes" ] ||  [ "$answer2" == "Y" ] ||  [ "$answer2" == "y" ]
@@ -467,7 +491,9 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
         mkswap "${DISK}3" #partition 4 (Swap)
         swapon "${DISK}3"
         fi 
-            #### mount point
+            
+        #---------  mount the points partitions  --------------#
+
     mount "${DISK}2" /mnt
     mkdir /mnt/boot
     mkdir /mnt/boot/efi
@@ -480,12 +506,15 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     clear
     lsblk
     echo -e "\n"
-    echo "----------------------------------------------------------"
-    echo "--   If you did not do the division correctly      -------"
-    echo "--           Stop Script with (CTRL + Z)           -------"
-    echo " Then enter the command 'umount -R' and try again   ------"
-    echo "               Or reboot and try again ..            -----"
-    echo "----------------------------------------------------------"
+    echo "----------------------------------------------------------------"
+    echo "--      If You DID Not Do The Division correctly              --"
+    echo "--               Stop Script With 'ctrl + z'                  --"
+    echo "               And Run Command 'Umount -R /mnt'               --"
+
+    echo "--       And turn off Your Swap partition if you have         --"
+    echo -e "                        with 'swapoff'                        \n"
+    echo "--                 [+]  And Try Again  [+]                    --"
+    echo "----------------------------------------------------------------"
     sleep 20
     clear
     echo "--------------------------------------"
@@ -521,6 +550,19 @@ if [ "$Mode" == "$N1" ]  ######### if Bios #######
     then
     clear
     count=`expr $count - 3`
-    fi        
+    fi 
+    function trap_ctrlc () #if ctrl^c 
+    {
+        echo -e "\n"
+        echo "-------------------------------------------------------------------"
+        echo "--     if you mount points Run Command 'umount -R /mnt'          --"
+        echo "--       And turn off Your Swap partition if you have            --"
+        echo -e "                        with 'swapoff'                             \n"
+        echo "--                 [+]  And Try Again  [+]                       --"
+        echo "-------------------------------------------------------------------"
+    }
+    
+    trap "trap_ctrlc" 2 
+       
 fi
 done
