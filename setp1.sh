@@ -8,14 +8,13 @@ echo "
 ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝
 " 
 ##_________________________________________WELCOM TO "ARCTUS" __________________________________________________________________##
-
+sleep 3
 pacman -S --noconfirm lsb-release 
 os=$(lsb_release -ds | sed 's/"//g')
 if [ "${os}" != "Arch Linux" ]; then
     echo "You must be using Arch Linux to execute this script."
     break
     elif [ "${os}" == "Arch Linux" ]; then
-    sleep 3
     #------In order to partition a disk----#
     echo -e "\nInstalling prereqs...\n"
     pacman -S --noconfirm gptfdisk btrfs-progs
