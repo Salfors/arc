@@ -466,7 +466,7 @@ if [ "${os}" != "Arch Linux" ]; then
             then 
             if  [ -z "${Swap##*[!0-9]*}" ]; 
                 then       
-                sgdisk -n 3:0:+${Swap} ${DISK}     
+                sgdisk -n 3:0:+"${Swap}" ${DISK}     
                 elif [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; 
                 then 
                 sgdisk -n 3:0:+${Swap}GB ${DISK}
