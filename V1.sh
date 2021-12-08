@@ -151,6 +151,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 #chosse edit or note
                 else
                 echo -e "\n[+]Choose 1 or 2 !!![+]\n"
+                fi
                 count=`expr $count + 1`
                 if [ "$count" -eq "$max" ]
                 then
