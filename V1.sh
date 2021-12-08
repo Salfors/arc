@@ -26,6 +26,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
     ### to make clean screen with limit trying 
     count=0
     max=3
+    function clean_screen() {
+        if [ "$count" -eq "$max" ]; then
+            clear
+            count=`expr $count - 3`
+            fi
+    }
     while true
     do
     echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
@@ -34,12 +40,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
         then
         echo -e "\n[+]Choose The Disk To Install To !!![+]\n"
         count=`expr $count + 1`
-        if [ "$count" -eq "$max" ]
-        then
-        clear
-        count=`expr $count - 3`
+        clean_screen
         lsblk
-        fi
         else 
         break    
     fi
@@ -54,7 +56,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         while true
             do
             echo -e ""
-            read -p "Do You Want To Modify a Hard Disk ? : " ED #EDIT DISK
+            read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
             case $ED in 
                 y|Y|yes|Yes|YES)
                         while true
@@ -90,11 +92,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     count=`expr $count + 1`   
                     ;;                      
             esac
-            if [ "$count" -eq "$max" ]
-                then
-                clear
-                count=`expr $count - 3`
-            fi
+            clean_screen
         done
     }
     EDIT_HARD
@@ -144,7 +142,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     count=`expr $count + 1`
                     ;;
                 esac
-                clean
+                clean_screen
             done    
             break
             
@@ -154,7 +152,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             else
             echo -e "\n[+]Choose 1 or 2 !!![+]\n"
             count=`expr $count + 1`
-            clean
+            clean_screen
             fi
             
         done
@@ -198,11 +196,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
                     count=`expr $count + 1`
                 fi
-                if [ "$count" -eq "$max" ]; then
-                    clear
-                    echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step"
-                    count=`expr $count - 3`       
-                fi
+                clean_screen
+                echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step"
+               
             done
             clear
                 
@@ -229,11 +225,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo "enter vailde value !!"
                                     count=`expr $count + 1`
                                 fi
-                                if [ "$count" -eq "$max" ]; then
-                                    clear
-                                    echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
-                                    count=`expr $count - 3`
-                                fi
+                                clean_screen
+                                echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                             
                             done
                             echo -e 
                             break
@@ -276,11 +270,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo "enter vailde value !!"
                                     count=`expr $count + 1`
                                 fi
-                                if [ "$count" -eq "$max" ]; then
-                                    clear
-                                    echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
-                                    count=`expr $count - 3`
-                                fi
+                                clean_screen
+                                echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                                 
                             done
                             echo -e 
                             break
@@ -291,10 +283,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     *) 
                             echo -e "\n[+]Enter yes or no (y/n)[+]"
                             count=`expr $count + 1`
-                            if [ "$count" -eq "$max" ]; then
-                                clear
-                                count=`expr $count - 3`
-                            fi
+                            clean_screen
                             ;;
                     esac
             done
@@ -302,6 +291,48 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
         Determine_size
         logic=`expr $RooP + $Homep + $Swap`
+
+        function check_logic() {
+            while true
+            do 
+            echo -e "\nIs This The Total Volume For The Operation ${logic}GB ?\n"
+            read -p "Enter 'Yes' To Continue or 'No' To Edit Size : " logic
+            case $logic in 
+                y|Y|yes|Yes|YES)
+                        break
+                        ;;
+
+                n|N|no|No|NO)
+
+                        while true
+                            do 
+                            clear
+                            echo -e "on next step GB is default\n"
+                            read -p "Enter The Size With (number only): " logic
+                            if [ -z "${logic//[0-9]/}" -a ! -z "$logic" ]; then
+                                clear
+                                echo -e "\n[+]The size for the process is ${logic}GB.[+] ."
+                                echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                break
+                                else 
+                                echo -e "\n[+]Enter Just The Number Without GB or Valid Value !![+]\n"
+                                count=`expr $count + 1`
+                            fi
+                            clean_screen
+                        done
+                        break
+                        ;;
+                *)
+                    echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
+                    count=`expr $count + 1`
+                    ;;
+            esac
+            clean_screen 
+        done
+
+        }
+        check_logic
+
         clear
 
                            #------    CREATE PARTITIONS ON BIOS MODE -------#
@@ -533,11 +564,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
                     count=`expr $count + 1`
                 fi
-                if [ "$count" -eq "$max" ]; then
-                    clear
-                    echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step"
-                    count=`expr $count - 3`       
-                fi
+                clean_screen
+                echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step"
+               
             done
             clear
                 
@@ -564,11 +593,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo "enter vailde value !!"
                                     count=`expr $count + 1`
                                 fi
-                                if [ "$count" -eq "$max" ]; then
-                                    clear
-                                    echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
-                                    count=`expr $count - 3`
-                                fi
+                                clean_screen
+                                echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                             
                             done
                             echo -e 
                             break
@@ -580,10 +607,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     *) 
                             echo -e "\n[+]Enter yes or no (y/n)[+]"
                             count=`expr $count + 1`
-                            if [ "$count" -eq "$max" ]; then
-                                clear
-                                count=`expr $count - 3`
-                            fi
+                            clean_screen
                             ;;
                     esac
             done
@@ -611,11 +635,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo "enter vailde value !!"
                                     count=`expr $count + 1`
                                 fi
-                                if [ "$count" -eq "$max" ]; then
-                                    clear
-                                    echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
-                                    count=`expr $count - 3`
-                                fi
+                                clean_screen
+                                echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                                
                             done
                             echo -e 
                             break
@@ -626,10 +648,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     *) 
                             echo -e "\n[+]Enter yes or no (y/n)[+]"
                             count=`expr $count + 1`
-                            if [ "$count" -eq "$max" ]; then
-                                clear
-                                count=`expr $count - 3`
-                            fi
+                            clean_screen
                             ;;
                     esac
             done
@@ -639,6 +658,46 @@ if [ "${os}" != '"Arch Linux"' ]; then
         logic=`expr $RooP + $Homep + $Swap`
         clear
 
+        function check_logic() {
+            while true
+            do 
+            echo -e "\nIs This The Total Volume For The Operation ${logic}GB ?\n"
+            read -p "Enter 'Yes' To Continue or 'No' To Edit Size : " logic
+            case $logic in 
+                y|Y|yes|Yes|YES)
+                        break
+                        ;;
+
+                n|N|no|No|NO)
+
+                        while true
+                            do 
+                            clear
+                            echo -e "on next step GB is default\n"
+                            read -p "Enter The Size With (number only): " logic
+                            if [ -z "${logic//[0-9]/}" -a ! -z "$logic" ]; then
+                                clear
+                                echo -e "\n[+]The size for the process is ${logic}GB.[+] ."
+                                echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                break
+                                else 
+                                echo -e "\n[+]Enter Just The Number Without GB or Valid Value !![+]\n"
+                                count=`expr $count + 1`
+                            fi
+                            clean_screen
+                        done
+                        break
+                        ;;
+                *)
+                    echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
+                    count=`expr $count + 1`
+                    ;;
+            esac
+            clean_screen 
+        done
+
+        }
+        check_logic
 
         #_____________________ IF MSDOS ON BIOS __________________# 
 
