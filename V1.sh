@@ -345,7 +345,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     ################################################################################################################## 
 
         
-        DT=`sudo parted /dev/sda print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
+        DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
 
             function MSDOS(){
@@ -701,7 +701,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
         #_____________________ IF MSDOS ON BIOS __________________# 
 
-        DT=`sudo parted /dev/sda print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
+        DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
             function MSDOS(){
                 echo "n 
