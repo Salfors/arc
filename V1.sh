@@ -134,6 +134,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         w
                         " | fdisk ${DISK}
                         break
+                        ;;
                     *)
                         echo "enter 1 or 2 "
                         count=`expr $count + 1`
