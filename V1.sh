@@ -428,7 +428,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 +${RooP}GB
                 w
                 " | fdisk ${DISK}
-                ROOT=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                             
                 if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
                     then 
@@ -438,7 +438,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Homep}GB
                     w
                     " | fdisk ${DISK}  
-                    HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #____home
                     echo "
                     n
@@ -447,7 +447,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Swap}GB
                     w
                     " | fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #_____swap             
 
                     elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
@@ -459,7 +459,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Swap}GB  
                     w
                     " | fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #_______# 
                     elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
                     then 
@@ -470,7 +470,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Homep}GB
                     w
                     " | fdisk ${DISK}
-                    HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`                   
+                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`                   
                 fi
             }
             GPT
@@ -721,7 +721,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +512M
                     w
                     " | fdisk ${DISK}
-                    EFI=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
                 }
                 ESP
@@ -733,7 +733,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 +${RooP}GB
                 w
                 " | fdisk ${DISK}
-                ROOT=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                             
                 if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
                     then 
@@ -744,7 +744,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Homep}GB
                     w
                     " | fdisk ${DISK}  
-                    HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #___home
                     echo "
                     n
@@ -754,7 +754,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Swap}GB
                     w
                     " | fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #___swap               
 
                     elif [ "$AN" == "NO" ] || [ "$AN" == "No" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] && [ "$AN2" == "Yes" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "y" ]
@@ -767,7 +767,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Swap}GB  
                     w
                     " | fdisk ${DISK}
-                    swap=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    swap=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #___swap
                     elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
                     then 
@@ -779,7 +779,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Homep}GB
                     w
                     " | fdisk ${DISK}
-                    HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                                     
                 fi
             }
@@ -798,7 +798,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +512M
                     w
                     " | fdisk ${DISK}
-                    EFI=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
                 }
                 ESP
@@ -809,7 +809,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 +${RooP}GB
                 w
                 " | fdisk ${DISK}
-                ROOT=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                             
                 if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
                     then 
@@ -819,7 +819,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Homep}GB
                     w
                     " | fdisk ${DISK}  
-                    HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #___home
                     echo "
                     n
@@ -828,7 +828,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Swap}GB
                     w
                     " | fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #____swap                
 
                     elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
@@ -840,7 +840,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Swap}GB  
                     w
                     " | fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                     #__swap
                     elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
                     then 
@@ -851,7 +851,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     +${Homep}GB
                     w
                     " | fdisk ${DISK}
-                    HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                                     
                 fi
             }
