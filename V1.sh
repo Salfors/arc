@@ -105,62 +105,60 @@ if [ "${os}" != '"Arch Linux"' ]; then
     echo -e "\n"
     function disk_format(){
         while true
-            do
-            echo -e ""
-            read -p "Do you want to use all disk for installation or just free space" UD #USE DISK
+            do 
             echo -e ""
             echo "[1] Use it all and format the hard drive."
             echo "[2] Use only free disk space."
+            echo -e ""
+            read -p "Do you want to use all disk for installation or just free space : " UD #USE DISK
 
             if [ "$UD" == "1" ] 
-                then
-                clear
-                sgdisk -Z ${DISK} # zap all on disk
-                while true 
+            then
+            clear
+            sgdisk -Z ${DISK} # zap all on disk
+            while true 
                 do
-                read -p "Do you want a GPT or MSDOS table for your hard disk" table 
+                
                 echo -e ""
                 echo "[1] GPT"
                 echo "[2] MSDOS"
+                echo -e ""
+                read -p "Do you want a 'GPT' or 'MSDOS' table for your hard disk : " table 
                 case $table in 
-                    1)
-                        clear
-                        sgdisk -a 2048 -o ${DISK} 
-                        break
-                        ;;
-                    2)
-                        clear
-                        echo "o
-                        w
-                        " | fdisk ${DISK}
-                        break
-                        ;;
-                    *)
-                        echo "enter 1 or 2 "
-                        count=`expr $count + 1`
-                        ;;
+                1)
+                    clear
+                    sgdisk -a 2048 -o ${DISK} 
+                    break
+                    ;;
+
+                2)
+                    clear
+                    echo "o
+                    w
+                    " | fdisk ${DISK}
+                    break
+                    ;;
+
+                *)
+                    echo "enter 1 or 2 "
+                    count=`expr $count + 1`
+                    ;;
                 esac
-                if [ "$count" -eq "$max" ]; then
-                clear
-                count=`expr $count - 3`
-                fi
-                done    
-                break
-        
-                elif [ "$UD" == "2" ]; then
-                #chosse edit or note
-                else
-                echo -e "\n[+]Choose 1 or 2 !!![+]\n"
-                fi
-                count=`expr $count + 1`
-                if [ "$count" -eq "$max" ]
-                then
-                clear
-                count=`expr $count - 3`
-                fi 
+                clean
+            done    
+            break
+            
+            elif [ "$UD" == "2" ]; then
+                        #chosse edit or note
+            break 
+            else
+            echo -e "\n[+]Choose 1 or 2 !!![+]\n"
+            count=`expr $count + 1`
+            clean
             fi
+            
         done
-        
+            
     }
     disk_format
     clear
