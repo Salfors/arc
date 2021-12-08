@@ -137,6 +137,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     *)
                         echo "enter 1 or 2 "
                         count=`expr $count + 1`
+                        ;;
                 esac
                 if [ "$count" -eq "$max" ]; then
                 clear
