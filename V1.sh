@@ -1,3 +1,6 @@
+
+####### NOTE THIS CODE ISN'T READY SO DON'T USE IT################
+
 clear
 echo "
  █████╗ ██████╗  ██████╗████████╗██╗   ██╗███████╗
