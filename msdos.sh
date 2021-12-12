@@ -131,8 +131,8 @@ function Determine_size() {
             while true
             do 
             echo -e "\nIs This The Total Volume For The Operation ${logic}GB ?\n"
-            read -p "Enter 'Yes' To Continue or 'No' To Edit Size : " logic
-            case $logic in 
+            read -p "Enter 'Yes' To Continue or 'No' To Edit Size : " AL #ask logic
+            case $AL in 
                 y|Y|yes|Yes|YES)
                         break
                         ;;
