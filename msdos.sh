@@ -1,3 +1,4 @@
+DISK=/dev/vda
 function disk_format(){
         while true
             do 
