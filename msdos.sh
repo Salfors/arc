@@ -1,4 +1,4 @@
-DISK=/dev/vda
+
 function Determine_size() {
 
             #_____Determine the size of the root partition____#
@@ -170,7 +170,7 @@ function Determine_size() {
 
 
 
-
+DISK=/dev/vda
 
 
 
@@ -210,11 +210,10 @@ function MSDOS(){
     n 
     l 
     
-    
     +${RooP}GB
     w
     " | fdisk ${DISK}
-    ROOT=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+    ROOT=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                             
     if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
         then 
@@ -222,21 +221,19 @@ function MSDOS(){
         n
         l
         
-        
         +${Homep}GB
         w
         " | fdisk ${DISK}  
-        HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+        HOME=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                     #####
         echo "
         n
         l
         
-        
         +${Swap}GB
         w
         " | fdisk ${DISK}
-        SWAP=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+        SWAP=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                     #######                
 
         elif [ "$AN" == "NO" ] || [ "$AN" == "No" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] && [ "$AN2" == "Yes" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "y" ]
@@ -245,11 +242,10 @@ function MSDOS(){
         n
         l
         
-        
         +${Swap}GB  
         w
         " | fdisk ${DISK}
-        swap=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+        swap=`sudo partx -rgo NR -n -1:-1 vda`
                     ### 
         elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
         then 
@@ -257,11 +253,10 @@ function MSDOS(){
         n
         l
         
-        
         +${Homep}GB
         w
         " | fdisk ${DISK}
-        HOME=`sudo partx -rgo NR -n -1:-1 /dev/sda`
+        HOME=`sudo partx -rgo NR -n -1:-1 vda`
                                     
     fi
 }
