@@ -949,6 +949,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         count=`expr $count + 1`
         clean_screen()           
         fi
+    fi
     done  
 fi
 
