@@ -197,67 +197,67 @@ DISK=/dev/vda
 
 
 function MSDOS(){
-    echo "
-    n 
-    e 
-    
-    
-    +${logic}GB
-    w
-    "| fdisk ${DISK}
-                #### root
-    echo "
-    n 
-    l 
-    
-    +${RooP}GB
-    w
-    " | fdisk ${DISK}
-    ROOT=`sudo partx -rgo NR -n -1:-1 /dev/vda`
-                            
-    if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
-        then 
         echo "
-        n
-        l
+        n 
+        e 
         
-        +${Homep}GB
-        w
-        "| fdisk ${DISK}  
-        HOME=`sudo partx -rgo NR -n -1:-1 /dev/vda`
-                    #####
-        echo "
-        n
-        l
         
-        +${Swap}GB
+        +${logic}GB
         w
         "| fdisk ${DISK}
-        SWAP=`sudo partx -rgo NR -n -1:-1 /dev/vda`
-                    #######                
+                    #### root
+        echo "
+        n 
+        l 
+        
+        +${RooP}GB
+        w
+        " | fdisk ${DISK}
+        ROOT=`sudo partx -rgo NR -n -1:-1 /dev/vda`
+                                
+        if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
+            then 
+            echo "
+            n
+            l
+            
+            +${Homep}GB
+            w
+            "| fdisk ${DISK}  
+            HOME=`sudo partx -rgo NR -n -1:-1 /dev/vda`
+                        #####
+            echo "
+            n
+            l
+            
+            +${Swap}GB
+            w
+            "| fdisk ${DISK}
+            SWAP=`sudo partx -rgo NR -n -1:-1 /dev/vda`
+                        #######                
 
-        elif [ "$AN" == "NO" ] || [ "$AN" == "No" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] && [ "$AN2" == "Yes" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "y" ]
-        then 
-        echo "
-        n
-        l
-        
-        +${Swap}GB  
-        w
-        "| fdisk ${DISK}
-        swap=`sudo partx -rgo NR -n -1:-1 vda`
-                    ### 
-        elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
-        then 
-        echo "
-        n
-        l
-        
-        +${Homep}GB
-        w
-        "| fdisk ${DISK}
-        HOME=`sudo partx -rgo NR -n -1:-1 vda`
-                                    
-    fi
+            elif [ "$AN" == "NO" ] || [ "$AN" == "No" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] && [ "$AN2" == "Yes" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "y" ]
+            then 
+            echo "
+            n
+            l
+            
+            +${Swap}GB  
+            w
+            "| fdisk ${DISK}
+            swap=`sudo partx -rgo NR -n -1:-1 vda`
+                        ### 
+            elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
+            then 
+            echo "
+            n
+            l
+            
+            +${Homep}GB
+            w
+            "| fdisk ${DISK}
+            HOME=`sudo partx -rgo NR -n -1:-1 vda`
+                                        
+        fi
 }
 MSDOS
