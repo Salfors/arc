@@ -245,7 +245,7 @@ function MSDOS(){
             +${Swap}GB  
             w
             "| fdisk ${DISK}
-            swap=`sudo partx -rgo NR -n -1:-1 vda`
+            swap=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                         ### 
             elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
             then 
@@ -256,8 +256,12 @@ function MSDOS(){
             +${Homep}GB
             w
             "| fdisk ${DISK}
-            HOME=`sudo partx -rgo NR -n -1:-1 vda`
+            HOME=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                                         
         fi
 }
 MSDOS
+
+echo "${ROOT}"
+echo "${HOME}"
+echo "${SWAP}"
