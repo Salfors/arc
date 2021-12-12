@@ -226,8 +226,7 @@ function MSDOS(){
             "| fdisk ${DISK}  
             HOME=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                         #####
-            echo "
-            n
+            echo "n
             l
             
             
@@ -239,8 +238,7 @@ function MSDOS(){
 
             elif [ "$AN" == "NO" ] || [ "$AN" == "No" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] && [ "$AN2" == "Yes" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "y" ]
             then 
-            echo "
-            n
+            echo "n
             l
               
             
