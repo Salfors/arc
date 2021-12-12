@@ -261,7 +261,3 @@ function MSDOS(){
         fi
 }
 MSDOS
-
-echo "${ROOT}"
-echo "${HOME}"
-echo "${SWAP}"
