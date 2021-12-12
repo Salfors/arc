@@ -229,6 +229,8 @@ function MSDOS(){
             echo "
             n
             l
+            
+            
             +${Swap}GB
             w
             "| fdisk ${DISK}
@@ -240,6 +242,8 @@ function MSDOS(){
             echo "
             n
             l
+            
+            
             +${Swap}GB  
             w
             "| fdisk ${DISK}
