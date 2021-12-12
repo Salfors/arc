@@ -1,6 +1,3 @@
-
-####### NOTE THIS CODE ISN'T READY SO DON'T USE IT################
-
 clear
 echo "
  █████╗ ██████╗  ██████╗████████╗██╗   ██╗███████╗
@@ -293,7 +290,20 @@ if [ "${os}" != '"Arch Linux"' ]; then
         }
 
         Determine_size
-        logic=`expr $RooP + $Homep + $Swap`
+        function logic() {
+        if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ] || [ "$AN2" == "No" ]; then
+            logic=`expr ${RooP} + ${Homep}`
+
+            elif  [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ] && [ "$AN" == "NO" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] || [ "$AN" == "No" ]; then
+            logic=`expr ${RooP} + ${Swap}`
+
+            elif [ "$AN" == "NO" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] || [ "$AN" == "No" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ] || [ "$AN2" == "No" ]; then
+            logic=${RooP} 
+            else
+            logic=`expr ${RooP} + ${Homep} + ${Swap}`
+        fi
+        } 
+        logic
 
         function check_logic() {
             while true
