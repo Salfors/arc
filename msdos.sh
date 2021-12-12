@@ -231,8 +231,7 @@ function MSDOS(){
             
             
             +${Swap}GB
-            w
-            "| fdisk ${DISK}
+            w"| fdisk ${DISK}
             SWAP=`sudo partx -rgo NR -n -1:-1 /dev/vda`
             #######                
 
@@ -243,8 +242,7 @@ function MSDOS(){
               
             
             +${Swap}GB  
-            w
-            "| fdisk ${DISK}
+            w"| fdisk ${DISK}
             SWAP=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                         ### 
             elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
