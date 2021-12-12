@@ -231,6 +231,7 @@ function MSDOS(){
             l
             
             
+            
             +${Swap}GB
             w
             "| fdisk ${DISK}
@@ -242,6 +243,7 @@ function MSDOS(){
             echo "
             n
             l
+            
             
             
             +${Swap}GB  
@@ -263,3 +265,6 @@ function MSDOS(){
         fi
 }
 MSDOS
+echo "${ROOT}"
+echo "${swap}"
+echo "${HOME}"
