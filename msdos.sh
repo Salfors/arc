@@ -230,7 +230,6 @@ function MSDOS(){
             n
             l
             
-            
             +${Swap}GB
             w
             "| fdisk ${DISK}
