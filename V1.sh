@@ -947,7 +947,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         else
         echo -e "\n[+]Choose Number One Or Two [+]\n"
         count=`expr $count + 1`
-        clean_screen()
+        
                
     fi
     done  
