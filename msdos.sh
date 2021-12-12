@@ -204,7 +204,7 @@ function MSDOS(){
     
     +${logic}GB
     w
-    " | fdisk ${DISK}
+    "| fdisk ${DISK}
                 #### root
     echo "
     n 
@@ -223,7 +223,7 @@ function MSDOS(){
         
         +${Homep}GB
         w
-        " | fdisk ${DISK}  
+        "| fdisk ${DISK}  
         HOME=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                     #####
         echo "
@@ -232,7 +232,7 @@ function MSDOS(){
         
         +${Swap}GB
         w
-        " | fdisk ${DISK}
+        "| fdisk ${DISK}
         SWAP=`sudo partx -rgo NR -n -1:-1 /dev/vda`
                     #######                
 
@@ -244,7 +244,7 @@ function MSDOS(){
         
         +${Swap}GB  
         w
-        " | fdisk ${DISK}
+        "| fdisk ${DISK}
         swap=`sudo partx -rgo NR -n -1:-1 vda`
                     ### 
         elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
@@ -255,7 +255,7 @@ function MSDOS(){
         
         +${Homep}GB
         w
-        " | fdisk ${DISK}
+        "| fdisk ${DISK}
         HOME=`sudo partx -rgo NR -n -1:-1 vda`
                                     
     fi
