@@ -304,7 +304,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
         fi
         } 
         logic
-
+        clear
+        echo -e ""
         function check_logic() {
             while true
             do 
@@ -362,7 +363,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
         if [ "${DT}" == 'msdos' ]; then
 
             function MSDOS(){
-                echo "n 
+                echo "
+                n 
                 e 
                 
                 
@@ -370,7 +372,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 w
                 " | fdisk ${DISK}
                 #### root
-                echo "n 
+                echo "
+                n 
                 l 
                 
                 
@@ -381,7 +384,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             
                 if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
                     then 
-                    echo "n
+                    echo "
+                    n
                     l
                     
                     
@@ -939,7 +943,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo "--   SYSTEM READY FOR FIRST BOOT    --"
         echo "--------------------------------------"
         echo "--          Reboot Now              --"
-        break         
+        break  
+        else
+        echo -e "\n[+]Choose Number One Or Two [+]\n"
+        count=`expr $count + 1`
+        clean_screen()
+               
     fi
     done  
 fi
