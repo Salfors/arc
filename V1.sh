@@ -109,7 +109,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo "[2] Use only free disk space."
                 echo -e ""
                 read -p "Do you want to use all disk for installation or just free space : " UD #USE DISK
-
+                clear
                 if [ "$UD" == "1" ] 
                 then
                 clear
@@ -140,9 +140,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     *)
                         echo "enter 1 or 2 "
                         count=`expr $count + 1`
+                        clean_screen
                         ;;
                     esac
-                    clean_screen
+                    #clean_screen
                 done    
                 break
                 
