@@ -140,16 +140,16 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     *)
                         echo "enter 1 or 2 "
                         count=`expr $count + 1`
-                        clean_screen
                         ;;
                     esac
-                    #clean_screen
+                    clean_screen
                 done    
                 break
                 
                 elif [ "$UD" == "2" ]; then
                 function available_table() {
                     DT0=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
+                    clear
                     case $DT0 in
                         "unknown")
                                 while true
@@ -176,6 +176,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             count=`expr $count + 1`
                                             ;;
                                     esac
+                                    clean_screen
                                     
                                 done
                                 ;; 
