@@ -147,18 +147,18 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 break
                 
                 elif [ "$UD" == "2" ]; then
-                function freetable() {
+                function available_table() {
                     DT0=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
                     case $DT0 in
                         "unknown")
                                 while true
                                     do
                                     echo -e ""
-                                    echo "you don't had any disk table choose one form them"
+                                    echo "You don't have any hard disk table, Choose one"
                                     echo -e ""
                                     echo "[1] MSDOS"
                                     echo "[2] GPT"
-                                    read -p "your choice : " NT #New Table
+                                    read -p "Your Choice : " NT #New Table
                                     case $NT in 
                                         "1")
                                             echo "o
@@ -171,7 +171,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             break
                                             ;;
                                         *)
-                                            echo -e "\n[+]Choose 1 or 2 !!![+]\n"
+                                            echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
                                             count=`expr $count + 1`
                                             ;;
                                     esac
@@ -184,10 +184,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     esac
 
                 }
-                freetable
+                available_table
                 break 
                 else
-                echo -e "\n[+]Choose 1 or 2 !!![+]\n"
+                echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
                 count=`expr $count + 1`
                 clean_screen
                 fi
