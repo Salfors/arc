@@ -196,23 +196,22 @@
 
         
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
-        function MSDOS(){
-            echo "
-            n  
+
+function MSDOS(){
+            echo "n
             e
             
             
             +${logic}GB
             w
-            " | fdisk ${DISK}
+            "| fdisk ${DISK}
             
-             echo "
-             n
-             l
-             
-             +${RooP}GB
-             w
-             "| fdisk ${DISK
+            echo "n  
+            l
+            
+            +${RooP}GB
+            w
+            " | fdisk ${DISK}
             ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
             case $AN in 
@@ -268,7 +267,6 @@
 
                     case $AN2 in 
                         n|N|no|No|NO)
-                            ;;
                                 ### if home and swap not created
                     esac
                     ;;
