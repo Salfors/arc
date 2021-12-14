@@ -522,6 +522,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
             function GPT(){
                 echo "
                 n  
+
+
                 +${RooP}GB
                 w
                 " | fdisk ${DISK}
@@ -534,6 +536,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             y|Y|yes|Yes|YES)
 
                                 echo "n
+
+
                                 +${Homep}GB
                                 w
                                 " | fdisk ${DISK}  
@@ -541,6 +545,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                     #____home
                                 echo "
                                 n
+
+
                                 +${Swap}GB
                                 w
                                 " | fdisk ${DISK}
@@ -567,6 +573,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                                 echo "
                                 n
+
+
                                 +${Swap}GB
                                 w
                                 " | fdisk ${DISK}
