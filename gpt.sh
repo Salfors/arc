@@ -249,8 +249,9 @@ DISK=/dev/vda
                         case $AN2 in 
                             y|Y|yes|Yes|YES)
                                     
-                                echo "
-                                n
+                                echo "n
+                                
+                                
                                 
                                 +${Swap}GB  
                                 w
@@ -259,9 +260,10 @@ DISK=/dev/vda
                         esac
 
                         case $AN2 in 
-                            n|N|no|No|NO)
+                            n|N|no|No|NO) 
+                                ;;
                                 ###nothing
-
+                       
                         esac
                         ;;
                 esac   
