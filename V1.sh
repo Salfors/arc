@@ -522,22 +522,18 @@ if [ "${os}" != '"Arch Linux"' ]; then
             function GPT(){
                 echo "
                 n  
-                
-                
                 +${RooP}GB
                 w
                 " | fdisk ${DISK}
                 ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                        
+
                 case $AN in 
                     y|Y|yes|Yes|YES)
 
                         case $AN2 in 
                             y|Y|yes|Yes|YES)
-                                                
+
                                 echo "n
-                                
-                                
                                 +${Homep}GB
                                 w
                                 " | fdisk ${DISK}  
@@ -545,8 +541,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                     #____home
                                 echo "
                                 n
-                                
-                                
                                 +${Swap}GB
                                 w
                                 " | fdisk ${DISK}
@@ -554,15 +548,15 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                         esac 
                         case $AN2 in 
-                            n|N|no|No|NO)
-                                echo "
-                                n
-                                
-                                
-                                +${Homep}GB
-                                w
-                                " | fdisk ${DISK}
-                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+                                n|N|no|No|NO)
+                                    echo "
+                                    n
+                                    
+                                    
+                                    +${Homep}GB
+                                    w
+                                    " | fdisk ${DISK}
+                                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
                         esac
                         ;;
 
@@ -570,27 +564,27 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                         case $AN2 in 
                             y|Y|yes|Yes|YES)
-                                                
+
                                 echo "
                                 n
-                                
-                                +${Swap}GB  
+                                +${Swap}GB
                                 w
                                 " | fdisk ${DISK}
-                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+
                         esac
 
                         case $AN2 in 
                             n|N|no|No|NO) 
                                 ;;
                                 ###nothing
-                                
+
                         esac
                         ;;
                 esac   
-                            
-            }
-            GPT
+                    
+        }
+        GPT
         fi
 
         ##_______________________________SELECT CONVERT TO __________________#
