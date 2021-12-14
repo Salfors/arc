@@ -271,3 +271,6 @@ DISK=/dev/vda
                 
      }
      GPT
+     echo "${ROOT}"
+     echo "${HOME}"
+     echo "${SWAP}"
