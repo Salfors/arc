@@ -253,6 +253,8 @@ DISK=/dev/vda
                                 n
                                 
                                 
+                                
+                                
                                 +${Swap}GB  
                                 w
                                 " | fdisk ${DISK}
