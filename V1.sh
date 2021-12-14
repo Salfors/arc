@@ -527,13 +527,13 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 w
                 " | fdisk ${DISK}
                 ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-            
+                        
                 case $AN in 
                     y|Y|yes|Yes|YES)
 
                         case $AN2 in 
                             y|Y|yes|Yes|YES)
-                                    
+                                                
                                 echo "n
                                 
                                 
@@ -541,7 +541,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 w
                                 " | fdisk ${DISK}  
                                 HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                        #____home
+                                                    #____home
                                 echo "
                                 n
                                 
@@ -569,9 +569,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                         case $AN2 in 
                             y|Y|yes|Yes|YES)
-                                    
-                                echo "
-                                n
+                                                
+                                echo "n
+                                
                                 
                                 
                                 +${Swap}GB  
@@ -581,15 +581,16 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         esac
 
                         case $AN2 in 
-                            n|N|no|No|NO)
+                            n|N|no|No|NO) 
+                                ;;
                                 ###nothing
-
+                                
                         esac
                         ;;
                 esac   
-                
-                }
-                GPT
+                            
+            }
+            GPT
         fi
 
         ##_______________________________SELECT CONVERT TO __________________#
