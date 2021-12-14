@@ -401,7 +401,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         done
 
         }
-        check_logic
+        # check logic
 
         clear
 
@@ -417,160 +417,161 @@ if [ "${os}" != '"Arch Linux"' ]; then
         
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
+            check_logic
 
-        function MSDOS(){
-            echo "n
-            e
-            
-            
-            +${logic}GB
-            w
-            "| fdisk ${DISK}
-            ### root
-            echo "n  
-            l
-            
-            +${RooP}GB
-            w
-            " | fdisk ${DISK}
-            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+            function MSDOS(){
+                echo "n
+                e
+                
+                
+                +${logic}GB
+                w
+                "| fdisk ${DISK}
+                ### root
+                echo "n  
+                l
+                
+                +${RooP}GB
+                w
+                " | fdisk ${DISK}
+                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
-            case $AN in 
-                y|Y|yes|Yes|YES)
+                case $AN in 
+                    y|Y|yes|Yes|YES)
 
-                    case $AN2 in 
-                        y|Y|yes|Yes|YES)
-                            echo "
-                            n
-                            l
-                            
-
-                            +${Homep}GB
-                            w
-                            "| fdisk ${DISK}  
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                                                    
-                            echo "n
-                            l
-                            
-                            
-                            +${Swap}GB
-                            w
-                            "| fdisk ${DISK}
-                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
-
-                    esac 
-                    case $AN2 in 
-                        n|N|no|No|NO)
-                            echo "
-                            n
-                            l
-                            
-
-                            +${Homep}GB
-                            w
-                            "| fdisk ${DISK}
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
-                    esac
-                    ;;
-
-                n|N|no|No|NO)
-
-                    case $AN2 in 
-                        y|Y|yes|Yes|YES)
-                            echo "n
-                            l
-                            
-                            
-                            +${Swap}GB  
-                            w
-                            "| fdisk ${DISK}
-                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
-                    esac
-
-                    case $AN2 in 
-                        n|N|no|No|NO)
-                                ### if home and swap not created
-                    esac
-                    ;;
-            esac
-        }
-        MSDOS
-            #___________________IF IS GPT ON BIOS _______________#
-        elif [ "${DT}" == 'gpt' ]; then
-
-        function GPT(){
-            echo "
-            n  
-            
-            
-            +${RooP}GB
-            w
-            " | fdisk ${DISK}
-            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-           
-            case $AN in 
-                y|Y|yes|Yes|YES)
-
-                    case $AN2 in 
-                        y|Y|yes|Yes|YES)
+                        case $AN2 in 
+                            y|Y|yes|Yes|YES)
+                                echo "
+                                n
+                                l
                                 
-                            echo "n
-                            
-                            
-                            +${Homep}GB
-                            w
-                            " | fdisk ${DISK}  
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                    #____home
-                            echo "
-                            n
-                            
-                            
-                            +${Swap}GB
-                            w
-                            " | fdisk ${DISK}
-                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
 
-                    esac 
-                    case $AN2 in 
-                        n|N|no|No|NO)
-                            echo "
-                            n
-                            
-                            
-                            +${Homep}GB
-                            w
-                            " | fdisk ${DISK}
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-                    esac
-                    ;;
-
-                n|N|no|No|NO)
-
-                    case $AN2 in 
-                        y|Y|yes|Yes|YES)
+                                +${Homep}GB
+                                w
+                                "| fdisk ${DISK}  
+                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                                                                        
+                                echo "n
+                                l
                                 
-                            echo "
-                            n
-                            
-                            
-                            +${Swap}GB  
-                            w
-                            " | fdisk ${DISK}
-                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
-                    esac
+                                
+                                +${Swap}GB
+                                w
+                                "| fdisk ${DISK}
+                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
 
-                    case $AN2 in 
-                        n|N|no|No|NO)
-                            ###nothing
+                        esac 
+                        case $AN2 in 
+                            n|N|no|No|NO)
+                                echo "
+                                n
+                                l
+                                
 
-                    esac
-                    ;;
-            esac   
-            
+                                +${Homep}GB
+                                w
+                                "| fdisk ${DISK}
+                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                        esac
+                        ;;
+
+                    n|N|no|No|NO)
+
+                        case $AN2 in 
+                            y|Y|yes|Yes|YES)
+                                echo "n
+                                l
+                                
+                                
+                                +${Swap}GB  
+                                w
+                                "| fdisk ${DISK}
+                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                        esac
+
+                        case $AN2 in 
+                            n|N|no|No|NO)
+                                    ### if home and swap not created
+                        esac
+                        ;;
+                esac
             }
-            GPT
+            MSDOS
+                #___________________IF IS GPT ON BIOS _______________#
+            elif [ "${DT}" == 'gpt' ]; then
+
+            function GPT(){
+                echo "
+                n  
+                
+                
+                +${RooP}GB
+                w
+                " | fdisk ${DISK}
+                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+            
+                case $AN in 
+                    y|Y|yes|Yes|YES)
+
+                        case $AN2 in 
+                            y|Y|yes|Yes|YES)
+                                    
+                                echo "n
+                                
+                                
+                                +${Homep}GB
+                                w
+                                " | fdisk ${DISK}  
+                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                                        #____home
+                                echo "
+                                n
+                                
+                                
+                                +${Swap}GB
+                                w
+                                " | fdisk ${DISK}
+                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+
+                        esac 
+                        case $AN2 in 
+                            n|N|no|No|NO)
+                                echo "
+                                n
+                                
+                                
+                                +${Homep}GB
+                                w
+                                " | fdisk ${DISK}
+                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+                        esac
+                        ;;
+
+                    n|N|no|No|NO)
+
+                        case $AN2 in 
+                            y|Y|yes|Yes|YES)
+                                    
+                                echo "
+                                n
+                                
+                                
+                                +${Swap}GB  
+                                w
+                                " | fdisk ${DISK}
+                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                        esac
+
+                        case $AN2 in 
+                            n|N|no|No|NO)
+                                ###nothing
+
+                        esac
+                        ;;
+                esac   
+                
+                }
+                GPT
         fi
 
         ##_______________________________SELECT CONVERT TO __________________#
