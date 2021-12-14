@@ -600,24 +600,23 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo "${HOME}"
         echo "${SWAP}"
         sleep 8
-        mkfs.ext4 "${DISK}${ROOT}"
-        y
+        echo "y" | mkfs.ext4 "${DISK}${ROOT}"
+ 
         case $AN in 
             y|Y|yes|Yes|YES)
 
                 case $AN2 in 
                     y|Y|yes|Yes|YES)
                             
-                        mkfs.ext4 "${DISK}${HOME}" 
-                        y #partition (Home)
+                        echo "y" | mkfs.ext4 "${DISK}${HOME}" #partition (Home)
                         mkswap "${DISK}${SWAP}" #partition (Swap)
                         swapon "${DISK}${SWAP}" ;;
 
                 esac 
                 case $AN2 in 
                     n|N|no|No|NO)
-                        mkfs.ext4 "${DISK}${HOME}"
-                        y ;;
+                        echo "y" | mkfs.ext4 "${DISK}${HOME}"
+ ;;
                 esac
                 ;;
 
