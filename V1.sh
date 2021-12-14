@@ -431,6 +431,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo "n  
                 l
                 
+                
                 +${RooP}GB
                 w
                 " | fdisk ${DISK}
