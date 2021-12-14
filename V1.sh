@@ -573,7 +573,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 echo "n
                                 
                                 
-                                
                                 +${Swap}GB  
                                 w
                                 " | fdisk ${DISK}
