@@ -418,7 +418,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
-            check_logic
+            
 
             function MSDOS(){
 
@@ -441,6 +441,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                
  
                     *)
+                        check_logic
                         echo "well "
                         echo "n
                         e
