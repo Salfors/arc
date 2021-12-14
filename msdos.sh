@@ -207,7 +207,7 @@
                         p
                         
                         
-                        +${RooP}
+                        +${RooP}GB
                         w
                         "| fdisk ${DISK} ;;
                     *)
