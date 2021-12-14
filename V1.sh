@@ -293,7 +293,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             while true
                 do
                 echo -e 
-                read  -p "Please do you want create home part or not (y/n) : " AN2 #ANSWER2
+                read  -p "Please do you want create swap part or not (y/n) : " AN2 #ANSWER2
                 case $AN2 in 
                     y|Y|YES|Yes|yes)
                             clear
@@ -419,8 +419,16 @@ if [ "${os}" != '"Arch Linux"' ]; then
         if [ "${DT}" == 'msdos' ]; then
 
         function MSDOS(){
-            echo "n  
+            echo "n
+            e
             
+            
+            +${logic}GB
+            w
+            "| fdisk ${DISK}
+            ### root
+            echo "n  
+            l
             
             +${RooP}GB
             w
@@ -436,6 +444,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             n
                             l
                             
+
                             +${Homep}GB
                             w
                             "| fdisk ${DISK}  
@@ -457,6 +466,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             n
                             l
                             
+
                             +${Homep}GB
                             w
                             "| fdisk ${DISK}
