@@ -197,8 +197,10 @@
         
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         function MSDOS(){
-            echo "n  
+            echo "
+            n  
             e
+            
             
             +${RooP}GB
             w
