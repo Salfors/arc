@@ -249,13 +249,15 @@ DISK=/dev/vda
                         case $AN2 in 
                             y|Y|yes|Yes|YES)
                                     
-                                echo "n
+                                echo "
+                                n
+                                
                                 
                                 
                                 +${Swap}GB  
                                 w
                                 " | fdisk ${DISK}
-                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
                         esac
 
                         case $AN2 in 
