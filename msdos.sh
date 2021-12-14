@@ -198,80 +198,96 @@
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
 
            function MSDOS(){
-                echo "n
-                e
-                
-                
-                +${logic}GB
-                w
-                "| fdisk ${DISK}
-                ### root
-                echo "n  
-                l
-                
-                +${RooP}GB
-                w
-                " | fdisk ${DISK}
-                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+               case $logic in 
 
-                case $AN in 
-                    y|Y|yes|Yes|YES)
+                    ${RooP})
+                        echo "good" 
+                        echo "
+                        n
+                        p
+                        
+                        
+                        +${RooP}
+                        w
+                        "| fdisk ${DISK} ;;
+                    *)
+                        echo "well "
+                        echo "n
+                        e
+                        
+                        
+                        +${logic}GB
+                        w
+                        "| fdisk ${DISK}
+                        ### root
+                        echo "n  
+                        l
+                        
+                        +${RooP}GB
+                        w
+                        " | fdisk ${DISK}
+                        ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
-                        case $AN2 in 
+                        case $AN in 
                             y|Y|yes|Yes|YES)
-                                echo "
-                                n
-                                l
-                                
-                                +${Homep}GB
-                                w
-                                "| fdisk ${DISK}  
-                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                                                        
-                                echo "
-                                n
-                                l
-                                
-                                
-                                +${Swap}GB
-                                w
-                                "| fdisk ${DISK}
-                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
 
-                        esac 
-                        case $AN2 in 
+                                case $AN2 in 
+                                    y|Y|yes|Yes|YES)
+                                        echo "
+                                        n
+                                        l
+                                        
+                                        +${Homep}GB
+                                        w
+                                        "| fdisk ${DISK}  
+                                        HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                                                                                
+                                        echo "
+                                        n
+                                        l
+                                        
+                                        
+                                        +${Swap}GB
+                                        w
+                                        "| fdisk ${DISK}
+                                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+
+                                esac 
+                                case $AN2 in 
+                                    n|N|no|No|NO)
+                                        echo "
+                                        n
+                                        l
+                                        
+                                        
+                                        +${Homep}GB
+                                        w
+                                        "| fdisk ${DISK}
+                                        HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                                esac
+                                ;;
+
                             n|N|no|No|NO)
-                                echo "
-                                n
-                                l
-                                
-                                
-                                +${Homep}GB
-                                w
-                                "| fdisk ${DISK}
-                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+
+                                case $AN2 in 
+                                    y|Y|yes|Yes|YES)
+                                        echo "n
+                                        l
+                                        
+                                        
+                                        +${Swap}GB  
+                                        w
+                                        "| fdisk ${DISK}
+                                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                                esac
+
+                                case $AN2 in 
+                                    n|N|no|No|NO)
+                                            ### if home and swap not created
+                                esac
+                                ;;
                         esac
                         ;;
-
-                    n|N|no|No|NO)
-
-                        case $AN2 in 
-                            y|Y|yes|Yes|YES)
-                                echo "n
-                                l
-                                
-                                
-                                +${Swap}GB  
-                                w
-                                "| fdisk ${DISK}
-                                SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
-                        esac
-
-                        case $AN2 in 
-                            n|N|no|No|NO)
-                                    ### if home and swap not created
-                        esac
-                        ;;
-                esac
+                    esac
             }
             MSDOS
