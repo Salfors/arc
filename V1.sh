@@ -100,7 +100,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     echo "-------------------------------------------------"
     echo "---           Disk Usage                     ----"
     echo "-------------------------------------------------"
-    echo -e "\n"
+    #echo -e "\n"
     function disk_format(){
             while true
                 do 
@@ -117,7 +117,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 while true 
                     do
                     
-                    echo -e ""
+                    echo -e "" ################ disk table new write here on box
                     echo "[1] GPT"
                     echo "[2] MSDOS"
                     echo -e ""
@@ -162,12 +162,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     read -p "Your Choice : " NT #New Table
                                     case $NT in 
                                         "1")
+                                            clear
                                             echo "o
                                             w
                                             "| fdisk ${DISK}
                                             break
                                             ;;
                                         "2")
+                                            clear
                                             sgdisk -a 2048 -o ${DISK} 
                                             break
                                             ;;
@@ -330,17 +332,32 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
         Determine_size
         function logic() {
-        if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ] || [ "$AN2" == "No" ]; then
-            logic=`expr ${RooP} + ${Homep}`
 
-            elif  [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ] && [ "$AN" == "NO" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] || [ "$AN" == "No" ]; then
-            logic=`expr ${RooP} + ${Swap}`
+            case $AN in 
+                y|Y|yes|Yes|YES)
 
-            elif [ "$AN" == "NO" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] || [ "$AN" == "No" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ] || [ "$AN2" == "No" ]; then
-            logic=${RooP} 
-            else
-            logic=`expr ${RooP} + ${Homep} + ${Swap}`
-        fi
+                        case $AN2 in 
+                            y|Y|yes|Yes|YES)
+                                logic=`expr ${RooP} + ${Homep} + ${Swap}` ;;
+                        esac 
+                        case $AN2 in 
+                            n|N|no|No|NO)
+                                logic=`expr ${RooP} + ${Homep}`;;
+                        esac
+                        ;;
+                n|N|no|No|NO)
+
+                        case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                                logic=`expr ${RooP} + ${Swap}` ;;
+                        esac
+                        case $AN2 in 
+                        n|N|no|No|NO)
+                                logic=${RooP}
+                                echo "is work" ;;
+                        esac
+                        ;;
+            esac
         } 
         logic
         clear
@@ -402,126 +419,145 @@ if [ "${os}" != '"Arch Linux"' ]; then
         if [ "${DT}" == 'msdos' ]; then
 
         function MSDOS(){
-                echo "
-                n 
-                e 
-                
-                
-                +${logic}GB
-                w
-                "| fdisk ${DISK}
-                #### root
-                echo "
-                n 
-                l 
-                
-                +${RooP}GB
-                w
-                " | fdisk ${DISK}
-                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                        
-                if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
-                    then 
-                    echo "
-                    n
-                    l
-                    
-                    +${Homep}GB
-                    w
-                    "| fdisk ${DISK}  
-                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                #####
-                    echo "n
-                    l
-                    
-                    
-                    +${Swap}GB
-                    w
-                    "| fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                    #######                
+            echo "n  
+            
+            
+            +${RooP}GB
+            w
+            " | fdisk ${DISK}
+            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
-                    elif [ "$AN" == "NO" ] || [ "$AN" == "No" ] || [ "$AN" == "N" ] || [ "$AN" == "no" ] || [ "$AN" == "n" ] && [ "$AN2" == "Yes" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "y" ]
-                    then 
-                    echo "n
-                    l
-                    
-                    
-                    +${Swap}GB  
-                    w
-                    "| fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                ### 
-                    elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
-                    then 
-                    echo "
-                    n
-                    l
-                    
-                    +${Homep}GB
-                    w
-                    "| fdisk ${DISK}
-                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                                
-                fi
+            case $AN in 
+                y|Y|yes|Yes|YES)
+
+                    case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                            echo "
+                            n
+                            l
+                            
+                            +${Homep}GB
+                            w
+                            "| fdisk ${DISK}  
+                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                                                                    
+                            echo "n
+                            l
+                            
+                            
+                            +${Swap}GB
+                            w
+                            "| fdisk ${DISK}
+                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+
+                    esac 
+                    case $AN2 in 
+                        n|N|no|No|NO)
+                            echo "
+                            n
+                            l
+                            
+                            +${Homep}GB
+                            w
+                            "| fdisk ${DISK}
+                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                    esac
+                    ;;
+
+                n|N|no|No|NO)
+
+                    case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                            echo "n
+                            l
+                            
+                            
+                            +${Swap}GB  
+                            w
+                            "| fdisk ${DISK}
+                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                    esac
+
+                    case $AN2 in 
+                        n|N|no|No|NO)
+                                ### if home and swap not created
+                    esac
+                    ;;
+            esac
         }
         MSDOS
             #___________________IF IS GPT ON BIOS _______________#
-            elif [ "${DT}" == 'gpt' ]; then
+        elif [ "${DT}" == 'gpt' ]; then
 
-            function GPT(){
+        function GPT(){
+            echo "n  
+            
+            
+            +${RooP}GB
+            w
+            " | fdisk ${DISK}
+            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+           
+            case $AN in 
+                y|Y|yes|Yes|YES)
 
-                #____root
-                echo "n  
-                
-                
-                +${RooP}GB
-                w
-                " | fdisk ${DISK}
-                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                    case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                                
+                            echo "n
                             
-                if [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "YES" ] || [ "$AN2" == "Yes" ] || [ "$AN2" == "Y" ] || [ "$AN2" == "yes" ] || [ "$AN2" == "y" ]
-                    then 
-                    echo "n
-                    
-                    
-                    +${Homep}GB
-                    w
-                    " | fdisk ${DISK}  
-                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                    #____home
-                    echo "
-                    n
-                    
-                    
-                    +${Swap}GB
-                    w
-                    " | fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                    #_____swap             
+                            
+                            +${Homep}GB
+                            w
+                            " | fdisk ${DISK}  
+                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                                    #____home
+                            echo "
+                            n
+                            
+                            
+                            +${Swap}GB
+                            w
+                            " | fdisk ${DISK}
+                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
 
-                    elif [ "$answer" == "NO" ] || [ "$answer" == "No" ] || [ "$answer" == "N" ] || [ "$answer" == "no" ] || [ "$answer" == "n" ] && [ "$answer2" == "Yes" ] || [ "$answer2" == "yes" ] || [ "$answer2" == "Y" ] || [ "$answer2" == "y" ]
-                    then 
-                    echo "
-                    n
-                    
-                    
-                    +${Swap}GB  
-                    w
-                    " | fdisk ${DISK}
-                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                    #_______# 
-                    elif [ "$AN" == "YES" ] || [ "$AN" == "Yes" ] || [ "$AN" == "Y" ] || [ "$AN" == "yes" ] || [ "$AN" == "y" ] && [ "$AN2" == "NO" ] || [ "$AN2" == "No" ] || [ "$AN2" == "N" ] || [ "$AN2" == "no" ] || [ "$AN2" == "n" ]
-                    then 
-                    echo "
-                    n
-                    
-                    
-                    +${Homep}GB
-                    w
-                    " | fdisk ${DISK}
-                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`                   
-                fi
+                    esac 
+                    case $AN2 in 
+                        n|N|no|No|NO)
+                            echo "
+                            n
+                            
+                            
+                            +${Homep}GB
+                            w
+                            " | fdisk ${DISK}
+                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+                    esac
+                    ;;
+
+                n|N|no|No|NO)
+
+                    case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                                
+                            echo "
+                            n
+                            
+                            
+                            +${Swap}GB  
+                            w
+                            " | fdisk ${DISK}
+                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                    esac
+
+                    case $AN2 in 
+                        n|N|no|No|NO)
+                            ###nothing
+
+                    esac
+                    ;;
+            esac   
+            
             }
             GPT
         fi
@@ -529,25 +565,53 @@ if [ "${os}" != '"Arch Linux"' ]; then
         ##_______________________________SELECT CONVERT TO __________________#
 
         mkfs.ext4 "${DISK}${ROOT}"
-        if [ "$AN" == "YES" ] ||  [ "$AN" == "Yes" ] ||  [ "$AN" == "Y" ] ||  [ "$AN" == "yes" ] ||  [ "$AN" == "y" ] && [ "$AN2" == "YES" ] ||  [ "$AN2" == "Yes" ] ||  [ "$AN2" == "Y" ] ||  [ "$AN2" == "yes" ] ||  [ "$AN2" == "y" ]
-            then
-            mkfs.ext4 "${DISK}${HOME}" #partition (Home)
-            mkswap "${DISK}${SWAP}" #partition (Swap)
-            swapon "${DISK}${SWAP}"
-            elif [ "$AN" == "NO" ] ||  [ "$AN" == "No" ] ||  [ "$AN" == "N" ] ||  [ "$AN" == "no" ] ||  [ "$AN" == "n" ] && [ "$AN2" == "Yes" ] ||  [ "$AN2" == "yes" ] ||  [ "$AN2" == "Y" ] ||  [ "$AN2" == "y" ]
-            then
-            mkswap "${DISK}${SWAP}" #partition  (Swap)
-            swapon "${DISK}${SWAP}"
-        fi 
+        case $AN in 
+            y|Y|yes|Yes|YES)
+
+                case $AN2 in 
+                    y|Y|yes|Yes|YES)
+                            
+                        mkfs.ext4 "${DISK}${HOME}" #partition (Home)
+                        mkswap "${DISK}${SWAP}" #partition (Swap)
+                        swapon "${DISK}${SWAP}" ;;
+
+                esac 
+                case $AN2 in 
+                    n|N|no|No|NO)
+                        mkfs.ext4 "${DISK}${HOME}" ;;
+                esac
+                ;;
+
+            n|N|no|No|NO)
+
+                case $AN2 in 
+                    y|Y|yes|Yes|YES)
+                            
+                        mkswap "${DISK}${SWAP}" #partition  (Swap)
+                        swapon "${DISK}${SWAP}";;
+                esac
+
+                case $AN2 in 
+                    n|N|no|No|NO)
+                        #nothing
+
+                esac
+                ;;
+        esac 
 
             #_____________ MOUNT THE POINTS PARTITIONS  _______________#
 
         mount "${DISK}${ROOT}" /mnt
-        if [ "$AN" == "YES" ] ||  [ "$AN" == "Yes" ] ||  [ "$AN" == "Y" ] ||  [ "$AN" == "yes" ] ||  [ "$AN" == "y" ]
-            then
-            mkdir /mnt/home
-            mount "${DISK}${HOME}" /mnt/home
-        fi
+        case $AN in 
+            y|Y|yes|Yes|YES)
+                mkdir /mnt/home
+                mount "${DISK}${HOME}" /mnt/home ;;
+
+            n|N|no|No|NO)
+                # nothing 
+                ;;
+        esac
+        #_______________________________________________________________________#
         clear 
         lsblk
         echo -e "\n"
