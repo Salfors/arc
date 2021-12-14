@@ -268,6 +268,7 @@
 
                     case $AN2 in 
                         n|N|no|No|NO)
+                            ;;
                                 ### if home and swap not created
                     esac
                     ;;
