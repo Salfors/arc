@@ -196,8 +196,6 @@
 
         
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
-        if [ "${DT}" == 'msdos' ]; then
-
         function MSDOS(){
             echo "n  
             
