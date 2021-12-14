@@ -601,20 +601,23 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo "${SWAP}"
         sleep 8
         mkfs.ext4 "${DISK}${ROOT}"
+        y
         case $AN in 
             y|Y|yes|Yes|YES)
 
                 case $AN2 in 
                     y|Y|yes|Yes|YES)
                             
-                        mkfs.ext4 "${DISK}${HOME}" #partition (Home)
+                        mkfs.ext4 "${DISK}${HOME}" 
+                        y #partition (Home)
                         mkswap "${DISK}${SWAP}" #partition (Swap)
                         swapon "${DISK}${SWAP}" ;;
 
                 esac 
                 case $AN2 in 
                     n|N|no|No|NO)
-                        mkfs.ext4 "${DISK}${HOME}" ;;
+                        mkfs.ext4 "${DISK}${HOME}"
+                        y ;;
                 esac
                 ;;
 
