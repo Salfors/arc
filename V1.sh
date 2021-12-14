@@ -451,7 +451,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 "| fdisk ${DISK}  
                                 HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                                                                         
-                                echo "n
+                                echo "
+                                n
                                 l
                                 
                                 
