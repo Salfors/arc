@@ -250,9 +250,8 @@ DISK=/dev/vda
                         y|Y|yes|Yes|YES)
 
                             echo "n
-
-
-
+                            
+                            
                             +${Swap}GB  
                             w
                             " | fdisk ${DISK}
