@@ -232,15 +232,15 @@ DISK=/dev/vda
 
                     esac 
                     case $AN2 in 
-                        n|N|no|No|NO)
-                            echo "
-                            n
-
-
-                            +${Homep}GB
-                            w
-                            " | fdisk ${DISK}
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+                            n|N|no|No|NO)
+                                echo "
+                                n
+                                
+                                
+                                +${Homep}GB
+                                w
+                                " | fdisk ${DISK}
+                                HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
                     esac
                     ;;
 
@@ -250,7 +250,6 @@ DISK=/dev/vda
                         y|Y|yes|Yes|YES)
 
                             echo "n
-                            
                             
                             
                             +${Swap}GB  
