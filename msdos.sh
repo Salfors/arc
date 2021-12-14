@@ -223,6 +223,7 @@ function MSDOS(){
                             n
                             l
                             
+                            
                             +${Homep}GB
                             w
                             "| fdisk ${DISK}  
@@ -243,6 +244,7 @@ function MSDOS(){
                             echo "
                             n
                             l
+                            
                             
                             +${Homep}GB
                             w
