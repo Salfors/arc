@@ -495,11 +495,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 case $AN2 in 
 
                                     y|Y|yes|Yes|YES)
-                                        echo "n
+                                        echo "
+                                        n
                                         l
                                         
                                         
-                                        +${Swap}GB  
+                                        +${Swap}GB
                                         w
                                         "| fdisk ${DISK}
                                         SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
