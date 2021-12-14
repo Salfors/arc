@@ -245,6 +245,7 @@
                                 n
                                 l
                                 
+                                
                                 +${Homep}GB
                                 w
                                 "| fdisk ${DISK}
