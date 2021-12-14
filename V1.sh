@@ -594,7 +594,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
         fi
 
         ##_______________________________SELECT CONVERT TO __________________#
-
+        echo "${ROOT}"
+        echo "${HOME}"
+        echo "${SWAP}"
+        sleep 8
         mkfs.ext4 "${DISK}${ROOT}"
         case $AN in 
             y|Y|yes|Yes|YES)
