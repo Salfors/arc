@@ -202,9 +202,17 @@
             e
             
             
-            +${RooP}GB
+            +${logic}GB
             w
             " | fdisk ${DISK}
+            
+             echo "
+             n
+             l
+             
+             +${RooP}GB
+             w
+             "| fdisk ${DISK
             ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
             case $AN in 
