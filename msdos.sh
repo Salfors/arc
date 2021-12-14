@@ -1,95 +1,267 @@
-DISK=/dev/vda
-function disk_format(){
-        while true
-            do 
-            echo -e ""
-            echo "[1] Use it all and format the hard drive."
-            echo "[2] Use only free disk space."
-            echo -e ""
-            read -p "Do you want to use all disk for installation or just free space : " UD #USE DISK
+        function Determine_size() {
 
-            if [ "$UD" == "1" ] 
-            then
-            clear
-            sgdisk -Z ${DISK} # zap all on disk
-            while true 
+            #_____Determine the size of the root partition____#
+            echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step\n "
+            while true
                 do
-                
                 echo -e ""
-                echo "[1] GPT"
-                echo "[2] MSDOS"
-                echo -e ""
-                read -p "Do you want a 'GPT' or 'MSDOS' table for your hard disk : " table 
-                case $table in 
-                1)
-                    clear
-                    sgdisk -a 2048 -o ${DISK} 
+                read -p "Please Enter Size For Root Partition : " RooP #Root Part
+                if [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; then 
+                    echo "${RooP}"
                     break
-                    ;;
-
-                2)
-                    clear
-                    echo "o
-                    w
-                    " | fdisk ${DISK}
-                    break
-                    ;;
-
-                *)
-                    echo "enter 1 or 2 "
+                    elif [ -z "${RooP##*[!0-9]*}" ]; then
+                    echo -e "\n[+]enter just the number and  with out GB or MB[+]"
                     count=`expr $count + 1`
-                    ;;
-                esac
+                    else
+                    echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
+                    count=`expr $count + 1`
+                fi
                 clean_screen
-            done    
-            break
-            
-            elif [ "$UD" == "2" ]; then
-            function freetable() {
-                DT0=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
-                case $DT0 in
-                    "unknown")
+                echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step"
+               
+            done
+            clear
+                
+                #____Determine the size of the home partition___#
+            while true
+                do
+                echo -e 
+                read  -p "Please do you want create home part or not (y/n) : " AN #ANSWER
+                case $AN in 
+                    y|yes)
+
+                            clear
+                            echo -e 
+                            echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n "
                             while true
                                 do
-                                echo "you don't had any disk table choose one form them"
-                                echo -e ""
-                                echo "[1] MSDOS"
-                                echo "[2] GPT"
-                                read -p "your choice : " NT #New Table
-                                case $NT in 
-                                    "1")
-                                        echo "o
-                                        w
-                                        "| fdisk ${DISK}
-                                        break
-                                        ;;
-                                    "2")
-                                        sgdisk -a 2048 -o ${DISK} 
-                                        break
-                                        ;;
-                                    *)
-                                        echo -e "\n[+]Choose 1 or 2 !!![+]\n"
-                                        count=`expr $count + 1`
-                                        ;;
-                                esac
-                                
+                                read -p "Enter your /home partition size please : " Homep #Home Part
+                                if [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; then
+                                    break
+                                    elif [ -z "${Homep##*[!0-9]*}" ]; then
+                                    echo -e "\n[+]enter just the number without GB or MB[+]\n"
+                                    count=`expr $count + 1`
+                                    else 
+                                    echo "enter vailde value !!"
+                                    count=`expr $count + 1`
+                                fi
+                                clean_screen
+                                echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                             
                             done
-                            ;; 
-                        *)
+                            echo -e 
                             break
                             ;;
-                esac
+                    n|no)
 
-            }
-            freetable
-            break 
-            else
-            echo -e "\n[+]Choose 1 or 2 !!![+]\n"
-            count=`expr $count + 1`
-            clean_screen
-            fi
-            
+                        break
+                        ;;
+                    *) 
+                            echo -e "\n[+]Enter yes or no (y/n)[+]"
+                            count=`expr $count + 1`
+                            if [ "$count" -eq "$max" ]; then
+                                clear
+                                count=`expr $count - 3`
+                            fi
+                            ;;
+                    esac
+            done
+            clear
+                #_____Determine the size of the swap partition__#
+
+            while true
+                do
+                echo -e 
+                read  -p "Please do you want create home part or not (y/n) : " AN2 #ANSWER2
+                case $AN2 in 
+                    y|Y|YES|Yes|yes)
+                            clear
+                            echo -e 
+                            echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n "
+                            while true
+                                do
+                                read -p "Enter your Swap partition size please : " Swap
+                                if [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; then
+                                    break
+                                    elif [ -z "${Swap##*[!0-9]*}" ]; then
+                                    echo -e "\n[+]enter just the number without GB or MB[+]\n"
+                                    count=`expr $count + 1`
+                                    else 
+                                    echo "enter vailde value !!"
+                                    count=`expr $count + 1`
+                                fi
+                                clean_screen
+                                echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                                 
+                            done
+                            echo -e 
+                            break
+                            ;;
+                    n|N|NO|No|no)
+                        break
+                        ;;
+                    *) 
+                            echo -e "\n[+]Enter yes or no (y/n)[+]"
+                            count=`expr $count + 1`
+                            clean_screen
+                            ;;
+                    esac
+            done
+        }
+
+        Determine_size
+        function logic() {
+
+            case $AN in 
+                y|Y|yes|Yes|YES)
+
+                        case $AN2 in 
+                            y|Y|yes|Yes|YES)
+                                logic=`expr ${RooP} + ${Homep} + ${Swap}` ;;
+                        esac 
+                        case $AN2 in 
+                            n|N|no|No|NO)
+                                logic=`expr ${RooP} + ${Homep}`;;
+                        esac
+                        ;;
+                n|N|no|No|NO)
+
+                        case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                                logic=`expr ${RooP} + ${Swap}` ;;
+                        esac
+                        case $AN2 in 
+                        n|N|no|No|NO)
+                                logic=${RooP}
+                                echo "is work" ;;
+                        esac
+                        ;;
+            esac
+        } 
+        logic
+        clear
+        echo -e ""
+        function check_logic() {
+            while true
+            do 
+            echo -e "\nIs This The Total Volume For The Operation ${logic}GB ?\n"
+            read -p "Enter 'Yes' To Continue or 'No' To Edit Size : " AL #ask logic
+            case $AL in 
+                y|Y|yes|Yes|YES)
+                        break
+                        ;;
+
+                n|N|no|No|NO)
+
+                        while true
+                            do 
+                            clear
+                            echo -e "on next step GB is default\n"
+                            read -p "Enter The Size With (number only): " logic
+                            if [ -z "${logic//[0-9]/}" -a ! -z "$logic" ]; then
+                                clear
+                                echo -e "\n[+]The size for the process is ${logic}GB.[+] ."
+                                echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                break
+                                else 
+                                echo -e "\n[+]Enter Just The Number Without GB or Valid Value !![+]\n"
+                                count=`expr $count + 1`
+                            fi
+                            clean_screen
+                        done
+                        break
+                        ;;
+                *)
+                    echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
+                    count=`expr $count + 1`
+                    ;;
+            esac
+            clean_screen 
         done
+
+        }
+        check_logic
+
+        clear
+
+                           #------    CREATE PARTITIONS ON BIOS MODE -------#
+
+    #####################################################################################################################
+
+    #  NOTE: Every line Here Is Important Even If It Is Empty. If You Delete Any Line Here, It Will Be A Problem
+    #               You Must Understand How the "FDISK" Partition Works To Understand It
+
+    ################################################################################################################## 
+
+        
+        DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
+        if [ "${DT}" == 'msdos' ]; then
+
+        function MSDOS(){
+            echo "n  
             
-}
-disk_format
+            
+            +${RooP}GB
+            w
+            " | fdisk ${DISK}
+            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+
+            case $AN in 
+                y|Y|yes|Yes|YES)
+
+                    case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                            echo "
+                            n
+                            l
+                            
+                            +${Homep}GB
+                            w
+                            "| fdisk ${DISK}  
+                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                                                                    
+                            echo "n
+                            l
+                            
+                            
+                            +${Swap}GB
+                            w
+                            "| fdisk ${DISK}
+                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+
+                    esac 
+                    case $AN2 in 
+                        n|N|no|No|NO)
+                            echo "
+                            n
+                            l
+                            
+                            +${Homep}GB
+                            w
+                            "| fdisk ${DISK}
+                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                    esac
+                    ;;
+
+                n|N|no|No|NO)
+
+                    case $AN2 in 
+                        y|Y|yes|Yes|YES)
+                            echo "n
+                            l
+                            
+                            
+                            +${Swap}GB  
+                            w
+                            "| fdisk ${DISK}
+                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                    esac
+
+                    case $AN2 in 
+                        n|N|no|No|NO)
+                                ### if home and swap not created
+                    esac
+                    ;;
+            esac
+        }
+        MSDOS
