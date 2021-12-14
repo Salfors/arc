@@ -570,8 +570,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         case $AN2 in 
                             y|Y|yes|Yes|YES)
                                                 
-                                echo "n
-                                
+                                echo "
+                                n
                                 
                                 +${Swap}GB  
                                 w
