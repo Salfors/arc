@@ -353,7 +353,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         esac
                         case $AN2 in 
                         n|N|no|No|NO)
-                                logic=${RooP}
+
+                                #logic=${RooP}
                                 echo "is work" ;;
                         esac
                         ;;
@@ -421,18 +422,24 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
             function MSDOS(){
 
-                case $logic in 
+                case $AN in 
+                    n|N|no|No|NO)
+                        echo""
+                        case $AN2 in 
+                            n|N|no|No|NO)     
+                                echo
+                                echo "
+                                n
+                                p
 
-                    ${RooP})
-                        echo "good" 
-                        echo "
-                        n
-                        p
-                        
-                        
-                        +${RooP}GB
-                        w
-                        "| fdisk ${DISK} ;;
+
+                                +${RooP}GB
+                                w
+                                "| fdisk ${DISK} ;;
+                        esac
+                        ;;
+               
+ 
                     *)
                         echo "well "
                         echo "n
