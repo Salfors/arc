@@ -500,7 +500,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
         elif [ "${DT}" == 'gpt' ]; then
 
         function GPT(){
-            echo "n  
+            echo "
+            n  
             
             
             +${RooP}GB
