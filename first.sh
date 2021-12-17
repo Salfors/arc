@@ -396,8 +396,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
             # check logic
 
         
-        function create_logic() {
-                d
+
+        
+        
+    function MSPART () {
+    
+        function MSDOS(){
+                        
+            check_logic
             
             echo "n
             e
@@ -406,25 +412,16 @@ if [ "${os}" != '"Arch Linux"' ]; then
             +${logic}GB
             w
             "| fdisk ${DISK}
-        }
-        
-    function ESP_M() {
-        echo "n
-        l
-        
-        +512M
-        w
-        " | fdisk ${DISK}
-        EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-
-    }
-
-
-    
-        function MSDOS(){
-                        
-            check_logic
-            create_logic
+            if [ "$Mode" == "$N2" ]; then
+                    #___ efi part
+                echo "n
+                l
+                
+                +512M
+                w
+                " | fdisk ${DISK}
+                EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+            fi
                                 ### root
             echo "n  
             l
@@ -524,15 +521,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     MSDOS
                     ;;
                 esac
-    function MSPART () {
-        if [ "$Mode" == "$N1"]; then
-            MSDOS
-        elif [ "$Mode" == "$N2" ]; then
-            check_logic
-            create_logic
-            ESP_M
-            MSDOS
-        fi
     }
 
 
