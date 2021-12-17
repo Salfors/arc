@@ -404,7 +404,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
         function MSDOS(){
                         
             check_logic
-            
             echo "n
             e
             
@@ -779,7 +778,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
             
-            ESP
+            #ESP
             MSPART
             clear
 
