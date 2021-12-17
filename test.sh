@@ -774,15 +774,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 clear
                 LAST
 
-                else
-                echo -e "\n[+]Choose Number One Or Two [+]\n"
-                count=`expr $count + 1`
-                if [ "$count" -eq "$max" ]; then
-                    clear
-                    count=`expr $count - 3`
-                    fi
-
-
 
                 ;;
             *)
