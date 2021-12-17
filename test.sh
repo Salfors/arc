@@ -354,7 +354,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         case $AN2 in 
                         n|N|no|No|NO)
 
-                                logic=`expr ${RooP} + ${Homep} + ${Swap}`
+                                logic=${RooP} 
                                 echo "is work" ;;
                         esac
                         ;;
