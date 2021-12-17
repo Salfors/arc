@@ -212,7 +212,8 @@
                                 echo "root just"
                                 ;;
                         esac
-                    *)
+                        ;;
+                    y)
                         echo"well do anthore job"
                         ;;
                         
