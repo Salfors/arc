@@ -202,9 +202,9 @@
 
             function MSDOS(){
 
-                if [ "$AN" == "n" ]; then
-                    echo "root and swap"
-                fi
+                #if [ "$AN" == "n" ]; then
+                    #echo "root and swap"
+                #fi
                 check_logic
                 echo "well "
                 echo "n
