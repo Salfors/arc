@@ -726,53 +726,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 # Determine size 
                 Determine_size
                 logic
-                
-                clear
-                #_____________________ IF MSDOS ON BIOS __________________# 
-
-                DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
-                if [ "${DT}" == 'msdos' ]; then
-                    
-                    MSDOS
-                    clear
-
-                    #________________________IF IS GPT ON UEFI _______________#
-                    elif [ "${DT}" == 'gpt' ]; then
-                    
-
-                        function ESP() {
-                            #___ efi part
-                            echo "n
-
-
-                            +512M
-                            w
-                            " | fdisk ${DISK}
-                            EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-
-                        }
-                        ESP
-                        #___root
-                        GPT #GPT()
-                        
-                fi
-
-                #_____________ mount the point ___________#
-
-                echo "y" | mkfs.fat -F32 "${DISK}${EFI}"
-
-                CONVERT ## convert partition
-                    #---------  mount the points partitions  --------------#
-
-                MOUNT #MOUNT POINT()
-
-                mkdir /mnt/boot
-                mkdir /mnt/boot/efi
-                mount "${DISK}${EFI}" /mnt/boot/efi
-
-                clear
-                LAST
-
 
                 ;;
             *)
