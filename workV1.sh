@@ -285,20 +285,20 @@
             }
             #MSDOS
 
-            if [ "$AN" == "n" ] && [ "$AN2" == "n" ]; then
-                echo "root "
-            fi
-            
+            #if [ "$AN" == "n" ] && [ "$AN2" == "n" ]; then
+                #echo "root "
+            #fi
+
             case $AN in
                 n)
                     case AN2 in
                         n) 
-                            echo "root just"
+                            echo "root "
                             ;;
                     esac
                     ;;
                 *)
-                    echo "root just"
+                    echo "do just work"
 
                     ;;
             esac
