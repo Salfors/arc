@@ -694,6 +694,18 @@ if [ "${os}" != '"Arch Linux"' ]; then
     }
 
 
+    function ESP() {
+        #___ efi part
+        echo "n
+
+
+        +512M
+        w
+        " | fdisk ${DISK}
+        EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+
+    }
+
                      #------    CREATE PARTITIONS ON BIOS MODE -------#
 
     #####################################################################################################################
@@ -755,6 +767,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
             
+            ESP
             MSPART
             clear
 
@@ -762,17 +775,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
         elif [ "${DT}" == 'gpt' ]; then
             
 
-            function ESP() {
-                #___ efi part
-                echo "n
-
-
-                +512M
-                w
-                " | fdisk ${DISK}
-                EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-
-            }
             ESP
                 #___root
             GPT #GPT()
