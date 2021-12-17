@@ -283,33 +283,33 @@
 
                 esac
             }
-            #MSDOS
-
-            #if [ "$AN" == "n" ] && [ "$AN2" == "n" ]; then
-                #echo "root "
-            #fi
 
             case $AN in
                 n)
                     case $AN2 in
                         n) 
                             echo "root is primary  "
+                            echo "
+                            n
+                            p
+
+
+                            +${RooP}GB
+                            w
+                            "| fdisk ${DISK} 
+                            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                             ;;
                         *)
-                            echo "MSDOS"
+                            MSDOS
                             ;;
 
                     esac
                     ;;
                 *)
-                    echo "MSDOS"
-
+                    echo MSDOS
                     ;;
             esac
-            sleep 10
-
-
-
+            
                 #___________________IF IS GPT ON BIOS _______________#
             elif [ "${DT}" == 'gpt' ]; then
 
