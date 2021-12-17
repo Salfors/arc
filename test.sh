@@ -215,7 +215,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo -e  "+[2] UFI Mode\n" # UFI
         read -p  "Enter Number : " Mode
         case $MODE in 
-            "1")
+            $N1)
                 echo "d"
                 clear
             
@@ -721,7 +721,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
 
                 ;;
-            "2")
+            $N2)
                 echo "gpt"
                 clear
                 # Determine size 
