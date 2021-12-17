@@ -424,47 +424,47 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                 #case $AN in 
 
-                        check_logic
-                        echo "well "
-                        echo "n
-                        e
-                        
-                        
-                        +${logic}GB
-                        w
-                        "| fdisk ${DISK}
+                    check_logic
+                    echo "well "
+                    echo "n
+                    e
+                    
+                    
+                    +${logic}GB
+                    w
+                    "| fdisk ${DISK}
                         ### root
-                        echo "n  
-                        l
-                        
-                        +${RooP}GB
-                        w
-                        " | fdisk ${DISK}
-                        ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                    echo "n  
+                    l
+                    
+                    +${RooP}GB
+                    w
+                    " | fdisk ${DISK}
+                    ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
-                        case $AN in 
-                            y|Y|yes|Yes|YES)
+                    case $AN in 
+                        y|Y|yes|Yes|YES)
 
-                                case $AN2 in 
-                                    y|Y|yes|Yes|YES)
-                                        echo "
-                                        n
-                                        l
-                                        
-                                        +${Homep}GB
-                                        w
-                                        "| fdisk ${DISK}  
-                                        HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                            case $AN2 in 
+                                y|Y|yes|Yes|YES)
+                                    echo "
+                                    n
+                                    l
+                                    
+                                    +${Homep}GB
+                                    w
+                                    "| fdisk ${DISK}  
+                                    HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                                                                                             
-                                        echo "
-                                        n
-                                        l
-                                        
-                                        
-                                        +${Swap}GB
-                                        w
-                                        "| fdisk ${DISK}
-                                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                                    echo "
+                                    n
+                                    l
+                                    
+                                    
+                                    +${Swap}GB
+                                    w
+                                    "| fdisk ${DISK}
+                                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
 
                                 esac 
                                 case $AN2 in 
@@ -478,39 +478,39 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                         w
                                         "| fdisk ${DISK}
                                         HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
-                                esac
-                                ;;
+                            esac
+                            ;;
 
-                            n|N|no|No|NO)
+                        n|N|no|No|NO)
 
-                                case $AN2 in 
+                            case $AN2 in 
 
-                                    y|Y|yes|Yes|YES)
-                                        echo "
-                                        n
-                                        l
-                                        
-                                        
-                                        +${Swap}GB
-                                        w
-                                        "| fdisk ${DISK}
-                                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-                                esac
+                                y|Y|yes|Yes|YES)
+                                    echo "
+                                    n
+                                    l
+                                    
+                                    
+                                    +${Swap}GB
+                                    w
+                                    "| fdisk ${DISK}
+                                    SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+                            esac
 
-                                case $AN2 in 
-                                    n|N|no|No|NO)
-                                        echo "n  
-                                        l
+                            case $AN2 in 
+                                n|N|no|No|NO)
+                                    echo "n  
+                                    l
 
-                                        +${RooP}GB
-                                        w
-                                        " | fdisk ${DISK}
-                                        ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                                    +${RooP}GB
+                                    w
+                                    " | fdisk ${DISK}
+                                    ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
                                         ### if home and swap not created
-                                esac
-                                ;;
-                        esac
+                            esac
+                            ;;
+                    esac
                         #;;
                 #esac
             }
