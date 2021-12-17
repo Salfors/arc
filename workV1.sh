@@ -201,23 +201,6 @@
             
 
             function MSDOS(){
-
-                if [ "$AN" == "n" ] && [ "$AN2" == "n" ]; then
-                    echo "root "
-                fi
-                case $AN in
-                    n)
-                        case AN2 in
-                            n) 
-                                echo "root just"
-                                ;;
-                        esac
-                        ;;
-                    *)
-                        echo "root just"
-
-                        ;;
-                esac
                 sleep 3
                 check_logic
                 echo "well "
@@ -300,7 +283,28 @@
 
                 esac
             }
-            MSDOS
+            #MSDOS
+
+            if [ "$AN" == "n" ] && [ "$AN2" == "n" ]; then
+                echo "root "
+            fi
+            
+            case $AN in
+                n)
+                    case AN2 in
+                        n) 
+                            echo "root just"
+                            ;;
+                    esac
+                    ;;
+                *)
+                    echo "root just"
+
+                    ;;
+            esac
+
+
+
                 #___________________IF IS GPT ON BIOS _______________#
             elif [ "${DT}" == 'gpt' ]; then
 
