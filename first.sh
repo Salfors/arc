@@ -418,15 +418,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
     }
-    function MSPART () {
-        if [ "$Mode" == "$N1"]; then
-            MSDOS
-        elif [ "$Mode" == "$N2" ]; then
-            check_logic
-            create_logic
-            ESP_M
-            MSDOS
-        fi
+
 
     
         function MSDOS(){
@@ -532,6 +524,15 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     MSDOS
                     ;;
                 esac
+    function MSPART () {
+        if [ "$Mode" == "$N1"]; then
+            MSDOS
+        elif [ "$Mode" == "$N2" ]; then
+            check_logic
+            create_logic
+            ESP_M
+            MSDOS
+        fi
     }
 
 
