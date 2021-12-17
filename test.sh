@@ -354,7 +354,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         case $AN2 in 
                         n|N|no|No|NO)
 
-                                logic=${RooP} 
+                                #logic=${RooP} 
                                 echo "is work" ;;
                         esac
                         ;;
@@ -433,9 +433,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 p
 
 
-                                +${logic}GB
+                                +${RooP}GB
                                 w
-                                "| fdisk ${DISK} ;;
+                                "| fdisk ${DISK} 
+                                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
                         esac
                         ;;
                
