@@ -1,4 +1,6 @@
-        function Determine_size() {
+    
+    DISK=/dev/vda
+    function Determine_size() {
 
             #_____Determine the size of the root partition____#
             echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step\n "
