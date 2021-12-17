@@ -432,10 +432,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         
             check_logic
             create_logic
-            if [ "$Mode" == "$N2" ]; then
-                    #___ efi part
-
-            fi
                                 ### root
             echo "n  
             l
