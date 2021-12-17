@@ -411,7 +411,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             +${logic}GB
             w
             "| fdisk ${DISK}
-            if [ "$Mode" == "$N2" ]
+            if [ "$Mode" == "$N2" ]; then
                     #___ efi part
                 echo "n
 
