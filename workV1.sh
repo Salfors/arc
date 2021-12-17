@@ -1,4 +1,3 @@
-   DISK=/dev/vda
     DISK=/dev/vda
     function Determine_size() {
 
