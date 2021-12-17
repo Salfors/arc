@@ -416,6 +416,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo "n
                 l
                 
+
+                
                 +512M
                 w
                 " | fdisk ${DISK}
