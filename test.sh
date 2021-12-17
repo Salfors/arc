@@ -437,6 +437,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 w
                                 "| fdisk ${DISK} 
                                 ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
+                            
                         esac
                         ;;
                
@@ -512,7 +513,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                         +${Swap}GB
                                         w
                                         "| fdisk ${DISK}
-                                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}`;;
+                                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
                                 esac
 
                                 case $AN2 in 
