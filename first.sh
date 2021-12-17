@@ -414,8 +414,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
             if [ "$Mode" == "$N2" ]; then
                     #___ efi part
                 echo "n
-
-
+                l
+                
                 +512M
                 w
                 " | fdisk ${DISK}
