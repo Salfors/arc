@@ -1,4 +1,4 @@
-    DISK=/dev/vda
+   DISK=/dev/vda
     function Determine_size() {
 
             #_____Determine the size of the root partition____#
@@ -202,8 +202,8 @@
 
             function MSDOS(){
 
-                if [ "$AN" == "n" ]; then
-                    echo "root and swap"
+                if [ "$AN" == "n" ] && [ "$AN2" == "n"]; then
+                    echo "root "
                 fi
                 check_logic
                 echo "well "
