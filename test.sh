@@ -724,8 +724,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo "gpt"
                 clear
                 # Determine size 
-                Determine_size ()
-                logic ()
+                function Determine_size 
+                function logic 
 
                 ;;
             *)
