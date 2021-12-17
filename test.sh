@@ -214,7 +214,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo -e "\n+[1] Bios Mode" # BIOS
         echo -e  "+[2] UFI Mode\n" # UFI
         read -p  "Enter Number : " Mode
-        case $MODE in 
+        case $Mode in 
             $N1)
                 echo "d"
                 clear
@@ -718,9 +718,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 }
                 LAST
 
-
-
                 ;;
+
             $N2)
                 echo "gpt"
                 clear
