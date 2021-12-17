@@ -696,13 +696,29 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
     function ESP() {
         #___ efi part
-        echo "n
+        DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
+        if [ "${DT}" == 'msdos' ]; then
+               
+            echo "n
+            l
 
 
-        +512M
-        w
-        " | fdisk ${DISK}
-        EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+            +512M
+            w
+            " | fdisk ${DISK}
+            EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`    
+           
+                #___________________IF IS GPT ON BIOS _______________#
+        elif [ "${DT}" == 'gpt' ]; then
+
+            echo "n
+
+
+            +512M
+            w
+            " | fdisk ${DISK}
+            EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+        fi
 
     }
 
