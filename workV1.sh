@@ -306,7 +306,7 @@
                     esac
                     ;;
                 *)
-                    echo MSDOS
+                    MSDOS
                     ;;
             esac
             
