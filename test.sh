@@ -423,26 +423,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             function MSDOS(){
 
                 case $AN in 
-                    n|N|no|No|NO)
-                        echo""
-                        case $AN2 in 
-                            n|N|no|No|NO)     
-                                echo
-                                echo "
-                                n
-                                p
 
-
-                                +${RooP}GB
-                                w
-                                "| fdisk ${DISK} 
-                                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-                            
-                        esac
-                        ;;
-               
- 
-                    *)
                         check_logic
                         echo "well "
                         echo "n
@@ -518,6 +499,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                                 case $AN2 in 
                                     n|N|no|No|NO)
+                                        echo "n  
+                                        l
+
+                                        +${RooP}GB
+                                        w
+                                        " | fdisk ${DISK}
+                                        ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+
                                         ### if home and swap not created
                                 esac
                                 ;;
