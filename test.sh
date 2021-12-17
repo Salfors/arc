@@ -725,8 +725,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
         elif [ "$Mode" == "$N2" ] # ---------- IF IS UEFI MODE ---------#
         then
         clear
-#########333########## Determine size 
+        # Determine size 
         Determine_size
+        logic
         
         clear
         #_____________________ IF MSDOS ON BIOS __________________# 
@@ -734,7 +735,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
             
-            MSPART
+            MSDOS
             clear
 
             #________________________IF IS GPT ON UEFI _______________#
@@ -758,7 +759,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 
         fi
 
-#_____________ mount the point ___________#
+        #_____________ mount the point ___________#
 
         echo "y" | mkfs.fat -F32 "${DISK}${EFI}"
 
@@ -772,7 +773,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         mount "${DISK}${EFI}" /mnt/boot/efi
 
         clear
-        #LAST #LAST WORK ()
+        LAST
 
         else
         echo -e "\n[+]Choose Number One Or Two [+]\n"
