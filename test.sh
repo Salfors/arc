@@ -772,7 +772,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         mount "${DISK}${EFI}" /mnt/boot/efi
 
         clear
-        LAST #LAST WORK ()
+        #LAST #LAST WORK ()
 
         else
         echo -e "\n[+]Choose Number One Or Two [+]\n"
