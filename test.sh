@@ -422,7 +422,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
             function MSDOS(){
 
-                case $AN in 
+                #case $AN in 
 
                         check_logic
                         echo "well "
@@ -511,8 +511,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 esac
                                 ;;
                         esac
-                        ;;
-                esac
+                        #;;
+                #esac
             }
             MSDOS
                 #___________________IF IS GPT ON BIOS _______________#
