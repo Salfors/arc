@@ -293,12 +293,16 @@
                 n)
                     case $AN2 in
                         n) 
-                            echo "root "
+                            echo "root is primary  "
                             ;;
+                        *)
+                            echo "MSDOS"
+                            ;;
+
                     esac
                     ;;
                 *)
-                    echo "do just work"
+                    echo "MSDOS"
 
                     ;;
             esac
