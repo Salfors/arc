@@ -202,6 +202,16 @@
 
             function MSDOS(){
 
+                case $AN in 
+                    n)
+                        case $AN2 in
+                            n)
+                                echo "root primary"
+                                ;;
+                        esac
+                        ;;
+                esac
+
                 #if [ "$AN" == "n" ]; then
                     #echo "root and swap"
                 #fi
