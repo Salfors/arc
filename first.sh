@@ -422,6 +422,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         if [ "$Mode" == "$N1"]; then
             MSDOS
         elif [ "$Mode" == "$N2" ]; then
+            check_logic
             create_logic
             ESP_M
             MSDOS
