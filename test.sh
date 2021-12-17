@@ -737,7 +737,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
         if [ "${DT}" == 'msdos' ]; then
             
-            MSDOS
+            MSPART
             clear
 
             #________________________IF IS GPT ON UEFI _______________#
