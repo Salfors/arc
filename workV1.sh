@@ -1,4 +1,5 @@
    DISK=/dev/vda
+    DISK=/dev/vda
     function Determine_size() {
 
             #_____Determine the size of the root partition____#
@@ -207,6 +208,16 @@
                         case $AN2 in
                             n)
                                 echo "root primary"
+                                #echo
+                                echo "
+                                n
+                                p
+
+
+                                +${RooP}GB
+                                w
+                                "| fdisk ${DISK} 
+                                ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
                                 ;;
                         esac
                         ;;
