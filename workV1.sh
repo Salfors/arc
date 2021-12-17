@@ -202,7 +202,7 @@
 
             function MSDOS(){
 
-                if [ "$AN" == "n" ] && [ "$AN2" == "n"]; then
+                if [ "$AN" == "n" ] && [ "$AN2" == "n"] ; then
                     echo "root "
                 fi
                 case $AN in
