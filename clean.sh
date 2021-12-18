@@ -36,6 +36,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         clear
                             while true
                                 do
+                                echo "[+] Note that if you have run a script before [+]"
+                                echo " make sure that the key layout at the top of the file is not repeated '/etc/locale.gen'"
+                                echo -e "\nPress Enter to Contine"
                                 echo -e "\n====================================="
                                 echo "[---]   Keyboard Layout Menu    [---]"
                                 echo -e "=====================================\n"
@@ -73,7 +76,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                 "nano"|"vi"|"vim"|"micro")
                                                     clear
                                                     echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
-                                                    echo -e "\n-Press Enter to Contine"
+                                                    echo -e "\nPress Enter to Contine"
                                                     read Confirm
                                                     case $Confirm in 
                                                         "")
