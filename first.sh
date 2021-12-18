@@ -87,14 +87,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo -e "\n[-] Sorry, Choose One From Them !!! [-]\n"
                                     sleep 1
                                     count=`expr $count + 1`
-                                    sleep 1
                                     clean_screen
                                     ;;
                                 *)
                                     echo -e "\n[-] Enter The Tool Name Correctly!!! [-]\n"
                                     sleep 1
                                     count=`expr $count + 1`
-                                    sleep 1
                                     clean_screen
                             esac
                         done
@@ -278,13 +276,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 echo ""
                                 echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
                                 echo "[+]If it is not correct, try restarting the script and try again[+]."
-                                break ;;
+                                ;;
+                                #break ;;
                             "2")
                                 Mode="UEFI"
                                 echo ""
                                 echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
                                 echo "[+]If it is not correct, try restarting the script and try again[+]."
-                                break 
+                                #break 
                                 sleep 4 ;;
 
                             *)
@@ -292,7 +291,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 count=`expr $count + 1`
                                 clean_screen ;;
                         esac
-                        #break
+                        break
                     
                             
                                 
