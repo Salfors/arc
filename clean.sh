@@ -32,10 +32,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     read CN #Confirm Note
                     case $CN in 
                         "")
+                            clear
                             while true
                                 do 
 
-                                clear
                                 echo -e "\n====================================="
                                 echo "[---]   Keyboard Layout Menu    [---]"
                                 echo -e "=====================================\n"
