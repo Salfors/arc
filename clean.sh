@@ -43,7 +43,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 echo "+[2] RU +"
                                 echo "+[3] FR +"
                                 echo -e
-                                read -p "Choose a Number Or Enter ['A'] To show more options" KEY
+                                read -p "Choose a Number Or Enter ['A'] To show more options : " KEY
                                 if [ "$KEY" == "1" ] ; then 
                                     echo "ar_AE.UTF-8 UTF-8" >> /etc/locale.gen
                                     break
@@ -72,7 +72,20 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             case $EK in 
                                                 "nano"|"vi"|"vim"|"micro")
                                                     $EK /etc/locale.gen 
-                                                    #break 
+                                                    echo -e ""
+                                                    read -p "Please confirm [y/n] : " CONF #CONF
+                                                    case $CONF in 
+                                                        y|Y|yes|Yes|YES)
+                                                            break ;;
+                                                        n|N|no|No|NO)
+                                                            sleep 3
+                                                            clear ;;
+                                                        *)
+                                                            echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
+                                                            count=`expr $count + 1` 
+                                                            sleep 1 
+                                                            clean_screen  ;;
+                                                    esac
                                                     ;;
                                                 *)
                                                     echo "[-]Type one of them[-]" 
@@ -80,20 +93,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                     clean_screen ;;
                                             esac
                                                     
-                                            echo -e ""
-                                            read -p "Please confirm [y/n] : " CONF #CONF
-                                            case $CONF in 
-                                                y|Y|yes|Yes|YES)
-                                                    break ;;
-                                                n|N|no|No|NO)
-                                                    sleep 3
-                                                    clear ;;
-                                                *)
-                                                    echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
-                                                    count=`expr $count + 1` 
-                                                    sleep 1 
-                                                    clean_screen  ;;
-                                            esac
+
                                                                  
                                         done
                                         break
