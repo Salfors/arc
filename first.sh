@@ -232,11 +232,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
     #-----Select live boot type------#
 
     function MODE() {
+
+        Mode=`ls /sys/firmware/efi`
+        clear
         echo -e "\n================================"
         echo "[---]    live boot type    [---]"
         echo -e "================================\n"
-        Mode=`ls /sys/firmware/efi`
-        clear
         if $Mode >/dev/null 2>&1; then
                 Mode="BIOS"
                     
