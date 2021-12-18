@@ -73,7 +73,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                 "nano"|"vi"|"vim"|"micro")
                                                     clear
                                                     echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
-                                                    echo -e "press enter to contine"
+                                                    echo -e "\n-Press Enter to Contine"
                                                     read Confirm
                                                     case $Confirm in 
                                                         "")
