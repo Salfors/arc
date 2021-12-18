@@ -152,7 +152,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     clean_screen
                                     ;;
 
-                            esac
+                            esac ;;
                             echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen ;;
                         *)
                             clear ;;
