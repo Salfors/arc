@@ -87,8 +87,13 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                             clean_screen  ;;
                                                     esac
                                                     ;;
+                                                "")
+                                                    echo -e "\n[-] Type one of them [-]\n" 
+                                                    count=`expr $count + 1`
+                                                    clean_screen ;;
+
                                                 *)
-                                                    echo -e"\n[-]Type one of them[-]\n" 
+                                                    echo -e "\n[-] Enter Valid Value !![-]\n" 
                                                     count=`expr $count + 1`
                                                     clean_screen ;;
                                             esac
@@ -99,7 +104,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                         break
                                     else
                                     sleep 1
-                                    echo -e "\n[+]Choose Any Number Or Set The Default !!! [+]\n"
+                                    echo -e "\n[+]Choose Any One f options !!! [+]\n"
                                     count=`expr $count + 1`
                                     clean_screen
                                 fi
