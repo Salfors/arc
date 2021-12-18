@@ -250,7 +250,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function CHECK_MODE() {
         while true
             do 
-            echo -e "\nTHE CURRENT BOOT MODE IS [${Mode}] ?\n"
+            echo -e "\n[+]THE CURRENT BOOT MODE IS {${Mode}} ?[+]\n"
             read -p "Please confirm [y/n] : " AM #ask MODE
             case $AM in 
                 y|Y|yes|Yes|YES)
@@ -283,7 +283,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     break ;;
 
                             *)
-                                    echo "enter just one or two "
+                                    echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
                                     count=`expr $count + 1`
                                     clean_screen ;;
                         esac
@@ -298,6 +298,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 *)
                     echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
                     count=`expr $count + 1`
+                    clean_screen
                     ;;
             esac
             clean_screen 
