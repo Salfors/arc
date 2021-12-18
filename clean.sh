@@ -45,15 +45,15 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 echo -e
                                 read -p "Choose a Number Or Enter ['A'] To show more options : " KEY
                                 if [ "$KEY" == "1" ] ; then 
-                                    echo "ar_AE.UTF-8 UTF-8" >> /etc/locale.gen
+                                    sed -i '/# lists of locales/a ar_AE.UTF-8 UTF-8' /etc/locale.gen
                                     break
                                     elif [ "$KEY" == "2" ] 
                                     then
-                                    echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
+                                    sed -i '/# lists of locales/a ru_RU.UTF-8 UTF-8' /etc/locale.gen
                                     break
                                     elif  [ "$KEY" == "3" ]
                                     then 
-                                    echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
+                                    sed -i '/# lists of locales/a fr_FR.UTF-8 UTF-8' /etc/locale.gen
                                     break
                                     elif [ "$KEY" == "A" ] || [ "$KEY" == "a" ]; then
                                         clear
@@ -71,6 +71,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             read -p "your choice : " EK #EDIT KEY
                                             case $EK in 
                                                 "nano"|"vi"|"vim"|"micro")
+                                                    clear
+                                                    echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
+                                                    sleep 10
                                                     $EK /etc/locale.gen 
                                                     while true
                                                         do
@@ -110,7 +113,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                         break
                                     else
                                     sleep 1
-                                    echo -e "\n[+]Choose Any one of options !!! [+]\n"
+                                    echo -e "\n[+] Choose Any one of options !!! [+]\n"
                                     count=`expr $count + 1`
                                     clean_screen
                                 fi
@@ -133,6 +136,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             ;;
 
                     esac
+                    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 
                     
                 done
