@@ -42,7 +42,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     read DISK
     if [ "$DISK" == "" ] 
         then
-        echo -e "\n[+]Choose The Disk To Install To !!![+]\n"
+        echo -e "\n[-] Choose The Disk To Install To !!![-]\n"
         sleep 1
         count=`expr $count + 1`
         clean_screen
@@ -89,7 +89,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     clean_screen
                                     ;;
                                 *)
-                                    echo -e "\n[-] Enter the tool name correctly!!! [-]\n"
+                                    echo -e "\n[-] Enter The Tool Name Correctly!!! [-]\n"
                             esac
                         done
                         break              
@@ -99,7 +99,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     break
                     ;;
                 *)
-                    echo -e "\n[+]ENTER 'yes' OR 'no' !!! [+]\n"
+                    echo -e "\n[+]ENTER 'YES' or 'NO' !!! [+]\n"
                     count=`expr $count + 1`   
                     ;;                      
             esac
@@ -108,13 +108,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
     }
     EDIT_HARD
     clear
-    echo -e "\n====================================="
-    echo "[---]     Hard Disk Usage       [---]"
-    echo -e "=====================================\n"
+
     #echo -e "\n"
     function disk_format(){
             while true
                 do 
+                echo -e "\n====================================="
+                echo "[---]     Hard Disk Usage       [---]"
+                echo -e "=====================================\n"
                 echo -e ""
                 echo "[1] Use it all and format the hard drive."
                 echo "[2] Use only free disk space."
@@ -149,7 +150,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         ;;
 
                     *)
-                        echo "enter 1 or 2 "
+                        echo "ENTER '1' Or '2' "
                         count=`expr $count + 1`
                         ;;
                     esac
