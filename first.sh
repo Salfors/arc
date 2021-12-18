@@ -65,6 +65,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
             case $ED in 
                 y|Y|yes|Yes|YES)
+                        clear
                         while true
                             do
                             #clear
@@ -81,12 +82,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     $tool ${DISK}
                                     break
                                     ;;
-                                *)
-                                    echo -e "\n[+]Sorry, Choose One From Them !!! [+]\n"
+                                "")
+                                    echo -e "\n[-]Sorry, Choose One From Them !!! [-]\n"
                                     sleep 1
                                     count=`expr $count + 1`
                                     clean_screen
                                     ;;
+                                *)
+                                    echo -e "\n[+]Enter the tool name correctly!!! [+]\n"
                             esac
                         done
                         break              
