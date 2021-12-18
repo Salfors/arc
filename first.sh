@@ -92,6 +92,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     ;;
                                 *)
                                     echo -e "\n[-] Enter The Tool Name Correctly!!! [-]\n"
+                                    sleep 1
+                                    count=`expr $count + 1`
+                                    sleep 1
+                                    clean_screen
                             esac
                         done
                         break              
@@ -293,8 +297,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     break
                     ;;
                 "")
-                    echo "[+] Default Choose {'${Mode}'} [+]"
-                    sleep 2
+                    echo -e "\n[+] Default Choose {'${Mode}'} [+]"
+                    sleep 5
                     break ;;
 
                 *)
@@ -413,7 +417,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 count=`expr $count + 1`
                         fi
                         clean_screen
-                        echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                        
                                     
                     done
                     echo -e 
