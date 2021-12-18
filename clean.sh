@@ -91,6 +91,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                                 clean_screen  ;;
                                                         esac
                                                     done
+                                                    break
                                                     ;;
                                                 "")
                                                     echo -e "\n[-] Type one of them [-]\n" 
