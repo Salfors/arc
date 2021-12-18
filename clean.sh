@@ -27,11 +27,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 while true
                     do
                     echo "[+] Note: that if you have run a script before [+]"
-                    echo "[+] make sure that the key layout at the top of the file is not repeated '/etc/locale.gen'[+]"
+                    echo "[+] make sure that the key layout at the top of the file is not repeated '/etc/locale.gen'. [+]"
                     echo -e "\nPress Enter to Contine"
                     read CE #Confirm EDIT
                     case $CE in 
                         "")
+                            clear
                             echo -e "\n====================================="
                             echo "[---]   Keyboard Layout Menu    [---]"
                             echo -e "=====================================\n"
