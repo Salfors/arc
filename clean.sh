@@ -29,14 +29,16 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     echo -e "\n====================================="
                     echo "[---]   Keyboard Layout Menu    [---]"
                     echo -e "=====================================\n"
-                    read -p "Do You Want to Add Another Keyboard Layout (default == EN)  : " AK #ASK KEY
+                    read -p "Do You Want to Add Another Keyboard Layout [Y/N] (default == EN)  : " AK #ASK KEY
                     case $AK in 
 
                         y|Y|yes|Yes|YES)  
                         clear
                             while true
                                 do
-                                echo -e ""
+                                echo -e "\n====================================="
+                                echo "[---]   Keyboard Layout Menu    [---]"
+                                echo -e "=====================================\n"
                                 echo "+[1] AR +"
                                 echo "+[2] RU +"
                                 echo "+[3] FR +"
