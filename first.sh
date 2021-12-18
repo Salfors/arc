@@ -121,7 +121,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo "[2] Use only free disk space."
                 echo -e ""
                 read -p "Do you want to use all disk for installation or just free space : " UD #USE DISK
-                clear
+                #clear
                 if [ "$UD" == "1" ]; then 
             
                     clear
