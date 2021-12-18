@@ -58,9 +58,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function EDIT_HARD() {
         while true
             do
-            echo -e "\n================================="
-            echo "[---]      Hard Disk Editor      [---]"
-            echo -e "===================================\n"
+            echo -e "\n====================================="
+            echo "[---]     Hard Disk Editor      [---]"
+            echo -e "=====================================\n"
             echo -e ""
             read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
             case $ED in 
@@ -103,9 +103,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
     }
     EDIT_HARD
     clear
-    echo "-------------------------------------------------"
-    echo "---           Disk Usage                     ----"
-    echo "-------------------------------------------------"
+    echo -e "\n====================================="
+    echo "[---]     Hard Disk Usage       [---]"
+    echo -e "=====================================\n"
     #echo -e "\n"
     function disk_format(){
             while true
@@ -237,9 +237,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     while true
                         do 
                                 
-                        echo "-------------------------------------------------"
-                        echo "----------Select Your Boot Type -----------------"
-                        echo "-------------------------------------------------"
+                        echo -e "\n========================================"
+                        echo "[---]   Select Your Boot Type      [---]"
+                        echo -e "========================================\n"
                         echo -e "\n+[1] Bios Mode" # BIOS
                         echo -e  "+[2] UFI Mode\n" # UFI
                         read -p  "Enter Number : " Mode
@@ -737,9 +737,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo "----------------------------------------------------------------"
         sleep 20
         clear
-        echo "--------------------------------------"
-        echo "-- Arch Install on Main Drive       --"
-        echo "--------------------------------------"
+        echo "==========================================="
+        echo "[---]   Arch Install on Main Drive    [---]"
+        echo "==========================================="
         pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo micro
         genfstab -U /mnt >> /mnt/etc/fstab
 
