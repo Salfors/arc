@@ -162,6 +162,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         *)
                             clear ;;
                     esac
+                    break
 
                     
                 done
