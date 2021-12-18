@@ -42,7 +42,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo -e "\n[+]Choose The Disk To Install To !!![+]\n"
         count=`expr $count + 1`
         clean_screen
-        lsblk
+       
         else 
         break    
     fi
