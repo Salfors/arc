@@ -32,7 +32,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     while true
     do
     echo "-------------------------------------------------"
-    echo "______Select Your Disk To Installation___________"
+    echo -e"______Select Your Disk To Installation___________\n"
     echo -e "-------------------------------------------------\n"
     lsblk
     echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
