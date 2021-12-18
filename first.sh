@@ -83,13 +83,13 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     break
                                     ;;
                                 "")
-                                    echo -e "\n[-]Sorry, Choose One From Them !!! [-]\n"
+                                    echo -e "\n[-] Sorry, Choose One From Them !!! [-]\n"
                                     sleep 1
                                     count=`expr $count + 1`
                                     clean_screen
                                     ;;
                                 *)
-                                    echo -e "\n[+]Enter the tool name correctly!!! [+]\n"
+                                    echo -e "\n[-] Enter the tool name correctly!!! [-]\n"
                             esac
                         done
                         break              
