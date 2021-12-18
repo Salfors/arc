@@ -19,13 +19,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
     echo -e "\nInstalling prereqs...\n"
     pacman -S --noconfirm gptfdisk btrfs-progs
     clear
-    echo "-------------------------------------------------"
-    echo "-------Select Your Disk To Format----------------"
-    echo "-------------------------------------------------"
-    lsblk
+
     ### to make clean screen with limit trying 
     count=0
-    max=3
+    max=2
     function clean_screen() {
         if [ "$count" -eq "$max" ]; then
             clear
@@ -34,6 +31,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
     }
     while true
     do
+    echo "-------------------------------------------------"
+    echo "------Select Your Disk To Installation-----------"
+    echo "-------------------------------------------------"
+    lsblk
     echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
     read DISK
     if [ "$DISK" == "" ] 
