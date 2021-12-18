@@ -31,9 +31,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
     }
     while true
     do
-    echo -e "-------------------------------------------------\n"
-    echo -e "______Select Your Disk To Installation___________\n"
-    echo -e "-------------------------------------------------\n"
+   echo "
+        ======================================================
+        [---]     Select Your Disk To Installation       [---]
+        ======================================================
+
+        "
     lsblk
     echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
     read DISK
@@ -55,9 +58,12 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function EDIT_HARD() {
         while true
             do
-            echo -e "-------------------------------------------------"
-            echo -e "------------    Hard Disk Editor   --------------"
-            echo -e "-------------------------------------------------\n"
+            echo "
+            =====================================
+            [---]     Hard Disk Editor      [---]
+            =====================================
+
+            "
             echo -e ""
             read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
             case $ED in 
