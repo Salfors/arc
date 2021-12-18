@@ -26,128 +26,133 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                 while true
                     do
-                    echo -e "\n====================================="
-                    echo "[---]   Keyboard Layout Menu    [---]"
-                    echo -e "=====================================\n"
-                    read -p "The Default keyboard Layout (EN) Do You Want To Add Another Layout [Y/N]  : " AK #ASK KEY
-                    case $AK in 
+                    echo "[+] Note: that if you have run a script before [+]"
+                    echo "[+] make sure that the key layout at the top of the file is not repeated '/etc/locale.gen'[+]"
+                    echo -e "\nPress Enter to Contine"
+                    read CE #Confirm EDIT
+                    case $CE in 
+                        "")
+                            echo -e "\n====================================="
+                            echo "[---]   Keyboard Layout Menu    [---]"
+                            echo -e "=====================================\n"
+                            read -p "The Default keyboard Layout (EN) Do You Want To Add Another Layout [Y/N]  : " AK #ASK KEY
+                            case $AK in 
 
-                        y|Y|yes|Yes|YES)  
-                        clear
-                            while true
-                                do
-                                echo "[+] Note that if you have run a script before [+]"
-                                echo " make sure that the key layout at the top of the file is not repeated '/etc/locale.gen'"
-                                echo -e "\nPress Enter to Contine"
-                                echo -e "\n====================================="
-                                echo "[---]   Keyboard Layout Menu    [---]"
-                                echo -e "=====================================\n"
-                                echo "+[1] AR +"
-                                echo "+[2] RU +"
-                                echo "+[3] FR +"
-                                echo -e
-                                read -p "Choose a Number Or Enter ['A'] To show more Layouts : " KEY
-                                if [ "$KEY" == "1" ] ; then 
-                                    sed -i '/# lists of locales/a ar_AE.UTF-8 UTF-8' /etc/locale.gen
-                                    break
-                                    elif [ "$KEY" == "2" ] 
-                                    then
-                                    sed -i '/# lists of locales/a ru_RU.UTF-8 UTF-8' /etc/locale.gen
-                                    break
-                                    elif  [ "$KEY" == "3" ]
-                                    then 
-                                    sed -i '/# lists of locales/a fr_FR.UTF-8 UTF-8' /etc/locale.gen
-                                    break
-                                    elif [ "$KEY" == "A" ] || [ "$KEY" == "a" ]; then
-                                        clear
-                                        while true
-                                            do 
-                                            echo -e  ""
-                                            echo -e "Now Choose Your Editor And Remove '#' From Your Layout And Save File And Exit\n"
-                                            #EDIT KEY
-                                            echo -e ""
-                                            echo "[-] nano"
-                                            echo "[-] vi"
-                                            echo "[-] vim"
-                                            echo "[-] micro"
-                                            echo -e""
-                                            read -p "your choice : " EK #EDIT KEY
-                                            case $EK in 
-                                                "nano"|"vi"|"vim"|"micro")
-                                                    clear
-                                                    echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
-                                                    echo -e "\nPress Enter to Contine"
-                                                    read Confirm
-                                                    case $Confirm in 
+                                y|Y|yes|Yes|YES)  
+                                clear
+                                    while true
+                                        do
+                                        echo -e "\n====================================="
+                                        echo "[---]   Keyboard Layout Menu    [---]"
+                                        echo -e "=====================================\n"
+                                        echo "+[1] AR +"
+                                        echo "+[2] RU +"
+                                        echo "+[3] FR +"
+                                        echo -e
+                                        read -p "Choose a Number Or Enter ['A'] To show more Layouts : " KEY
+                                        if [ "$KEY" == "1" ] ; then 
+                                            sed -i '/# lists of locales/a ar_AE.UTF-8 UTF-8' /etc/locale.gen
+                                            break
+                                            elif [ "$KEY" == "2" ] 
+                                            then
+                                            sed -i '/# lists of locales/a ru_RU.UTF-8 UTF-8' /etc/locale.gen
+                                            break
+                                            elif  [ "$KEY" == "3" ]
+                                            then 
+                                            sed -i '/# lists of locales/a fr_FR.UTF-8 UTF-8' /etc/locale.gen
+                                            break
+                                            elif [ "$KEY" == "A" ] || [ "$KEY" == "a" ]; then
+                                                clear
+                                                while true
+                                                    do 
+                                                    echo -e  ""
+                                                    echo -e "Now Choose Your Editor And Remove '#' From Your Layout And Save File And Exit\n"
+                                                    #EDIT KEY
+                                                    echo -e ""
+                                                    echo "[-] nano"
+                                                    echo "[-] vi"
+                                                    echo "[-] vim"
+                                                    echo "[-] micro"
+                                                    echo -e""
+                                                    read -p "your choice : " EK #EDIT KEY
+                                                    case $EK in 
+                                                        "nano"|"vi"|"vim"|"micro")
+                                                            clear
+                                                            echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
+                                                            echo -e "\nPress Enter to Contine"
+                                                            read Confirm
+                                                            case $Confirm in 
+                                                                "")
+                                                                    
+                                                                    $EK /etc/locale.gen 
+                                                                    while true
+                                                                        do
+                                                                        clear
+                                                                        echo -e "\n"
+                                                                        read -p "Please Confirm Changes [y/n] : " CONF #CONF
+                                                                        case $CONF in 
+                                                                            y|Y|yes|Yes|YES)
+                                                                                break ;;
+                                                                            n|N|no|No|NO)
+                                                                                sleep 3
+                                                                                clear 
+                                                                                break;;
+                                                                            *)
+                                                                                echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
+                                                                                count=`expr $count + 1` 
+                                                                                sleep 1 
+                                                                                clean_screen  ;;
+                                                                        esac
+                                                                    done ;;
+                                                                *)
+                                                                    clear ;;
+                                                            esac
+                                                            break
+                                                            ;;
                                                         "")
-                                                            
-                                                            $EK /etc/locale.gen 
-                                                            while true
-                                                                do
-                                                                clear
-                                                                echo -e "\n"
-                                                                read -p "Please Confirm Changes [y/n] : " CONF #CONF
-                                                                case $CONF in 
-                                                                    y|Y|yes|Yes|YES)
-                                                                        break ;;
-                                                                    n|N|no|No|NO)
-                                                                        sleep 3
-                                                                        clear 
-                                                                        break;;
-                                                                    *)
-                                                                        echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
-                                                                        count=`expr $count + 1` 
-                                                                        sleep 1 
-                                                                        clean_screen  ;;
-                                                                esac
-                                                            done ;;
+                                                            echo -e "\n[-] Type one of them [-]\n" 
+                                                            count=`expr $count + 1`
+                                                            clean_screen ;;
+
                                                         *)
-                                                            clear ;;
+                                                            echo -e "\n[-] Enter Valid Value !![-]\n" 
+                                                            count=`expr $count + 1`
+                                                            clean_screen ;;
                                                     esac
-                                                    break
-                                                    ;;
-                                                "")
-                                                    echo -e "\n[-] Type one of them [-]\n" 
-                                                    count=`expr $count + 1`
-                                                    clean_screen ;;
+                                                            
 
-                                                *)
-                                                    echo -e "\n[-] Enter Valid Value !![-]\n" 
-                                                    count=`expr $count + 1`
-                                                    clean_screen ;;
-                                            esac
-                                                    
+                                                                        
+                                                done
+                                                break
+                                            else
+                                            sleep 1
+                                            echo -e "\n[+] Choose Any one of options !!! [+]\n"
+                                            count=`expr $count + 1`
+                                            clean_screen
+                                        fi
+                                
+                                    #clear
+                                    done
+                                    break
+                                    ;; 
 
-                                                                 
-                                        done
-                                        break
-                                    else
+                                n|N|no|No|NO) 
+                                    
+                                    break ;;
+                                *)  
                                     sleep 1
-                                    echo -e "\n[+] Choose Any one of options !!! [+]\n"
+                                    echo -e ""
+                                    echo "[-]Enter Yes or No !!! [-] "
+                                    echo -e ""
                                     count=`expr $count + 1`
                                     clean_screen
-                                fi
-                           
-                            #clear
-                            done
-                            break
-                            ;; 
+                                    ;;
 
-                        n|N|no|No|NO) 
-                            
-                            break ;;
-                        *)  
-                            sleep 1
-                            echo -e ""
-                            echo "[-]Enter Yes or No !!! [-] "
-                            echo -e ""
-                            count=`expr $count + 1`
-                            clean_screen
-                            ;;
-
+                            esac
+                            echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen ;;
+                        *)
+                            clear ;;
                     esac
-                    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-
                     
                 done
             }
