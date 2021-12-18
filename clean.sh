@@ -74,7 +74,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                     clear
                                                     echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
                                                     echo -e "press enter to contine"
-                                                    Confirm
+                                                    read Confirm
                                                     case $Confirm in 
                                                         "")
                                                             
