@@ -26,7 +26,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function clean_screen() {
         if [ "$count" -eq "$max" ]; then
             clear
-            count=`expr $count - 3`
+            count=`expr $count - 2`
             fi
     }
     while true
