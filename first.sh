@@ -63,7 +63,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             echo "[---]     Hard Disk Editor      [---]"
             echo -e "=====================================\n"
             echo -e ""
-            read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
+            read -p "Do You Want To Modify a Hard Disk [Y/N] ? : " ED #EDIT DISK
             case $ED in 
                 y|Y|yes|Yes|YES)
                         clear
@@ -101,7 +101,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     break
                     ;;
                 *)
-                    echo -e "\n[+]ENTER 'YES' or 'NO' !!! [+]\n"
+                    echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
                     count=`expr $count + 1` 
                     sleep 1 
                     clean_screen 
@@ -198,7 +198,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                 break
                                                 ;;
                                             *)
-                                                echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
+                                                echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
                                                 count=`expr $count + 1`
                                                 sleep 1
                                                 clean_screen
@@ -298,7 +298,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     break ;;
 
                 *)
-                    echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
+                    echo -e "\n[-] ENTER 'yes' or 'no' !!![-]\n"
                     count=`expr $count + 1`
                     clean_screen
                     ;;
@@ -377,7 +377,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         break
                         ;;
                         *) 
-                            echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
+                            echo -e "\n[-] ENTER 'Yes' or 'No' !!![-]\n"
                             count=`expr $count + 1`
                             clean_screen
                             ;;
@@ -423,7 +423,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     break
                     ;;
                 *) 
-                    echo -e "\n[+]Enter yes or no (y/n)[+]"
+                    echo -e "\n[-] Enter yes or no (y/n) [-]"
                     count=`expr $count + 1`
                     clean_screen
                     ;;
@@ -490,7 +490,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo "[+]If it is not correct, try restarting the script and try again[+]."
                                     break
                             else 
-                                    echo -e "\n[+]Enter Just The Number Without GB or Valid Value !![+]\n"
+                                    echo -e "\n[-] Enter Just The Number Without GB or Valid Value !![-]\n"
                                     count=`expr $count + 1`
                             fi
                             clean_screen
@@ -498,7 +498,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         break
                         ;;
                 *)
-                        echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
+                        echo -e "\n[-] ENTER 'yes' or 'no' !!![-]\n"
                         count=`expr $count + 1`
                         ;;
             esac
