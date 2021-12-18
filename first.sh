@@ -55,7 +55,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 y|Y|yes|Yes|YES)
                     break ;;
                 n|N|no|No|NO)
-                    sleep 3 ;;
+                    sleep 3
+                    clear ;;
                 *)
                     echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
                     count=`expr $count + 1` 
