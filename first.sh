@@ -158,7 +158,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             ;;
 
                         *)
-                            echo "ENTER '1' Or '2' "
+                            echo -e "\n[-] ENTER One '1' Or Two '2' !!![-]\n"
                             count=`expr $count + 1`
                             sleep 1
                             clean_screen
