@@ -56,7 +56,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         while true
             do
             echo -e "-------------------------------------------------\n"
-            echo -e "____________    Hard Disk Editor  ______________\n"
+            echo -e "____________    Hard Disk Editor   ______________\n"
             echo -e "-------------------------------------------------\n"
             echo -e ""
             read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
