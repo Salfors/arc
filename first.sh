@@ -274,26 +274,26 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         read -p  "Enter Number : " Mode
                         case $Mode in 
                             "1")
-                                    Mode="BIOS"
-                                    echo ""
-                                    echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
-                                    echo "[+]If it is not correct, try restarting the script and try again[+]."
-                                    break ;;
+                                 Mode="BIOS"
+                                echo ""
+                                echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
+                                echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                break ;;
                             "2")
-                                    Mode="UEFI"
-                                    echo ""
-                                    echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
-                                    echo "[+]If it is not correct, try restarting the script and try again[+]."
-                                    break
+                                Mode="UEFI"
+                                echo ""
+                                echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
+                                echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                break
                                     #sleep 4;;
 
                             *)
-                                    echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
-                                    count=`expr $count + 1`
-                                    clean_screen ;;
+                                echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
+                                count=`expr $count + 1`
+                                clean_screen ;;
                         esac
-                        break
-                        ;;
+                        #break
+                    
                             
                                 
                     done
