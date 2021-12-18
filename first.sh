@@ -293,6 +293,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     clean_screen ;;
                         esac
                         break
+                        ;;
                             
                                 
                     done
