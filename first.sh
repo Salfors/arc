@@ -285,7 +285,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
                                     echo "[+]If it is not correct, try restarting the script and try again[+]."
                                     break
-                                    sleep 4;;
+                                    #sleep 4;;
 
                             *)
                                     echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
