@@ -204,16 +204,75 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
     #-----Select live boot type------#
 
-    while true
-    do
-    N1=1
-    N2=2
-    echo "-------------------------------------------------"
-    echo "----------Select Your Boot Type -----------------"
-    echo "-------------------------------------------------"
-    echo -e "\n+[1] Bios Mode" # BIOS
-    echo -e  "+[2] UFI Mode\n" # UFI
-    read -p  "Enter Number : " Mode
+    function MODE() {
+
+        Mode=`ls /sys/firmware/efi`
+        if $Mode >/dev/null 2>&1; then
+                Mode="BIOS"
+                    
+        else
+                Mode="UEFI"
+        fi
+    }
+    MODE
+
+    function CHECK_MODE() {
+        while true
+            do 
+            echo -e "\nTHE CURRENT BOOT MODE IS ${Mode} ?\n"
+            read -p "Please confirm [y/n] : " AM #ask MODE
+            case $AM in 
+                y|Y|yes|Yes|YES)
+                    break
+                    ;;
+
+                n|N|no|No|NO)
+                    clear
+                    while true
+                        do 
+                                
+                        echo "-------------------------------------------------"
+                        echo "----------Select Your Boot Type -----------------"
+                        echo "-------------------------------------------------"
+                        echo -e "\n+[1] Bios Mode" # BIOS
+                        echo -e  "+[2] UFI Mode\n" # UFI
+                        read -p  "Enter Number : " Mode
+                        case $Mode in 
+                            "1")
+                                    Mode="BIOS"
+                                    echo ""
+                                    echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
+                                    echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                    break ;;
+                            "2")
+                                    Mode="UEFI"
+                                    echo ""
+                                    echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
+                                    echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                    break ;;
+
+                            *)
+                                    echo "enter just one or two "
+                                    count=`expr $count + 1`
+                                    clean_screen ;;
+                        esac
+                            
+                                
+                    done
+                    break
+                    ;;
+                "")
+                    break ;;
+
+                *)
+                    echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
+                    count=`expr $count + 1`
+                    ;;
+            esac
+            clean_screen 
+        done
+    }
+    CHECK_MODE
         
     function Determine_size() {
 
@@ -411,7 +470,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             +${logic}GB
             w
             "| fdisk ${DISK}
-            if [ "$Mode" == "$N2" ]; then
+            if [ "$Mode" == "UEFI" ]; then
                     #___ efi part
                 echo "n
                 l
@@ -683,6 +742,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
         chmod a+x /mnt/step2.sh
         echo "$DISK" > /mnt/ID
         echo "$Mode" > /mnt/GrubID
+        pwd=`pwd`
+        sed -i 's/ROOT=.*/ROOT='${ROOT}'/' ${pwd}/help.sh
+        sed -i 's/SWAP=.*/SWAP='${SWAP}'/' ${pwd}/help.sh
+        chmod a+x help.sh
         clear
         echo "-------------------------------------------------------------"
         echo "--    You Should Run Step 2 After It Be Ready (./step2)  --"
@@ -725,7 +788,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
     ################################################################################################################## 
 
-    if [ "$Mode" == "$N1" ]  ######### IF IS BIOS MODE #######
+    if [ "$Mode" == "BIOS" ]  ######### IF IS BIOS MODE #######
         then       
         clear
         Determine_size
@@ -746,10 +809,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         fi
 
         ##_______________________________SELECT CONVERT TO __________________#
-        echo "${ROOT}"
-        echo "${HOME}"
-        echo "${SWAP}"
-        sleep 8
+        sleep 1
 
         CONVERT
 
