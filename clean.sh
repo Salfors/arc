@@ -104,7 +104,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                         break
                                     else
                                     sleep 1
-                                    echo -e "\n[+]Choose Any One f options !!! [+]\n"
+                                    echo -e "\n[+]Choose Any one of options !!! [+]\n"
                                     count=`expr $count + 1`
                                     clean_screen
                                 fi
