@@ -7,8 +7,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
     case $root in
 
         "root")
-            
-            echo -e "\nInstalling packages (for next steps)...\n"
+            echo  -e "\n---------------------------------------"
+            echo  "Installing packages (for next steps)..."
+            echo  -e "---------------------------------------\n"
             pacman -S --noconfirm git micro nano vi vim 
             ### to make clean screen with limit trying 
             count=0
