@@ -250,7 +250,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function CHECK_MODE() {
         while true
             do 
-            echo -e "\n[+]THE CURRENT BOOT MODE IS {${Mode}} ?[+]\n"
+            echo -e "\n[+]THE CURRENT BOOT MODE IS { '${Mode}' } ?[+]\n"
             read -p "Please confirm [y/n] : " AM #ask MODE
             case $AM in 
                 y|Y|yes|Yes|YES)
