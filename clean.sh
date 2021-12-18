@@ -72,7 +72,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             case $EK in 
                                                 "nano"|"vi"|"vim"|"micro")
                                                     $EK /etc/locale.gen 
-                                                    echo -e ""
+                                                    echo -e "\n"
+                                                    clear
                                                     read -p "Please Confirm Changes [y/n] : " CONF #CONF
                                                     case $CONF in 
                                                         y|Y|yes|Yes|YES)
