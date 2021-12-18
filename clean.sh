@@ -43,7 +43,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 echo "+[2] RU +"
                                 echo "+[3] FR +"
                                 echo -e
-                                read -p "Choose your keyboard layout : " KEY
+                                read -p "Choose a Number Or Enter ['A'] To show more options" KEY
                                 if [ "$KEY" == "1" ] ; then 
                                     echo "ar_AE.UTF-8 UTF-8" >> /etc/locale.gen
                                     break
@@ -55,20 +55,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     then 
                                     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
                                     break
-                                    else
-                                    sleep 1
-                                    echo -e "\n[+]Choose Any Number Or Set The Default !!! [+]\n"
-                                    count=`expr $count + 1`
-                                    clean_screen
-                                fi
-                            done
-                            clear
-                            while true
-                                do 
-                                echo -e ""
-                                read -p "Did you find your keyboard layout (Y/N)? : " AD 
-                                case $AD in  
-                                    n|N|no|No|NO)
+                                    elif [ "$KEY" == "A"] || [ "$KEY" == "a"]; then
                                         clear
                                         while true
                                             do 
@@ -85,25 +72,39 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             case $EK in 
                                                 "nano"|"vi"|"vim"|"micro")
                                                     $EK /etc/locale.gen 
-                                                    break 
+                                                    #break 
                                                     ;;
                                                 *)
                                                     echo "[-]Type one of them[-]" 
                                                     count=`expr $count + 1`
                                                     clean_screen ;;
-                                            esac 
+                                            esac
+                                                    
+                                            echo -e ""
+                                            read -p "Please confirm [y/n] : " CONF #CONF
+                                            case $CONF in 
+                                                y|Y|yes|Yes|YES)
+                                                    break ;;
+                                                n|N|no|No|NO)
+                                                    sleep 3
+                                                    clear ;;
+                                                *)
+                                                    echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
+                                                    count=`expr $count + 1` 
+                                                    sleep 1 
+                                                    clean_screen  ;;
+                                            esac
+                                                                 
                                         done
                                         break
-                                        ;;
-                                        
-                                    y|Y|yes|Yes|YES)
-                                        echo "break"
-                                        break ;;
-                                    *)  
-                                        echo "[-]Enter Yes or No !!! [-]" 
-                                        count=`expr $count + 1`
-                                        clean_screen ;;
-                                esac
+                                    else
+                                    sleep 1
+                                    echo -e "\n[+]Choose Any Number Or Set The Default !!! [+]\n"
+                                    count=`expr $count + 1`
+                                    clean_screen
+                                fi
+                            done
+                            #clear
                             done
                             break
                             ;; 
