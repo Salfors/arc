@@ -40,6 +40,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     if [ "$DISK" == "" ] 
         then
         echo -e "\n[+]Choose The Disk To Install To !!![+]\n"
+        sleep 0.8
         count=`expr $count + 1`
         clean_screen
        
