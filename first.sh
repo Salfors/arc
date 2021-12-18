@@ -293,6 +293,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     break
                     ;;
                 "")
+                    echo "[+] Default Choose {'${Mode}'} [+]"
+                    sleep 2
                     break ;;
 
                 *)
