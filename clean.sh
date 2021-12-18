@@ -66,7 +66,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             echo "[-] nano"
                                             echo "[-] vi"
                                             echo "[-] vim"
-                                            echo "[-] micor"
+                                            echo "[-] micro"
                                             echo -e""
                                             read -p "your choice : " EK #EDIT KEY
                                             case $EK in 
