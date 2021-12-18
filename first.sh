@@ -83,7 +83,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     ;;
                                 *)
                                     echo -e "\n[+]Sorry, Choose One From Them !!! [+]\n"
+                                    sleep 1
                                     count=`expr $count + 1`
+                                    clean_screen
                                     ;;
                             esac
                         done
