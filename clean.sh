@@ -21,7 +21,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     count=`expr $count - 3`
                     fi
             }
-
+            clear
             function Keyboard() {
 
                 while true
