@@ -232,8 +232,11 @@ if [ "${os}" != '"Arch Linux"' ]; then
     #-----Select live boot type------#
 
     function MODE() {
-
+        echo -e "\n================================"
+        echo "[---]    live boot type    [---]"
+        echo -e "================================\n"
         Mode=`ls /sys/firmware/efi`
+        clear
         if $Mode >/dev/null 2>&1; then
                 Mode="BIOS"
                     
@@ -246,7 +249,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function CHECK_MODE() {
         while true
             do 
-            echo -e "\nTHE CURRENT BOOT MODE IS ${Mode} ?\n"
+            echo -e "\nTHE CURRENT BOOT MODE IS [${Mode}] ?\n"
             read -p "Please confirm [y/n] : " AM #ask MODE
             case $AM in 
                 y|Y|yes|Yes|YES)
