@@ -291,7 +291,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     count=`expr $count + 1`
                                     clean_screen ;;
                         esac
-                        break
+                        #break
                             
                                 
                     done
