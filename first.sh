@@ -49,16 +49,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
     fi
     done
     ##### to choos Disk option free space or all or gpt or msdos
-    echo "-----------------------------"
-    echo -e "\n----     EDIT Disk        ---\n"
-    echo "-----------------------------"
 
 
+    clear
     function EDIT_HARD() {
         while true
             do
             echo -e "-------------------------------------------------\n"
-            echo -e "______Select Your Disk To Installation___________\n"
+            echo -e "______         Hard Disk Editor       ___________\n"
             echo -e "-------------------------------------------------\n"
             echo -e ""
             read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
