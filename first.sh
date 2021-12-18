@@ -49,8 +49,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         clean_screen
        
         else
-        while true
-            do
+            echo -e ""
             read -p "Please confirm [y/n] : " CONF #CONF
             case $CONF in 
                 y|Y|yes|Yes|YES)
@@ -63,7 +62,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     sleep 1 
                     clean_screen  ;;
             esac
-        done
+       
         #break    
     fi
     done
