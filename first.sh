@@ -100,7 +100,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     ;;
                 *)
                     echo -e "\n[+]ENTER 'YES' or 'NO' !!! [+]\n"
-                    count=`expr $count + 1`   
+                    count=`expr $count + 1`  
+                    clean_screen 
                     ;;                      
             esac
             clean_screen
@@ -126,22 +127,26 @@ if [ "${os}" != '"Arch Linux"' ]; then
             
                     clear
                     sgdisk -Z ${DISK} # zap all on disk
+                    clear
                     while true 
                         do
                         
-                        echo -e "" ################ disk table new write here on box
+                         ################ disk table new write here on box
+                        echo -e "\n============================================"
+                        echo "[---]  Hard disk partition table type  [---]"
+                        echo -e "============================================\n"
                         echo "[1] GPT"
                         echo "[2] MSDOS"
                         echo -e ""
                         read -p "Do you want a 'GPT' or 'MSDOS' table for your hard disk : " table 
                         case $table in 
-                        1)
+                        "1")
                             clear
                             sgdisk -a 2048 -o ${DISK} 
                             break
                             ;;
 
-                        2)
+                        "2")
                             clear
                             echo "o
                             w
@@ -152,6 +157,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         *)
                             echo "ENTER '1' Or '2' "
                             count=`expr $count + 1`
+                            clean_screen
                             ;;
                         esac
                         clean_screen
@@ -166,7 +172,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             "unknown")
                                     while true
                                         do
-                                        echo -e ""
+                                        echo -e "\n============================================"
+                                        echo "[---]  Hard disk partition table type  [---]"
+                                        echo -e "============================================\n"
                                         echo "You don't have any hard disk table, Choose one"
                                         echo -e ""
                                         echo "[1] MSDOS"
@@ -188,6 +196,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             *)
                                                 echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
                                                 count=`expr $count + 1`
+                                                clean_screen
                                                 ;;
                                         esac
                                         clean_screen
@@ -203,7 +212,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     available_table
                     break 
                 else
-                echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
+                echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
                 count=`expr $count + 1`
                 clean_screen
                 fi
