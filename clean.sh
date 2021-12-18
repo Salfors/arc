@@ -74,8 +74,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                     $EK /etc/locale.gen 
                                                     while true
                                                         do
-                                                        echo -e "\n"
                                                         clear
+                                                        echo -e "\n"
                                                         read -p "Please Confirm Changes [y/n] : " CONF #CONF
                                                         case $CONF in 
                                                             y|Y|yes|Yes|YES)
