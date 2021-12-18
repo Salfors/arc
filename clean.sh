@@ -60,7 +60,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                         while true
                                             do 
                                             echo -e  ""
-                                            echo -e "Now Choose Your Editor And Remove '#' From Your Layout And Save File And Exit"
+                                            echo -e "Now Choose Your Editor And Remove '#' From Your Layout And Save File And Exit\n"
                                             #EDIT KEY
                                             echo -e ""
                                             echo "[-] nano"
@@ -88,7 +88,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                     esac
                                                     ;;
                                                 *)
-                                                    echo "[-]Type one of them[-]" 
+                                                    echo -e"\n[-]Type one of them[-]\n" 
                                                     count=`expr $count + 1`
                                                     clean_screen ;;
                                             esac
