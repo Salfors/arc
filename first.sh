@@ -277,17 +277,15 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
                                 echo "[+]If it is not correct, try restarting the script and try again[+]."
                                 ;;
-                                #break ;;
                             "2")
                                 Mode="UEFI"
                                 echo ""
                                 echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
                                 echo "[+]If it is not correct, try restarting the script and try again[+]."
-                                #break 
                                 sleep 4 ;;
 
                             *)
-                                echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
+                                echo -e "\n[-] Choose Number One '1' or Two '2' [-]\n"
                                 count=`expr $count + 1`
                                 clean_screen ;;
                         esac
@@ -304,7 +302,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     break ;;
 
                 *)
-                    echo -e "\n[-] ENTER 'yes' or 'no' !!![-]\n"
+                    echo -e "\n[-] ENTER 'Yes' or 'No' !!![-]\n"
                     count=`expr $count + 1`
                     clean_screen
                     ;;
@@ -361,7 +359,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         echo "[---]  Determine The Size of The Home Partition  [---]"
                         echo -e "======================================================\n"
   
-                        read -p "Enter your /home partition size please : " Homep #Home Part
+                        read -p "Enter Your Home Partition Size Please : " Homep #Home Part
                         if [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; then
                                 break
                         elif [ -z "${Homep##*[!0-9]*}" ]; then
@@ -408,7 +406,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         echo -e "\n======================================================"
                         echo "[---]  Determine The Size of the Swap Partition  [---]"
                         echo -e "======================================================\n"
-                        read -p "Enter your Swap partition size please : " Swap
+                        read -p "Enter Your Swap Partition Size Please : " Swap
                         if [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; then
                                 break
                         elif [ -z "${Swap##*[!0-9]*}" ]; then
