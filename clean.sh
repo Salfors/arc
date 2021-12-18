@@ -43,7 +43,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 echo "+[2] RU +"
                                 echo "+[3] FR +"
                                 echo -e
-                                read -p "Choose a Number Or Enter ['A'] To show more options : " KEY
+                                read -p "Choose a Number Or Enter ['A'] To show more Layouts : " KEY
                                 if [ "$KEY" == "1" ] ; then 
                                     sed -i '/# lists of locales/a ar_AE.UTF-8 UTF-8' /etc/locale.gen
                                     break
@@ -73,27 +73,34 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                 "nano"|"vi"|"vim"|"micro")
                                                     clear
                                                     echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
-                                                    sleep 10
-                                                    $EK /etc/locale.gen 
-                                                    while true
-                                                        do
-                                                        clear
-                                                        echo -e "\n"
-                                                        read -p "Please Confirm Changes [y/n] : " CONF #CONF
-                                                        case $CONF in 
-                                                            y|Y|yes|Yes|YES)
-                                                                break ;;
-                                                            n|N|no|No|NO)
-                                                                sleep 3
-                                                                clear 
-                                                                break;;
-                                                            *)
-                                                                echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
-                                                                count=`expr $count + 1` 
-                                                                sleep 1 
-                                                                clean_screen  ;;
-                                                        esac
-                                                    done
+                                                    echo -e "press enter to contine"
+                                                    Confirm
+                                                    case in Confirm in 
+                                                        "")
+                                                            d
+                                                            $EK /etc/locale.gen 
+                                                            while true
+                                                                do
+                                                                clear
+                                                                echo -e "\n"
+                                                                read -p "Please Confirm Changes [y/n] : " CONF #CONF
+                                                                case $CONF in 
+                                                                    y|Y|yes|Yes|YES)
+                                                                        break ;;
+                                                                    n|N|no|No|NO)
+                                                                        sleep 3
+                                                                        clear 
+                                                                        break;;
+                                                                    *)
+                                                                        echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
+                                                                        count=`expr $count + 1` 
+                                                                        sleep 1 
+                                                                        clean_screen  ;;
+                                                                esac
+                                                            done ;;
+                                                        *)
+                                                            clear ;;
+                                                    esac
                                                     break
                                                     ;;
                                                 "")
