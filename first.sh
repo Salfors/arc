@@ -48,8 +48,23 @@ if [ "${os}" != '"Arch Linux"' ]; then
         sleep 1
         clean_screen
        
-        else 
-        break    
+        else
+        while true
+            do
+            read -p "Please confirm [y/n] : " CONF #CONF
+            case $CONF in 
+                y|Y|yes|Yes|YES)
+                    break ;;
+                n|N|no|No|NO)
+                    sleep 3 ;;
+                *)
+                    echo -e "\n[+] ENTER 'Yes' or 'No' !!! [+]\n"
+                    count=`expr $count + 1` 
+                    sleep 1 
+                    clean_screen  ;;
+            esac
+        done
+        #break    
     fi
     done
     ##### to choos Disk option free space or all or gpt or msdos
