@@ -33,7 +33,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     do
     echo "-------------------------------------------------"
     echo "------Select Your Disk To Installation-----------"
-    echo "-------------------------------------------------"
+    echo -e "-------------------------------------------------\n"
     lsblk
     echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
     read DISK
