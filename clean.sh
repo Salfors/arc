@@ -55,7 +55,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     then 
                                     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
                                     break
-                                    elif [ "$KEY" == "A"] || [ "$KEY" == "a"]; then
+                                    elif [ "$KEY" == "A" ] || [ "$KEY" == "a" ]; then
                                         clear
                                         while true
                                             do 
