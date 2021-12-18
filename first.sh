@@ -250,7 +250,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function CHECK_MODE() {
         while true
             do 
-            echo -e "\n[+]THE CURRENT BOOT MODE IS { '${Mode}' } ?[+]\n"
+            echo -e "\n[+]THE CURRENT BOOT MODE IS {'${Mode}'} ?[+]\n"
             read -p "Please confirm [y/n] : " AM #ask MODE
             case $AM in 
                 y|Y|yes|Yes|YES)
@@ -310,23 +310,26 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
 
         #_____Determine the size of the root partition____#
-        echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step\n "
+
         while true
             do
-            echo -e ""
+            echo -e "\n======================================================"
+            echo "[---]  Determine the size of the Home partition  [---]"
+            echo -e "======================================================\n"
+            echo -e "\nNote:Enter Just The Number And Without GB or MB on Next steps"
             read -p "Please Enter Size For Root Partition : " RooP #Root Part
             if [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; then 
                     echo "${RooP}"
                     break
             elif [ -z "${RooP##*[!0-9]*}" ]; then
-                    echo -e "\n[+]enter just the number and  with out GB or MB[+]"
+                    echo -e "\n[-] Enter Just The Number And Without GB or MB. [-]"
                     count=`expr $count + 1`
             else
-                    echo -e "\n[+]You Must Enter Root Partition Size !!![+]\n"
+                    echo -e "\n[-] You Must Enter Root Partition Size !!![-]\n"
                     count=`expr $count + 1`
             fi
             clean_screen
-            echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step"
+            #echo -e "\nNote: Enter Values in 'MB' or 'GB' on Next step"
                 
         done
         clear
@@ -334,28 +337,34 @@ if [ "${os}" != '"Arch Linux"' ]; then
         #____Determine the size of the home partition___#
         while true
             do
-            echo -e 
-            read  -p "Please do you want create home part or not (y/n) : " AN #ANSWER
+            echo -e "\n=========================================="
+            echo "[---]  Select Create Home Partition  [---]"
+            echo -e "==========================================\n"
+            read  -p "Please do you want create home part or not [y/n] : " AN #ANSWER
             case $AN in 
                 y|Y|YES|Yes|yes)
 
                     clear
                     echo -e 
-                    echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n "
+                    #echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n "
                     while true
                         do
+                        echo -e "\n======================================================"
+                        echo "[---]  Determine The Size of The Home Partition  [---]"
+                        echo -e "======================================================\n"
+  
                         read -p "Enter your /home partition size please : " Homep #Home Part
                         if [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; then
                                 break
                         elif [ -z "${Homep##*[!0-9]*}" ]; then
-                                echo -e "\n[+]enter just the number without GB or MB[+]\n"
+                                echo -e "\n[-] Enter Just The Number And Without GB or MB. [-]"
                                 count=`expr $count + 1`
                         else 
-                                echo "enter vailde value !!"
+                                echo "\n[-] Enter Valid Value !![-]\n"
                                 count=`expr $count + 1`
                         fi
                         clean_screen
-                        echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
+                        #echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n"
                                 
                     done
                     echo -e 
@@ -366,7 +375,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         break
                         ;;
                         *) 
-                            echo -e "\n[+]Enter yes or no (y/n)[+]"
+                            echo -e "\n[+]ENTER 'yes' or 'no' !!![+]\n"
                             count=`expr $count + 1`
                             clean_screen
                             ;;
@@ -377,23 +386,28 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
         while true
             do
-            echo -e 
-            read  -p "Please do you want create swap part or not (y/n) : " AN2 #ANSWER2
+            echo -e "\n=========================================="
+            echo "[---]  Select Create swap Partition  [---]"
+            echo -e "==========================================\n"
+            read  -p "Please Do You Want Create Swap Part Or Not [y/n] : " AN2 #ANSWER2
             case $AN2 in 
                 y|Y|YES|Yes|yes)
                     clear
                     echo -e 
-                    echo -e "Note: Enter Values in 'MB' or 'GB' on Next step\n "
+
                     while true
                         do
+                        echo -e "\n======================================================"
+                        echo "[---]  Determine The Size of the Swap Partition  [---]"
+                        echo -e "======================================================\n"
                         read -p "Enter your Swap partition size please : " Swap
                         if [ -z "${Swap//[0-9]/}" -a ! -z "$Swap" ]; then
                                 break
                         elif [ -z "${Swap##*[!0-9]*}" ]; then
-                                echo -e "\n[+]enter just the number without GB or MB[+]\n"
+                                echo -e "\n[-] Enter Just The Number And Without GB or MB. [-]"
                                 count=`expr $count + 1`
                         else 
-                                echo "enter vailde value !!"
+                                echo "\n[-] Enter Valid Value !![-]\n"
                                 count=`expr $count + 1`
                         fi
                         clean_screen
@@ -448,6 +462,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
         function check_logic() {
         while true
             do 
+            echo -e "\n========================================"
+            echo "[---]  Total Size For Installation  [---]"
+            echo -e "========================================\n"
             echo -e "\nIs This The Total Volume For The Operation ${logic}GB ?\n"
             read -p "Enter 'Yes' To Continue or 'No' To Edit Size : " AL #ask logic
             case $AL in 
@@ -456,11 +473,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         ;;
 
                 n|N|no|No|NO)
-
+                        clear
                         while true
                             do 
-                            clear
-                            echo -e "on next step GB is default\n"
+                            #clear
+                            echo -e "\n================================"
+                            echo "[---]     Overall Size     [---]"
+                            echo -e "================================\n"
+                            echo -e "On Next Step GB Is Default\n"
                             read -p "Enter The Size With (number only): " logic
                             if [ -z "${logic//[0-9]/}" -a ! -z "$logic" ]; then
                                     clear
