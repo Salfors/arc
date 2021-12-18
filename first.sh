@@ -45,6 +45,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
         echo -e "\n[-] Choose The Disk To Install To !!![-]\n"
         sleep 1
         count=`expr $count + 1`
+        sleep 1
         clean_screen
        
         else 
@@ -86,6 +87,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo -e "\n[-] Sorry, Choose One From Them !!! [-]\n"
                                     sleep 1
                                     count=`expr $count + 1`
+                                    sleep 1
                                     clean_screen
                                     ;;
                                 *)
@@ -100,7 +102,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     ;;
                 *)
                     echo -e "\n[+]ENTER 'YES' or 'NO' !!! [+]\n"
-                    count=`expr $count + 1`  
+                    count=`expr $count + 1` 
+                    sleep 1 
                     clean_screen 
                     ;;                      
             esac
@@ -157,6 +160,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         *)
                             echo "ENTER '1' Or '2' "
                             count=`expr $count + 1`
+                            sleep 1
                             clean_screen
                             ;;
                         esac
@@ -196,6 +200,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                             *)
                                                 echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
                                                 count=`expr $count + 1`
+                                                sleep 1
                                                 clean_screen
                                                 ;;
                                         esac
@@ -214,6 +219,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 else
                 echo -e "\n[-] Choose Number 'One' or 'Two' [-]\n"
                 count=`expr $count + 1`
+                sleep 1
                 clean_screen
                 fi
                 
