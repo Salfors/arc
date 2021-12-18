@@ -55,8 +55,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
     function EDIT_HARD() {
         while true
             do
-            echo -e "-------------------------------------------------\n"
-            echo -e "____________    Hard Disk Editor   ______________\n"
+            echo -e "-------------------------------------------------"
+            echo -e "____________    Hard Disk Editor   ______________"
             echo -e "-------------------------------------------------\n"
             echo -e ""
             read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
