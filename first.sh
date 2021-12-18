@@ -203,7 +203,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     available_table
                     break 
                 else
-                echo  "\n[+]Choose Number 'One' or 'Two' [+]\n"
+                echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
                 count=`expr $count + 1`
                 clean_screen
                 fi
