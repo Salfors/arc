@@ -10,6 +10,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             echo  -e "\n---------------------------------------"
             echo  "Installing packages (for next steps)..."
             echo  -e "---------------------------------------\n"
+            rm -rf /var/lib/pacman/db.lck
             pacman -S --noconfirm git micro nano vi vim 
             ### to make clean screen with limit trying 
             count=0
