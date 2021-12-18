@@ -284,6 +284,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     echo ""
                                     echo -e "\n[+]The Boot Mode In Which The Installation Will Be Performed Is ${Mode}.[+] ."
                                     echo "[+]If it is not correct, try restarting the script and try again[+]."
+                                    break
                                     sleep 4;;
 
                             *)
@@ -291,7 +292,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     count=`expr $count + 1`
                                     clean_screen ;;
                         esac
-                        #break
+                        break
                             
                                 
                     done
