@@ -75,9 +75,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                     echo "[+] Note that if you edit the file before, make sure you don't repeat the key layout in the top of the file. [+]"
                                                     echo -e "press enter to contine"
                                                     Confirm
-                                                    case in Confirm in 
+                                                    case $Confirm in 
                                                         "")
-                                                            d
+                                                            
                                                             $EK /etc/locale.gen 
                                                             while true
                                                                 do
