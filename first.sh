@@ -53,10 +53,13 @@ if [ "${os}" != '"Arch Linux"' ]; then
     echo -e "\n----     EDIT Disk        ---\n"
     echo "-----------------------------"
 
-    clear
+
     function EDIT_HARD() {
         while true
             do
+            echo -e "-------------------------------------------------\n"
+            echo -e "______Select Your Disk To Installation___________\n"
+            echo -e "-------------------------------------------------\n"
             echo -e ""
             read -p "Do You Want To Modify a Hard Disk (Y/N) ? : " ED #EDIT DISK
             case $ED in 
