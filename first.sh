@@ -122,88 +122,88 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo -e ""
                 read -p "Do you want to use all disk for installation or just free space : " UD #USE DISK
                 clear
-                if [ "$UD" == "1" ] 
-                then
-                clear
-                sgdisk -Z ${DISK} # zap all on disk
-                while true 
-                    do
-                    
-                    echo -e "" ################ disk table new write here on box
-                    echo "[1] GPT"
-                    echo "[2] MSDOS"
-                    echo -e ""
-                    read -p "Do you want a 'GPT' or 'MSDOS' table for your hard disk : " table 
-                    case $table in 
-                    1)
-                        clear
-                        sgdisk -a 2048 -o ${DISK} 
-                        break
-                        ;;
+                if [ "$UD" == "1" ]; then 
+            
+                    clear
+                    sgdisk -Z ${DISK} # zap all on disk
+                    while true 
+                        do
+                        
+                        echo -e "" ################ disk table new write here on box
+                        echo "[1] GPT"
+                        echo "[2] MSDOS"
+                        echo -e ""
+                        read -p "Do you want a 'GPT' or 'MSDOS' table for your hard disk : " table 
+                        case $table in 
+                        1)
+                            clear
+                            sgdisk -a 2048 -o ${DISK} 
+                            break
+                            ;;
 
-                    2)
-                        clear
-                        echo "o
-                        w
-                        " | fdisk ${DISK}
-                        break
-                        ;;
+                        2)
+                            clear
+                            echo "o
+                            w
+                            " | fdisk ${DISK}
+                            break
+                            ;;
 
-                    *)
-                        echo "ENTER '1' Or '2' "
-                        count=`expr $count + 1`
-                        ;;
-                    esac
-                    clean_screen
-                done    
-                break
+                        *)
+                            echo "ENTER '1' Or '2' "
+                            count=`expr $count + 1`
+                            ;;
+                        esac
+                        clean_screen
+                    done    
+                    break
                 
                 elif [ "$UD" == "2" ]; then
-                function available_table() {
-                    DT0=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
-                    clear
-                    case $DT0 in
-                        "unknown")
-                                while true
-                                    do
-                                    echo -e ""
-                                    echo "You don't have any hard disk table, Choose one"
-                                    echo -e ""
-                                    echo "[1] MSDOS"
-                                    echo "[2] GPT"
-                                    read -p "Your Choice : " NT #New Table
-                                    case $NT in 
-                                        "1")
-                                            clear
-                                            echo "o
-                                            w
-                                            "| fdisk ${DISK}
-                                            break
-                                            ;;
-                                        "2")
-                                            clear
-                                            sgdisk -a 2048 -o ${DISK} 
-                                            break
-                                            ;;
-                                        *)
-                                            echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
-                                            count=`expr $count + 1`
-                                            ;;
-                                    esac
-                                    clean_screen
-                                    
-                                done
-                                ;; 
-                            *)
-                                break
-                                ;;
-                    esac
+                    function available_table() {
+                        DT0=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
+                        clear
+                        case $DT0 in
+                            "unknown")
+                                    while true
+                                        do
+                                        echo -e ""
+                                        echo "You don't have any hard disk table, Choose one"
+                                        echo -e ""
+                                        echo "[1] MSDOS"
+                                        echo "[2] GPT"
+                                        read -p "Your Choice : " NT #New Table
+                                        case $NT in 
+                                            "1")
+                                                clear
+                                                echo "o
+                                                w
+                                                "| fdisk ${DISK}
+                                                break
+                                                ;;
+                                            "2")
+                                                clear
+                                                sgdisk -a 2048 -o ${DISK} 
+                                                break
+                                                ;;
+                                            *)
+                                                echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
+                                                count=`expr $count + 1`
+                                                ;;
+                                        esac
+                                        clean_screen
+                                        
+                                    done
+                                    ;; 
+                                *)
+                                    break
+                                    ;;
+                        esac
 
-                }
-                available_table
-                break 
+                    }
+                    available_table
+                    break 
                 else
-                echo -e "\n[+]Choose Number 'One' or 'Two' [+]\n"
+                echo  "\n[+]Choose Number 'One' or 'Two' [+]\n"
                 count=`expr $count + 1`
                 clean_screen
                 fi
