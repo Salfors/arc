@@ -67,7 +67,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 y|Y|yes|Yes|YES)
                         while true
                             do
-                            clear
+                            #clear
                             echo -e "\nChoose Tool for Managing Hard Disk Partitions.\n"
                             echo "**********"
                             echo "[-]fdisk"
