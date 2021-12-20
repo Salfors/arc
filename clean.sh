@@ -122,7 +122,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     echo -e  "+[3] KDE_PLASMA\n" # UFI    
                     read -p "Choose A Desktop Environment : "  ENV
                     case $EN in 
-                        "1""2""3")
+                        "1"|"2"|"3")
                             break ;;
                         *)
                             echo -e "\n[-] Choose an option from the options [-]"
