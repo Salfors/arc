@@ -269,7 +269,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                 fi
                 function password() {
-                    clear
+                    #clear
                     while true
                         do
                         echo -e ""
