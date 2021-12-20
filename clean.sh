@@ -33,6 +33,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     case $ask in 
                         
                         y|Y|yes|Yes|YES)
+                            clear
                             while true
                                 do 
                                 echo -e "\n================================="
