@@ -208,12 +208,13 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo -e "\n=================================="
                 echo "[---]     User creation      [---]"
                 echo -e "==================================\n"
-                username=""
+                
                 while [ x$username = "x" ]; do
 
                 read -p "Please Enter the Username You Wish To Create : " username
                 if [ "${username}" == "" ]; then
                     echo -e "\n[-] Enter Something [-]\n"
+                    username=""
                     count=`expr $count + 1`
                     clean_screen
                 elif id -u $username >/dev/null 2>&1; then
@@ -226,13 +227,14 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 fi
 
                 done
-                group=""
+                
                 echo -e "\n"
                 while [ x$group = "x" ]; do
 
                 read -p "Please Enter The Primary Group. If Group Not Exist, It Will Be Created : " group
                 if [ "$group" == "" ]; then
                     echo -e "\n[-] Enter Something !! [-]\n"
+                    group=""
                     count=`expr $count + 1`
                     clean_screen
 
@@ -242,9 +244,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 count=`expr $count + 1`
                 clean_screen
             
-                else
+                #else
 
-                groupadd $group
+                #groupadd $group
 
                 fi
 
@@ -296,7 +298,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     do 
                     case $confirm in 
                         y|Y|yes|Yes|YES)
-
+                            clear
                             useradd -g $group -s $bash -d $homedir -m $username
                             sed -i '/root ALL=(ALL) ALL/a '${username}' ALL=(ALL) ALL' /etc/sudoers 
                             password
@@ -323,7 +325,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo -e "\n==============================="
                 echo "[---]    USER ACCOUNT     [---]"
                 echo -e "===============================\n"
-                read -p  "do you want add new user : " user
+                read -p  "do you want add new user [Y/N] : " user
                 case $user in 
                     y|Y|yes|Yes|YES)
 
