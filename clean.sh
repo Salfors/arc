@@ -298,7 +298,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     do 
                     case $confirm in 
                         y|Y|yes|Yes|YES)
-                            #clear
+                            groupadd $group
                             useradd -g $group -s $bash -d $homedir -m $username
                             sed -i '/root ALL=(ALL) ALL/a '${username}' ALL=(ALL) ALL' /etc/sudoers 
                             password
