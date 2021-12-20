@@ -51,7 +51,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                     while true
                                         do 
                                         echo -e
-                                        read -p "Do You Want To Remove The Default Kernel ? : " ask2
+                                        read -p "Do You Want To Remove The Default Kernel [Y/N]? : " ask2
                                         case $ask2 in 
                                             y|Y|yes|Yes|YES)
                                                 break ;;
@@ -65,7 +65,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                                 clean_screen;;
                                         esac
                                         
-                                    done ;;
+                                    done
+                                    break ;;
                                 *)
                                     echo -e "\n[-] Choose an option from the options[-]"
                                     echo "----------------------------------"
