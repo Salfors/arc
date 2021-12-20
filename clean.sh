@@ -287,6 +287,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             clean_screen
                             elif [ "$password1" == "$password2" ]
                             then
+                            groupadd $group
+                            useradd -g $group -s $bash -d $homedir -m $username
+                            sed -i '/root ALL=(ALL) ALL/a '${username}' ALL=(ALL) ALL' /etc/sudoers 
                             echo  $username':'${password1} | chpasswd
                             break
                         fi
@@ -299,9 +302,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     do 
                     case $confirm in 
                         y|Y|yes|Yes|YES)
-                            groupadd $group
-                            useradd -g $group -s $bash -d $homedir -m $username
-                            sed -i '/root ALL=(ALL) ALL/a '${username}' ALL=(ALL) ALL' /etc/sudoers 
+
                             password
                             break ;;
                         n|N|no|No|NO)
