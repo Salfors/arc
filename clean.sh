@@ -16,131 +16,146 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     fi
             }
             clear
-            echo -e "\n===================================="
-            echo "[---]    Kernel Preparation    [---]"
-            echo -e "====================================\n"
-            while true
-                do 
-                N1=1
-                N2=2
-                echo -e "\nThe Default Kernel Is 'Stable Linux Kernel'...\n"
-                read -p  "Do You Want To Change It ? : " ask
-                ############################
+            function KERNEL_Preparation() {
 
-                case $ask in 
-                    
-                    y|Y|yes|Yes|YES)
-                        while true
-                            do 
-                            echo -e "\n+[1] LTS Kernel" # 
-                            echo  "+[2] Hardened Kernel" # 
-                            echo -e "+[3] Zen Kernel\n" # 
-                            read -p "Choose a Kernel Or Enter ['A'] To Install Them All : " KERNEL
-                            case $KERNEL in 
-                            "a"|"A")
-                                break ;;
+                while true
+                    do 
 
-                            "1"|"2"|"3")
-                                while true
-                                    do 
-                                    echo -e
-                                    read -p "Do You Want To Remove The Default Kernel ? : " ask2
-                                    case $ask2 in 
-                                        y|Y|yes|Yes|YES)
-                                            break ;;
-                                        n|N|no|No|NO)
-                                            break
-                                            ;;
-                                        *)
-                                            echo -e "\n[-] Enter yes or no (y/n) [-]"
-                                            echo "----------------------------------"
-                                            count=`expr $count + 1`
-                                            clean_screen;;
-                                    esac
-                                    
-                                done ;;
-                            esac
+                    echo -e "\n===================================="
+                    echo "[---]    Kernel Preparation    [---]"
+                    echo -e "====================================\n"
+                    #N1=1
+                    #N2=2
+                    echo -e "\nThe Default Kernel Is 'Stable Linux Kernel'...\n"
+                    read -p  "Do You Want To Change It [Y/N] ? : " ask
+                    ############################
 
-                        done
-                        break;;
+                    case $ask in 
+                        
+                        y|Y|yes|Yes|YES)
+                            while true
+                                do 
+                                echo -e "\n+[1] LTS Kernel" # 
+                                echo  "+[2] Hardened Kernel" # 
+                                echo -e "+[3] Zen Kernel\n" # 
+                                read -p "Choose a Kernel Or Enter ['A'] To Install Them All : " KERNEL
+                                case $KERNEL in 
+                                "a"|"A")
+                                    break ;;
 
-                    n)
-                        break ;;
+                                "1"|"2"|"3")
+                                    while true
+                                        do 
+                                        echo -e
+                                        read -p "Do You Want To Remove The Default Kernel ? : " ask2
+                                        case $ask2 in 
+                                            y|Y|yes|Yes|YES)
+                                                break ;;
+                                            n|N|no|No|NO)
+                                                break
+                                                ;;
+                                            *)
+                                                echo -e "\n[-] Enter yes or no (y/n) [-]"
+                                                echo "----------------------------------"
+                                                count=`expr $count + 1`
+                                                clean_screen;;
+                                        esac
+                                        
+                                    done ;;
+                                esac
 
-                    *)
+                            done
+                            break;;
+
+                        n|N|no|No|NO)
+                            break ;;
+
+                        *)
+                            echo ""
+                            sleep 1
+                            echo -e "\n[-] Choose an option from the options[-]"
+                            echo "---------------------------------------------"
+                            count=`expr $count + 1`
+                            clean_screen ;;
+                    esac
+                done
+            }
+            KERNEL_Preparation
+            clear
+            function Boot_Setup() {
+                
+                echo -e "\n==============================="
+                echo "[---]     Boot Setup      [---]"
+                echo -e "===============================\n"
+                case $ask2 in 
+                    y|Y|YES|Yes|yes)
                         echo ""
-                        sleep 1
-                        echo -e "\n[-] Choose an option from the options[-]"
-                        echo "---------------------------------------------"
-                        count=`expr $count + 1`
-                        clean_screen ;;
-                esac
-            done
+                        while true 
+                            do
+                            echo -e 
+                            read -p "Do You Want To Have a Quick Boot Up ? : " ab # ask boot
+                            case $ab in 
+                                y|Y|yes|Yes|YES)
+                                    break ;;
+                                n|N|no|No|NO)
+                                    break ;;
+                                *)  
+                                    echo -e "\n[-] Enter yes or no (y/n) [-]"
+                                    echo "---------------------------------------" 
+                                    count=`expr $count + 1`
+                                    clean_screen ;;
+                            esac
+                        done
+                        ;;
+                esac  
+            }
+            Boot_Setup
+            clear
+            function Desktop_Setup() { 
+                while true
+                    do  
+                    echo -e "\n======================================="
+                    echo "[---]  Desktop Environment Setup  [---]"
+                    echo -e "=======================================\n"
+                    echo -e "\n+[1] GNOME  " # BIOS
+                    echo -e  "+[2] XFCE4" # UFI
+                    echo -e  "+[3] KDE_PLASMA\n" # UFI    
+                    read -p "Choose A Desktop Environment : "  ENV
+                    case $EN in 
+                        "1""2""3")
+                            break ;;
+                        *)
+                            echo -e "\n[-] Choose an option from the options [-]"
+                            echo "------------------------------------" 
+                            count=`expr $count + 1`
+                            clean_screen ;;
+                    esac
 
+                done
+            }
+            Desktop_Setup
             clear
-            echo -e "\n==============================="
-            echo "[---]     Boot Setup      [---]"
-            echo -e "===============================\n"
-            case $ask2 in 
-                y|Y|YES|Yes|yes)
-                    echo ""
-                    while true 
-                        do
-                        echo -e 
-                        read -p "Do You Want To Have a Quick Boot Up ? : " ab # ask boot
-                        case $ab in 
-                            y|Y|yes|Yes|YES)
-                                break ;;
-                            n|N|no|No|NO)
-                                break ;;
-                            *)  
-                                echo -e "\n[-] Enter yes or no (y/n) [-]"
-                                echo "---------------------------------------" 
-                                count=`expr $count + 1`
-                                clean_screen ;;
-                        esac
-                    done
-                    ;;
-            esac        
-            clear
-            echo -e "\n======================================="
-            echo "[---]  Desktop Environment Setup  [---]"
-            echo -e "=======================================\n"
-            while true
-                do  
-                echo -e "\n+[1] GNOME  " # BIOS
-                echo -e  "+[2] XFCE4" # UFI
-                echo -e  "+[3] KDE_PLASMA\n" # UFI    
-                read -p "Choose A Desktop Environment : "  ENV
-                case $EN in 
-                    "1""2""3")
-                        break ;;
-                    *)
-                        echo -e "\n[-] Choose an option from the options [-]"
-                        echo "------------------------------------" 
+            function Packages() {
+                
+                while true
+                    do
+                    echo -e "\n================================="
+                    echo "[---]  Base Packages Setup   ---]"
+                    echo -e "=================================\n"
+                    echo -e "\n+[1] Main Packages  " 
+                    echo -e  "+[2] Full base packages (take a time...)\n"
+                    read -p "Choose Your Packages Install Mode : " PM #Package mode
+                    if [ "$PM" == "1" ] ||  [ "$PM" == "2" ] ;then
+                        break
+                        else
+                        sleep 0.8
+                        echo -e "\n[+]Choose an option from the options[+]"
                         count=`expr $count + 1`
-                        clean_screen ;;
-                esac
-
-            done
-            clear
-            echo -e "\n================================="
-            echo "[---]  Base Packages Setup   ---]"
-            echo -e "=================================\n"
-            while true
-                do
-                echo -e "\n+[1] Main Packages  " 
-                echo -e  "+[2] Full base packages (take a time...)\n"
-                read -p "Choose Your Packages Install Mode : " PM #Package mode
-                if [ "$PM" == "1" ] ||  [ "$PM" == "2" ] ;then
-                    break
-                    else
-                    sleep 0.8
-                    echo -e "\n[+]Choose an option from the options[+]"
-                    count=`expr $count + 1`
-                    clean_screen
-                fi
-            done
+                        clean_screen
+                    fi
+                done
+            }
+            Packages
             clear 
             ########## START INSTALLATION ##################
             #__________ KERNEL LINUX CHOOSE
