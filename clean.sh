@@ -219,7 +219,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     clean_screen
                 elif id -u $username >/dev/null 2>&1; then
 
-                echo -e "\n[+]User already exists[+] "
+                echo -e "\n[+]User already exists[+]\n"
                 count=`expr $count + 1`
                 clean_screen
                 username=""
@@ -239,7 +239,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     clean_screen
 
                 elif id -g $group >/dev/null 2>&1; then
-                clear
+                #clear
                 echo -e "\n[+]Group Exist[+] "
                 count=`expr $count + 1`
                 clean_screen
@@ -298,7 +298,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     do 
                     case $confirm in 
                         y|Y|yes|Yes|YES)
-                            clear
+                            #clear
                             useradd -g $group -s $bash -d $homedir -m $username
                             sed -i '/root ALL=(ALL) ALL/a '${username}' ALL=(ALL) ALL' /etc/sudoers 
                             password
