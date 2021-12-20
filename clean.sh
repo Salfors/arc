@@ -304,7 +304,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                             password
                             break ;;
                         n|N|no|No|NO)
-
                             clear
                             add_user ;;
                         *)
