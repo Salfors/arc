@@ -66,6 +66,11 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                         esac
                                         
                                     done ;;
+                                *)
+                                    echo -e "\n[-] Choose an option from the options[-]"
+                                    echo "----------------------------------"
+                                    count=`expr $count + 1`
+                                    clean_screen;;
                                 esac
 
                             done
@@ -77,7 +82,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         *)
                             echo ""
                             sleep 1
-                            echo -e "\n[-] Choose an option from the options[-]"
+                            echo -e "\n[-] Enter yes or no (y/n) [-]"
                             echo "---------------------------------------------"
                             count=`expr $count + 1`
                             clean_screen ;;
