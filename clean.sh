@@ -204,69 +204,73 @@ if [ "${os}" != '"Arch Linux"' ]; then
             clear
             ####################################################
             function add_user() {
+                while true
                 
-                echo -e "\n=================================="
-                echo "[---]     User creation      [---]"
-                echo -e "==================================\n"
-                
-                while [ x$username = "x" ]; do
+                    do
+                    clear
+                    echo -e "\n=================================="
+                    echo "[---]     User creation      [---]"
+                    echo -e "==================================\n"
+                    
+                    while [ x$username = "x" ]; do
 
-                read -p "Please Enter the Username You Wish To Create : " username
-                if [ "${username}" == "" ]; then
-                    echo -e "\n[-] Enter Something [-]\n"
+                    read -p "Please Enter the Username You Wish To Create : " username
+                    if [ "${username}" == "" ]; then
+                        echo -e "\n[-] Enter Something [-]\n"
+                        username=""
+                        count=`expr $count + 1`
+                        clean_screen
+                    elif id -u $username >/dev/null 2>&1; then
+
+                    echo -e "\n[+]User already exists[+]\n"
+                    count=`expr $count + 1`
+                    clean_screen
                     username=""
+
+                    fi
+
+                    done
+                    
+                    echo -e "\n"
+                    while [ x$group = "x" ]; do
+
+                    read -p "Please Enter The Primary Group. If Group Not Exist, It Will Be Created : " group
+                    if [ "$group" == "" ]; then
+                        echo -e "\n[-] Enter Something !! [-]\n"
+                        group=""
+                        count=`expr $count + 1`
+                        clean_screen
+
+                    elif id -g $group >/dev/null 2>&1; then
+                    #clear
+                    echo -e "\n[+]Group Exist[+] "
                     count=`expr $count + 1`
                     clean_screen
-                elif id -u $username >/dev/null 2>&1; then
-
-                echo -e "\n[+]User already exists[+]\n"
-                count=`expr $count + 1`
-                clean_screen
-                username=""
-
-                fi
-
-                done
                 
-                echo -e "\n"
-                while [ x$group = "x" ]; do
+                    #else
 
-                read -p "Please Enter The Primary Group. If Group Not Exist, It Will Be Created : " group
-                if [ "$group" == "" ]; then
-                    echo -e "\n[-] Enter Something !! [-]\n"
-                    group=""
-                    count=`expr $count + 1`
-                    clean_screen
+                    #groupadd $group
 
-                elif id -g $group >/dev/null 2>&1; then
-                #clear
-                echo -e "\n[+]Group Exist[+] "
-                count=`expr $count + 1`
-                clean_screen
-            
-                #else
+                    fi
 
-                #groupadd $group
+                    done
+                    echo -e "\n"
+                    read -p "Please Enter Bash [/bin/bash] : " bash
 
-                fi
+                    if [ x"$bash" = "x" ]; then
 
+                    bash="/bin/bash"
+
+                    fi
+
+                    read -p "Please Enter Homedir [/home/$username] : " homedir
+
+                    if [ x"$homedir" = "x" ]; then
+
+                    homedir="/home/$username"
+
+                    fi
                 done
-                echo -e "\n"
-                read -p "Please Enter Bash [/bin/bash] : " bash
-
-                if [ x"$bash" = "x" ]; then
-
-                bash="/bin/bash"
-
-                fi
-
-                read -p "Please Enter Homedir [/home/$username] : " homedir
-
-                if [ x"$homedir" = "x" ]; then
-
-                homedir="/home/$username"
-
-                fi
                 function password() {
                     clear
                     while true
