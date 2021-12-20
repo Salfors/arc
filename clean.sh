@@ -268,7 +268,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
 
                 fi
                 function password() {
-                
+                    clear
                     while true
                         do
                         echo -e ""
@@ -333,7 +333,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         while true 
                             do
                             clear
-                            read -p "Do You Want Anthore User : " new_user 
+                            echo -e "\n"
+                            read -p "Do You Want Anthore User [Y/N]: " new_user 
                             case $new_user in 
                                 y|Y|yes|Yes|YES)
 
@@ -369,7 +370,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             while true
             do
             echo -e "\n===================================="
-            echo "[---]  Set Password for Root   [---]"
+            echo "[---]  Set Password For Root   [---]"
             echo -e "====================================\n"
             read -p "Enter New Password For Root User : " passwd1
             read -p "Re-enter Password  : " passwd2
@@ -391,9 +392,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
             done
             clear
 
-            echo "=========================================="
+            echo -e "\n=========================================="
             echo "[---]    Bootloader  Installation    [---]"
-            echo "=========================================="
+            echo -e "==========================================\n"
             pacman -S --noconfirm efibootmgr grub
             ID="`cat ID`"
             GrubID="`cat GrubID`"
