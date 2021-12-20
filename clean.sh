@@ -208,7 +208,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 echo -e "\n=================================="
                 echo "[---]     User creation      [---]"
                 echo -e "==================================\n"
-                username""
+                username=""
                 while [ x$username = "x" ]; do
 
                 read -p "Please Enter the Username You Wish To Create : " username
