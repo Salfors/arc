@@ -35,6 +35,9 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         y|Y|yes|Yes|YES)
                             while true
                                 do 
+                                echo -e "\n================================="
+                                echo "[---]     Linux Kernel      [---]"
+                                echo -e "=================================\n"
                                 echo -e "\n+[1] LTS Kernel" # 
                                 echo  "+[2] Hardened Kernel" # 
                                 echo -e "+[3] Zen Kernel\n" # 
@@ -84,14 +87,15 @@ if [ "${os}" != '"Arch Linux"' ]; then
             clear
             function Boot_Setup() {
                 
-                echo -e "\n==============================="
-                echo "[---]     Boot Setup      [---]"
-                echo -e "===============================\n"
+
                 case $ask2 in 
                     y|Y|YES|Yes|yes)
                         echo ""
                         while true 
                             do
+                            echo -e "\n==============================="
+                            echo "[---]     Boot Setup      [---]"
+                            echo -e "===============================\n"
                             echo -e 
                             read -p "Do You Want To Have a Quick Boot Up ? : " ab # ask boot
                             case $ab in 
