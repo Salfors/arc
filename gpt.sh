@@ -1,4 +1,4 @@
-   
+      DISK=/dev/vda
        function Determine_Size() {
 
         #_____Determine the size of the root partition____#
