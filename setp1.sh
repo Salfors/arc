@@ -77,7 +77,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 y|Y|yes|Yes|YES)
                     break ;;
                 n|N|no|No|NO)
-                    sleep 3
+                    sleep 1
                     clear ;;
                 *)
                     echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n"
@@ -100,7 +100,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             read CN #Confirm Note
             case $CN in 
                 "")
-                    
+                    clear
                     while true
                         do
                         echo -e "\n${b}====================================="
