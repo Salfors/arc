@@ -27,7 +27,6 @@
         clear
         count=0       
         #____Determine the size of the home partition___#
-        sleep 2
         while true
             do
             echo -e "\n${b}=========================================="
@@ -87,7 +86,7 @@
                 y|Y|YES|Yes|yes)
                     clear
                     echo -e 
-                    sleep 2
+                   
                     while true
                         do
                         count=0
@@ -128,7 +127,8 @@
 
         +${RooP}GB
         w
-        "| fdisk ${DISK} && ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+        "| fdisk ${DISK} 
+        ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
         case $CH in 
             y|Y|yes|Yes|YES)
