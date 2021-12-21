@@ -101,7 +101,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             read CN #Confirm Note
             case $CN in 
                 *)
-                    
+                    clear
                     while true
                         do
                         echo -e "\n${b}====================================="
