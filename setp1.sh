@@ -26,7 +26,8 @@ EP=${rt}${g}${bo}[${rt}${y}${bo}+${rt}${g}${bo}]${rt} #End of the success of a P
 #------------------------------------------------------------------------------------------------------------#
 
 clear
-echo -e "${p}${bo}
+echo -e "\n"
+echo -e "\n${p}${bo}
  ░░░░░  ░░░░░░   ░░░░░░ ░░░░░░░░ ░░    ░░ ░░░░░░░ 
 ▒▒   ▒▒ ▒▒   ▒▒ ▒▒         ▒▒    ▒▒    ▒▒ ▒▒      
 ▒▒▒▒▒▒▒ ▒▒▒▒▒▒  ▒▒         ▒▒    ▒▒    ▒▒ ▒▒▒▒▒▒▒${rt}
@@ -96,10 +97,10 @@ if [ "${os}" != '"Arch Linux"' ]; then
             echo -e "\n${SP}Note: This is a script that cannot detect if there is space available for installation${EP}"
             echo -e "${w}${bo}..or if an extender already exists${rt}"
             echo -e "${SP}So you have to make sure that you have enough space and that there is no pre-expanded in the next stage. ${EP}"
-            echo -e "\n${w}${bo}Press Enter To Continue${rt}"
+            echo -e "\n${w}${bo}Press Any Key To Continue${rt}"
             read CN #Confirm Note
             case $CN in 
-                "")
+                *)
                     
                     while true
                         do
@@ -153,9 +154,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                                 ;;                      
                         esac
                         clean_screen
-                    done
-                *)  
-                    clear ;;
+                    done ;;
+
 
             esac
         done
