@@ -121,14 +121,14 @@
         done
         }
    Determine_Size
-   function GPT(){
+    function GPT(){
         echo "
         n  
 
 
         +${RooP}GB
         w
-        " | fdisk ${DISK}
+        "| fdisk ${DISK}
         ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
         case $CH in 
@@ -151,7 +151,7 @@
 
                         +${Swp}GB
                         w
-                        " | fdisk ${DISK}
+                        "| fdisk ${DISK}
                         SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
 
                 esac 
@@ -163,7 +163,7 @@
                             
                             +${Homep}GB
                             w
-                            " | fdisk ${DISK}
+                            "| fdisk ${DISK}
                             HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
                 esac
                 ;;
@@ -179,7 +179,7 @@
 
                         +${Swp}GB
                         w
-                        " | fdisk ${DISK}
+                        "| fdisk ${DISK}
                         SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
 
                 esac
