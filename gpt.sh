@@ -128,8 +128,7 @@
 
         +${RooP}GB
         w
-        "| fdisk ${DISK}
-        ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+        "| fdisk ${DISK} && ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
 
         case $CH in 
             y|Y|yes|Yes|YES)
