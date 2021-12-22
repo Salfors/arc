@@ -618,7 +618,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             ;;
         *)  
             sleep 3 
-            echo "You Must Be a Root User To Successfully Complete a Process !! "
+            echo -e "\n${SE} You Must Be a Root User To Successfully Complete a Process !! ${EE}\n"
             ;;
     esac
 fi
