@@ -182,7 +182,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     echo -e "[---]  ${p}Base Packages Setup${rt}${b}   ---]"
                     echo -e "=================================${rt}\n"
                     echo -e "${g}${bo}+${rt}${SL1} ${w}${bo}Main Packages${rt}" 
-                    echo -e  "${g}${bo}+${rt}${SL2} ${w}${bo}Full Base Packages ${rt}(take a time...)\n"
+                    echo -e  "${g}${bo}+${rt}${SL2} ${w}${bo}Full Base Packages ${rt}${w}(take a time...)${rt}\n"
                     read -p "Choose Your Packages Install Mode : " PM #Package mode
                     if [ "$PM" == "1" ] ||  [ "$PM" == "2" ] ;then
                         break
@@ -577,33 +577,34 @@ if [ "${os}" != '"Arch Linux"' ]; then
             systemctl stop dhcpcd.service
             systemctl enable NetworkManager.service
             systemctl enable bluetooth
+            sudo ufw enable 
+            sudo systemctl enable  ufw.service
+            sudo pulseaudio --start 
             #___Desktop Environment 
             case $ENV in 
                 "1")
                     #gnome
                     sudo pacman -S gnome --noconfirm
-                    systemctl stop --now lightdm.service
-                    systemctl disable --now lightdm.service
-                    systemctl stop --now sddm.service
-                    systemctl disable  --now sddm.service
-                    sudo ufw enable --now
-                    sudo systemctl enable --now ufw.service
-                    systemctl enable --now gdm.service
-                    systemctl start --now gdm.service
+                    sudo pacman -S gdm 
+                    systemctl stop  lightdm.service
+                    systemctl disable  lightdm.service
+                    systemctl stop  sddm.service
+                    systemctl disable  sddm.service
+                    systemctl enable  gdm.service
+                    systemctl start  gdm.service
 
                     ;;
                 "2")
                     # "xfce4"
                     sudo pacman -S  xfce4 xfce4-goodies --noconfirm
-                    systemctl stop --now gdm.service
-                    systemctl disable --now gdm.service
-                    systemctl stop --now sddm.service
-                    systemctl disable --now sddm.service
-                    sudo ufw enable --now
-                    sudo systemctl enable --now ufw.service
+                    sudo paman -S lightdm
+                    systemctl stop  gdm.service
+                    systemctl disable gdm.service
+                    systemctl stop sddm.service
+                    systemctl disable  sddm.service
                     echo "exec startxfce-4" > ~/.xinitrc
-                    systemctl enable --now lightdm.service
-                    systemctl start --now lightdm.service
+                    systemctl enable lightdm.service
+                    systemctl start  lightdm.service
                     ;;
                 "3")
                     # "KDE"
@@ -613,8 +614,6 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     systemctl stop --now gdm.service
                     systemctl disable --now gdm.service
                     systemctl enable --now sddm.service
-                    sudo ufw enable --now
-                    sudo systemctl enable --now ufw.service
                     systemctl start --now sddm.service
                     ;;
             esac
