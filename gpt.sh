@@ -40,7 +40,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
     root=`whoami`
     case $root in
         "root")
- 
+            sleep 3 
             sudo rm -rf /var/lib/pacman/db.lck
             count=0
             max=3
@@ -52,7 +52,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             }
             clear
             function KERNEL_Preparation() {
-
+                sleep 1
                 while true
                     do 
 
@@ -66,6 +66,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                         
                         y|Y|yes|Yes|YES)
                             clear
+                            sleep 1
                             while true
                                 do 
                                 echo -e "\n${b}================================="
@@ -126,6 +127,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                 case $ask2 in 
                     y|Y|YES|Yes|yes)
                         echo ""
+                        sleep 1
                         while true 
                             do
                             echo -e "\n${b}==============================="
@@ -148,7 +150,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
             }
             Boot_Setup
             clear
-            function Desktop_Setup() { 
+            function Desktop_Setup() {
+                sleep 1 
                 while true
                     do  
                     echo -e "\n${b}======================================="
@@ -172,7 +175,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             Desktop_Setup
             clear
             function Packages() {
-                
+                sleep 1
                 while true
                     do
                     echo -e "\n${b}================================="
@@ -617,7 +620,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
             esac
             ;;
         *)  
-            sleep 3 
+            sleep 2 
             echo -e "\n${SE} You Must Be a Root User To Successfully Complete a Process !! ${EE}\n"
             ;;
     esac
