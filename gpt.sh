@@ -596,8 +596,7 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     ;;
                 "2")
                     # "xfce4"
-                    sudo pacman -S  xfce4 xfce4-goodies --noconfirm
-                    sudo paman -S lightdm
+                    sudo pacman -S  xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm
                     systemctl stop  gdm.service
                     systemctl disable gdm.service
                     systemctl stop sddm.service
