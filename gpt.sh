@@ -13,6 +13,7 @@ p='\033[0;35m' #> Purple
 SL=${p}${bo}[${rt}${b}${bo}-${rt}${p}${bo}]${rt}  #Start of Some Menu
 SL1=${p}${bo}[${rt}${y}${bo}1${rt}${p}${bo}]${rt} #Start of Numbers Menus (1)
 SL2=${p}${bo}[${rt}${y}${bo}2${rt}${p}${bo}]${rt} #Start of Numbers Menus (2)
+SL3=${p}${bo}[${rt}${y}${bo}3${rt}${p}${bo}]${rt}
 
 SE=${r}${bo}[${rt}${y}${bo}!${rt}${r}${bo}]${rt}${w}${bo}${u} #Start Exclamation error 
 EE=${rt}${r}${bo}[${rt}${y}${bo}!${rt}${r}${bo}]${rt} #End of Exclamation error 
@@ -24,999 +25,599 @@ SP=${g}${bo}[${rt}${y}${bo}+${rt}${g}${bo}]${rt}${w}${bo} #Start of the success 
 EP=${rt}${g}${bo}[${rt}${y}${bo}+${rt}${g}${bo}]${rt} #End of the success of a Positive sign
 
 #------------------------------------------------------------------------------------------------------------#
-chmod a+x help.sh
-clear
-echo -e "\n${p}${bo}
+
+echo -e "${p}${bo}
  ░░░░░  ░░░░░░   ░░░░░░ ░░░░░░░░ ░░    ░░ ░░░░░░░ 
 ▒▒   ▒▒ ▒▒   ▒▒ ▒▒         ▒▒    ▒▒    ▒▒ ▒▒      
 ▒▒▒▒▒▒▒ ▒▒▒▒▒▒  ▒▒         ▒▒    ▒▒    ▒▒ ▒▒▒▒▒▒▒${rt}
 ${b}${bo}▓▓   ▓▓ ▓▓   ▓▓ ▓▓         ▓▓    ▓▓    ▓▓      ▓▓ 
 ██   ██ ██   ██  ██████    ██     ██████  ███████${rt} 
 "
-##_________________________________________WELCOM TO "ARCTUS" __________________________________________________________________##
-
 os=`cat /etc/*-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g'`
 if [ "${os}" != '"Arch Linux"' ]; then
-    echo -e "\n${SE}You must be using Arch Linux to execute this script.${EE}"
-    break
+    echo "You must be using Arch Linux to execute this script."
     elif [ "${os}" == '"Arch Linux"' ]; then
-    sleep 3
-    #------In order to partition a disk----#
-    echo -e "\nInstalling prereqs...\n"
-    pacman -S --noconfirm gptfdisk btrfs-progs
-    clear
-    ### to make clean screen with limit trying 
-    count=0
-    max=2
-    function clean_screen() {
-        if [ "$count" -eq "$max" ]; then
+    root=`whoami`
+    case $root in
+        "root")
+ 
+            sudo rm -rf /var/lib/pacman/db.lck
+            count=0
+            max=3
+            function clean_screen() {
+                if [ "$count" -eq "$max" ]; then
+                    clear
+                    count=`expr $count - 3`
+                    fi
+            }
             clear
-            count=`expr $count - 2`
-            fi
-    }
-    while true
-    do
-    echo -e "\n${b}======================================================"
-    echo -e "[---]     ${p}Select Your Disk To Installation${rt}${b}       [---]"
-    echo -e "======================================================${rt}\n"
-    lsblk
-    echo -e "\nPlease Enter Disk: (example /dev/sda)\n"
-    read DISK
-    if [ "$DISK" == "" ] 
-        then
-        echo -e "\n${SM} Choose The Disk To Install To !!!${EM}\n"
-        sleep 1
-        count=`expr $count + 1`
-        sleep 1
-        clean_screen
-       
-        else
-            echo -e ""
-            read -p "Please confirm [y/n] : " HDC #HARD DISK CONFIRM 
-            case $HDC in 
-                y|Y|yes|Yes|YES)
-                    sleep 1
-                    break ;;
-                n|N|no|No|NO)
-                    sleep 2
-                    clear ;;
-                *)
-                    echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n"
-                    count=`expr $count + 1` 
-                    sleep 1 
-                    clean_screen  ;;
-            esac
-       
-    fi
-    done
-    count=0
-    clear
-    function EDIT_HARD_DISK() {
-        while true
-            do
-            echo -e "\n${SP}Note: This is a script that cannot detect if there is space available for installation${EP}"
-            echo -e "${w}${bo}..or if an extender already exists${rt}"
-            echo -e "${SP}So you have to make sure that you have enough space and that there is no pre-expanded in the next stage. ${EP}"
-            echo -e "\n${w}${bo}Press Enter To Continue${rt}"
-            read CN #Confirm Note
-            case $CN in 
-                "")
-                    clear
-                    while true
-                        do
-                        echo -e "\n${b}====================================="
-                        echo -e "[---]     ${p}Hard Disk Editor${rt}${b}      [---]"
-                        echo -e "=====================================${rt}\n"
-                        echo -e ""
-                        read -p "Do You Want To Modify a Hard Disk [Y/N] ? : " HDEC # HARD DISK EDIT CONFIRM 
-                        case $HDEC in 
-                            y|Y|yes|Yes|YES)
-                                    clear
-                                    while true
-                                        do
-                                        echo -e "\nChoose Tool for Managing Hard Disk Partitions.\n"
-                                        echo -e "${y}${bo}***********${rt}\n"
-                                        echo -e "${SL}${w}${bo}fdisk${rt}"
-                                        echo -e "${SL}${w}${bo}cfdisk${rt}"
-                                        echo -e "${SL}${w}${bo}parted${rt}"
-                                        echo -e "${SL}${w}${bo}cgdisk${rt}"
-                                        echo -e "\n${y}${bo}***********${rt}\n"
-                                        read -p "Enter Your Favorite Tool : " TOOL ## TOOL TO EDIT DISK
-                                        case $TOOL in 
-                                            fdisk|cfdisk|parted|cgdisk)
-                                                clear
-                                                $TOOL ${DISK}
-                                                clear
-                                                break
-                                                ;;
-                                            "")
-                                                echo -e "\n${SM} Sorry, Choose One From Them !!! ${EM}\n"
-                                                sleep 1
-                                                count=`expr $count + 1`
-                                                clean_screen
-                                                ;;
-                                            *)
-                                                echo -e "\n${SM} Enter The Tool Name Correctly!!! ${EM}\n"
-                                                sleep 1
-                                                count=`expr $count + 1`
-                                                clean_screen
-                                        esac
-                                    done
-                                    break              
-                                    ;;
+            function KERNEL_Preparation() {
 
-                            n|N|no|No|NO)
-                                sleep 1
-                                break
-                                ;;
-                            *)
-                                echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n"
-                                count=`expr $count + 1` 
-                                sleep 1 
-                                clean_screen 
-                                ;;                      
-                        esac
-                        clean_screen
-                    done 
-                    break ;;
-                *)  
-                    clear ;;
+                while true
+                    do 
 
-            esac
-        done
-    }
-    EDIT_HARD_DISK
-    clear
-    count=0
-    function Format_The_Hard_Disk (){
-            sleep 1
-            while true
-                do 
-                echo -e "\n${b}====================================="
-                echo -e "[---]     ${p}Hard Disk Usage${rt}${b}       [---]"
-                echo -e "=====================================${rt}\n"
-                echo -e ""
-                echo -e "${SL1} ${w}${bo}Use it all and format the hard drive.${rt}"
-                echo -e "${SL2} ${w}${bo}Use only free disk space.${rt}"
-                echo -e ""
-                read -p "Do you want to use all disk for installation or just free space : " HDU  #Hard Disk Usage
-                #clear
-                if [ "$HDU" == "1" ]; then 
-            
-                    clear
-                    sgdisk -Z ${DISK} # zap all on disk
-                    clear
-                    sleep 1
-                    while true 
-                        do
-                        echo -e "\n${b}============================================"
-                        echo -e "[---]  ${p}Hard disk partition table type${rt}${b}  [---]"
-                        echo -e "============================================${rt}\n"
-                        echo -e "${SL1} ${w}${bo}GPT${rt}"
-                        echo -e "${SL2} ${w}${bo}MSDOS${rt}"
-                        echo -e ""
-                        read -p "Do you want a 'GPT' or 'MSDOS' table for your hard disk : " HDT  #Hard Disk Table
-                        case $HDT in 
-                        "1")
+                    echo -e "\n${b}===================================="
+                    echo -e "[---]    ${p}Kernel Preparation${rt}${b}    [---]"
+                    echo -e "====================================${rt}\n"
+                    echo -e "\n${w}${bo}The Default Kernel Is 'Stable Linux Kernel'...${rt}\n"
+                    read -p  "Do You Want To Change It [Y/N] ? : " ask
+
+                    case $ask in 
+                        
+                        y|Y|yes|Yes|YES)
                             clear
-                            sgdisk -a 2048 -o ${DISK}  #Create new gpt table
-                            break
-                            ;;
+                            while true
+                                do 
+                                echo -e "\n${b}================================="
+                                echo -e "[---]     ${p}Linux Kernel${rt}${b}      [---]"
+                                echo -e "=================================${rt}\n"
+                                echo -e "${g}${bo}+${rt}${SL1} ${w}${bo}LTS Kernel${rt}" # 
+                                echo -e "${g}${bo}+${rt}${SL2} ${w}${bo}Hardened Kernel${rt}" # 
+                                echo -e "${g}${bo}+${rt}${SL3} ${w}${bo}Zen Kernel${rt}\n" # 
+                                read -p "Choose a Kernel Or Enter ['A'] To Install Them All : " KERNEL
+                                case $KERNEL in 
+                                "a"|"A")
+                                    break ;;
 
-                        "2") # Create new msdos table
-                            clear
-                            echo "o
-                            w
-                            " | fdisk ${DISK} 
-                            break
-                            ;;
-
-                        *)
-                            echo -e "\n${SM} ENTER One '1' Or Two '2' !!!${EM}\n"
-                            count=`expr $count + 1`
-                            sleep 1
-                            clean_screen
-                            ;;
-                        esac
-                        clean_screen
-                    done    
-                    break
-                
-                elif [ "$HDU" == "2" ]; then
-                    count=0
-                    function Available_Table() {
-                        AODT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'` #Availability Of Disk Table 
-                        clear
-                        case $AODT in
-                            "unknown")
-                                    sleep 2
+                                "1"|"2"|"3")
                                     while true
-                                        do
-                                        echo -e "\n${b}============================================"
-                                        echo -e "[---]  ${p}Hard disk partition table type${rt}${b}  [---]"
-                                        echo -e "============================================${rt}\n"
-                                        echo "You don't have any hard disk table, Choose one"
-                                        echo -e ""
-                                        echo -e "${SL1} ${w}${bo}MSDOS${rt}"
-                                        echo -e "${SL2} ${w}${bo}GPT${rt}"
-                                        read -p "Your Choice : " NHDT #New Hard Disk Table
-                                        case $NHDT in 
-                                            "1")
-                                                clear
-                                                echo "o
-                                                w
-                                                "| fdisk ${DISK}
-                                                break
-                                                ;;
-                                            "2")
-                                                clear
-                                                sgdisk -a 2048 -o ${DISK} 
+                                        do 
+                                        echo -e
+                                        read -p "Do You Want To Remove The Default Kernel [Y/N]? : " ask2
+                                        case $ask2 in 
+                                            y|Y|yes|Yes|YES)
+                                                break ;;
+                                            n|N|no|No|NO)
                                                 break
                                                 ;;
                                             *)
-                                                echo -e "\n${SM} Choose Number 'One' or 'Two' ${EM}\n"
+                                                echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n"
                                                 count=`expr $count + 1`
-                                                sleep 1
-                                                clean_screen
-                                                ;;
+                                                clean_screen;;
                                         esac
-                                        clean_screen
                                         
                                     done
-                                    ;; 
+                                    break ;;
                                 *)
-                                    break
-                                    ;;
-                        esac
+                                    echo -e "\n${SM} Choose an option from the options ${EM}\n"
+                                    count=`expr $count + 1`
+                                    clean_screen;;
+                                esac
 
-                    }
-                    Available_Table
-                    break 
-                else
-                echo -e "\n${SM} Choose Number 'One' or 'Two' ${EM}\n"
-                count=`expr $count + 1`
-                sleep 1
-                clean_screen
-                fi
-                
-            done
-                
-    }
-    Format_The_Hard_Disk
-    clear
+                            done
+                            break;;
 
-    #-----Select live boot type------#
-    count=0
-    function Direct_Boot_Mode () {   
+                        n|N|no|No|NO)
+                            break ;;
 
-        Mode=`ls /sys/firmware/efi`
-        clear
-        sleep 1
-        echo -e "\n${b}================================"
-        echo -e "[---]    ${p}Live Boot Type${rt}${b}    [---]"
-        echo -e "================================${rt}\n"
-        if $Mode >/dev/null 2>&1; then
-                MODE="BIOS"
-        else
-                MODE="UEFI"
-        fi
-    }
-    Direct_Boot_Mode
-    function CHECK_MODE() {
-        sleep 1
-        while true
-            do 
-            echo -e "\n${SP}THE CURRENT BOOT MODE IS {'${g}${MODE}${rt}${w}${bo}'}? ${EP}\n"
-            read -p "Please confirm [y/n] : " CM #Confirm MODE
-            case $CM in 
-                y|Y|yes|Yes|YES)
-                    break
-                    ;;
-
-                n|N|no|No|NO)
-                    clear
-                    sleep 1
-                    while true
-                        do 
-                                
-                        echo -e "\n${b}========================================"
-                        echo -e "[---]   ${p}Select Your Boot Type${rt}${b}      [---]"
-                        echo -e "========================================${rt}\n"
-                        echo -e "${g}${bo}+${rt}${SL1} ${w}${bo}BIOS Mode${rt}" # BIOS
-                        echo -e "${g}${bo}+${rt}${SL2} ${w}${bo}UEFI Mode${rt}\n" # UEFI
-                        read -p  "Enter Number : " MODE
-                        case $MODE in 
-                            "1")
-                                 Mode="BIOS"
-                                echo ""
-                                echo -e "\n${SP} The Boot Mode In Which The Installation Will Be Performed Is {'${g}${MODE}${rt}${w}${bo}'}. ${EP}"
-                                echo -e "${SP} If it is not correct, try restarting the script and try again. ${EP}"
-                                ;;
-                            "2")
-                                Mode="UEFI"
-                                echo ""
-                                echo -e "\n${SP} The Boot Mode In Which The Installation Will Be Performed Is {'${g}${MODE}${rt}${w}${bo}'}. ${EP}"
-                                echo -e "${SP} If it is not correct, try restarting the script and try again. ${EP}"
-                                sleep 4 ;;
-
-                            *)
-                                echo -e "\n${SM} Choose Number One '1' or Two '2' ${EM}\n"
-                                count=`expr $count + 1`
-                                clean_screen ;;
-                        esac
-                        break             
-                    done
-                    break
-                    ;;
-                "")
-                    echo -e "\n${SP} Default Choose {'${MODE}'} ${EP}"
-                    sleep 5
-                    break ;;
-
-                *)
-                    echo -e "\n${SM} ENTER 'Yes' or 'No' !!!${EM}\n"
-                    count=`expr $count + 1`
-                    clean_screen
-                    ;;
-            esac
-            clean_screen 
-        done
-    }
-    CHECK_MODE
-        
-    function Determine_Size() {
-
-        #_____Determine the size of the root partition____#
-        count=0
-        sleep 1
-        while true
-            do
-            echo -e "\n${b}======================================================"
-            echo -e "[---]  ${p}Determine the size of the Home partition${rt}${b}  [---]"
-            echo -e "======================================================${rt}\n"
-            echo -e "\nNote:Enter Just The Number And Without GB or MB on Next steps"
-            read -p "Please Enter Size For Root Partition : " RooP #Root Partition
-            if [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; then 
-                    echo "${RooP}"
-                    break
-            elif [ -z "${RooP##*[!0-9]*}" ]; then
-                    echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
-                    count=`expr $count + 1`
-            else
-                    echo -e "\n${SM} You Must Enter Root Partition Size !!! ${EM}\n"
-                    count=`expr $count + 1`
-            fi
-            clean_screen
-                
-        done
-        clear
-        count=0       
-        #____Determine the size of the home partition___#
-        sleep 1
-        while true
-            do
-            echo -e "\n${b}=========================================="
-            echo -e "[---]  ${p}Select Create Home Partition${rt}${b}  [---]"
-            echo -e "==========================================${rt}\n"
-            read  -p "Please do you want create home part or not [y/n] : " CH #Create  Home 
-            case $CH in 
-                y|Y|YES|Yes|yes)
-
-                    clear
-                    echo -e 
-                    sleep 2
-                    while true
-                        do
-                        count=0
-                        echo -e "\n${b}======================================================"
-                        echo -e "[---]  ${p}Determine The Size of The Home Partition${rt}${b}  [---]"
-                        echo -e "======================================================${rt}\n"
-  
-                        read -p "Enter Your Home Partition Size Please : " Homep #Home Partition
-                        if [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; then
-                                break
-                        elif [ -z "${Homep##*[!0-9]*}" ]; then
-                                echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
-                                count=`expr $count + 1`
-                        else 
-                                echo "\n${SM} Enter Valid Value !! ${EM}\n"
-                                count=`expr $count + 1`
-                        fi
-                        clean_screen
-                           
-                    done
-                    echo -e 
-                    break
-                    ;;
-                n|no)
-                        break
-                        ;;
-                        *) 
+                        *)
+                            echo ""
+                            sleep 1
                             echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n"
                             count=`expr $count + 1`
-                            clean_screen
-                            ;;
+                            clean_screen ;;
+                    esac
+                done
+            }
+            KERNEL_Preparation
+            clear
+            function Boot_Setup() {
+                
+                case $ask2 in 
+                    y|Y|YES|Yes|yes)
+                        echo ""
+                        while true 
+                            do
+                            echo -e "\n${b}==============================="
+                            echo -e "[---]     ${p}Boot Setup${rt}${b}      [---]"
+                            echo -e "===============================${rt}\n"
+                            read -p "Do you Wanna Hide Grub Menu  To Have a Quick Boot Up [Y/N]? : " ab # ask boot
+                            case $ab in 
+                                y|Y|yes|Yes|YES)
+                                    break ;;
+                                n|N|no|No|NO)
+                                    break ;;
+                                *)  
+                                    echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n"
+                                    count=`expr $count + 1`
+                                    clean_screen ;;
+                            esac
+                        done
+                        ;;
+                esac  
+            }
+            Boot_Setup
+            clear
+            function Desktop_Setup() { 
+                while true
+                    do  
+                    echo -e "\n${b}======================================="
+                    echo -e "[---]  ${p}Desktop Environment Setup${rt}${b}  [---]"
+                    echo -e "=======================================${rt}\n"
+                    echo -e "${g}${bo}+${rt}${SL1} ${w}${bo}GNOME${rt}" 
+                    echo -e "${g}${bo}+${rt}${SL1} ${w}${bo}XFCE4${rt}" 
+                    echo -e "${g}${bo}+${rt}${SL1} ${w}${bo}KDE_PLASMA${rt}\n"  
+                    read -p "Choose A Desktop Environment : "  ENV
+                    case $ENV in 
+                        "1"|"2"|"3")
+                            break ;;
+                        *)
+                            echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n" 
+                            count=`expr $count + 1`
+                            clean_screen ;;
+                    esac
+
+                done
+            }
+            Desktop_Setup
+            clear
+            function Packages() {
+                
+                while true
+                    do
+                    echo -e "\n${b}================================="
+                    echo -e "[---]  ${p}Base Packages Setup${rt}${b}   ---]"
+                    echo -e "=================================${rt}\n"
+                    echo -e "${g}${bo}+${rt}${SL1} ${w}${bo}Main Packages${rt}" 
+                    echo -e  "${g}${bo}+${rt}${SL2} ${w}${bo}Full Base Packages ${rt}(take a time...)\n"
+                    read -p "Choose Your Packages Install Mode : " PM #Package mode
+                    if [ "$PM" == "1" ] ||  [ "$PM" == "2" ] ;then
+                        break
+                        else
+                        sleep 0.8
+                        echo -e "\n${SM} Choose an option from the options ${EM}\n"
+                        count=`expr $count + 1`
+                        clean_screen
+                    fi
+                done
+            }
+            Packages
+            clear 
+            ########## START INSTALLATION ##################
+            #__________ KERNEL LINUX CHOOSE
+            echo -e "\n___Installation started  .......\n"
+            sudo rm -rf /var/lib/pacman/db.lck
+            sleep 1
+            case $KERNEL in 
+                "1")
+                    # "lts"
+                    sudo pacman -S linux-lts --noconfirm
+                    sudo pacman -S linux-lts-headers --noconfirm
+                    sudo grub-mkconfig -o /boot/grub/grub.cfg
+                    ;;
+                "2")  
+                    # "herdand"
+                    sudo pacman -S linux-hardened --noconfirm
+                    sudo grub-mkconfig -o /boot/grub/grub.cfg
+                    ;;
+                "3")
+                    # "zen" 
+                    sudo pacman -S linux-zen --noconfirm
+                    sudo grub-mkconfig -o /boot/grub/grub.cfg
+                    ;;  
+                "a"|"A")
+                    echo "all kernel" 
+                    sudo pacman -S linux-lts --noconfirm
+                    sudo pacman -S linux-lts-headers --noconfirm
+                    sudo pacman -S linux-hardened --noconfirm
+                    sudo pacman -S linux-zen --noconfirm
+                    sed -i 's/#GRUB_DISABLE_SUBMENU=y/GRUB_DISABLE_SUBMENU=y/' /etc/default/grub
+                    sed -i 's/GRUB_DISABLE_SUBMENU=y/GRUB_DEFAULT=saved/' /etc/default/grub
+                    sed -i 's/GRUB_DEFAULT=saved/GRUB_SAVEDEFAULT=true/' /etc/default/grub
+                    sudo grub-mkconfig -o /boot/grub/grub.cfg
+                    ;;
             esac
-        done
-        clear
-        count=0
-        #_____Determine the size of the swap partition__#
-        sleep 1
-        while true
-            do
-            echo -e "\n${b}=========================================="
-            echo -e "[---]  ${p}Select Create swap Partition${rt}${b}  [---]"
-            echo -e "==========================================${rt}\n"
-            read  -p "Please Do You Want Create Swap Part Or Not [y/n] : " CS #Create swap 
-            case $CS in 
+            case $ask2 in 
                 y|Y|YES|Yes|yes)
-                    clear
-                    echo -e 
-                    sleep 2
-                    while true
-                        do
-                        count=0
-                        echo -e "\n${b}======================================================"
-                        echo -e "[---]  ${p}Determine The Size of the Swap Partition${rt}${b}  [---]"
-                        echo -e "======================================================${rt}\n"
-                        read -p "Enter Your Swap Partition Size Please : " Swp # Swap Partition
-                        if [ -z "${Swp//[0-9]/}" -a ! -z "$Swp" ]; then
-                                break
-                        elif [ -z "${Swp##*[!0-9]*}" ]; then
-                                echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
-                                count=`expr $count + 1`
-                        else 
-                                echo -e "\n${SM} Enter Valid Value !! ${EM}\n"
-                                count=`expr $count + 1`
-                        fi
-                        clean_screen              
-                    done
-                    echo -e 
-                    break
+                    sudo pacman -Rs linux --noconfirm
+                    sudo grub-mkconfig -o /boot/grub/grub.cfg
                     ;;
                 n|N|NO|No|no)
-                    break
+                    sed -i 's/#GRUB_DISABLE_SUBMENU=y/GRUB_DISABLE_SUBMENU=y/' /etc/default/grub
+                    sed -i 's/GRUB_DISABLE_SUBMENU=y/GRUB_DEFAULT=saved/' /etc/default/grub
+                    sed -i 's/GRUB_DEFAULT=saved/GRUB_SAVEDEFAULT=true/' /etc/default/grub
+                    sudo grub-mkconfig -o /boot/grub/grub.cfg
                     ;;
-                *) 
-                    echo -e "\n${SM} ENTER 'Yes' or 'No' !!! ${EM}\n"
-                    count=`expr $count + 1`
-                    clean_screen
-                    ;;
+
             esac
-        done
-        }
-        #Determine_Size
 
-        function Extender() {
+            #__________ GRUB CONFIG
 
-            case $CH in 
-                y|Y|yes|Yes|YES)
 
-                    case $CS in 
-                        y|Y|yes|Yes|YES)
-                                ES=`expr ${RooP} + ${Homep} + ${Swp}` ;; ###Extender Size
-                    esac 
-                    case $CS in 
-                        n|N|no|No|NO)
-                                ES=`expr ${RooP} + ${Homep}`;;
-                    esac
-                    ;;
-                n|N|no|No|NO)
-
-                    case $CS in 
-                        y|Y|yes|Yes|YES)
-                                ES=`expr ${RooP} + ${Swp}` ;;
-                    esac
-                    case $CS in 
-                        n|N|no|No|NO)
-                                ;;
-                    esac
-                    ;;
-            esac
-        } 
-        #logic
-        
-        function Check_Of_Extender() {
-        sleep 2
-        while true
-            do 
-            count=0
-            echo -e "\n${b}========================================"
-            echo -e "[---]  ${p}Total Size For Installation${rt}${b}  [---]"
-            echo -e "========================================${rt}\n"
-            echo -e "\n${SP} Is This The Total Volume For The Operation ${p}${bo}${ES}${rt}${w}${bo}GB ? ${rt}${EP}\n" ###Extender Size
-            read -p "Enter 'Yes' To Continue or 'No' To Edit Size : " CES #Confirme Extender Size
-            case $CES in 
-                y|Y|yes|Yes|YES)
-                        break
-                        ;;
-
-                n|N|no|No|NO)
-                        clear
-                        sleep 1
-                        while true
-                            do 
-                            count=0
-                            echo -e "\n${b}================================"
-                            echo -e "[---]     ${p}Overall Size${rt}${b}     [---]"
-                            echo -e "================================${rt}\n"
-                            echo -e "On Next Step GB Is Default\n"
-                            read -p "Enter The Size With (number only): " ES
-                            if [ -z "${ES//[0-9]/}" -a ! -z "$ES" ]; then
-                                    clear
-                                    echo -e "\n${SP} The Size For The Process is ${p}${bo}${ES}${rt}${w}${bo}GB ${rt}${EP}\n"
-                                    echo -e "${SP} If it is not correct, try restarting the script and try again. ${EP}"
-                                    sleep 6
-                                    break
-                            else 
-                                    echo -e "\n${EM} Enter Just The Number Without GB or Valid Value !!${EM}\n"
-                                    count=`expr $count + 1`
-                            fi
-                            clean_screen
-                        done
-                        break
-                        ;;
-                *)
-                        echo -e "\n${SM} ENTER 'yes' or 'no' !!!${EM}\n"
-                        count=`expr $count + 1`
+            case $ab in
+                    y|Y|yes|Yes|YES)
+                        echo 'GRUB_FORCE_HIDDEN_MENU="true"' >> /etc/deafult/grub
+                        sudo rm -rf /etc/grub.d/31_hold_shift
+                        cp 31_hold_shift /etc/grub.d/
+                        sudo chmod a+x /etc/grub.d/31_hold
+                        sudo grub-mkconfig -o /boot/grub/grub.cfg
                         ;;
             esac
-            clean_screen 
-        done
 
-        }
-        # Check_Of_Extender
+            #____base packages install 
 
+            case $PM in 
+                "1")
+                    PKGS=(
+                    'intel-ucode'
+                    'linux-firmware'
+                    'firefox' #  Browser
+                    'pulseaudio' #
+                    'pulseaudio-alsa' # 
+                    'xorg'
+                    'xorg-xinit'
+                    'xorg-server'
+                    'xorg-apps'
+                    'xorg-xkill'
+                    'xorg-drivers' # 
+                    'bash-completion'
+                    'ufw' # 
+                    'libreoffice'
+                    'aria2' # 
+                    'gedit' # video conferences
+                    'conky'
+                    'celluloid' # video player
+                    'autojump'
+                    'unzip'
+                    'linux-firmware'
+                    'code'
+                    'cups'
 
-    #####################################################################################################################
+                    )
+                    for PKG in "${PKGS[@]}"; do
+                        sudo pacman -S --noconfirm $PKG
+                    done
+                    ;;
+                "2")
+                    echo "full package"
+                    PKGS=(
+                    'ufw'
+                    'xorg'
+                    'xorg-xinit'
+                    'xorg-server'
+                    'xorg-apps'
+                    'xorg-drivers'
+                    'xorg-xkill'
+                    'intel-ucode'
+                    'linux-firmware'
+                    'bash-completion'       # Tab completion for Bash
+                    'curl'                  # Remote content retrieval
+                    'file-roller'           # Archive utility
+                    'gtop'                  # System monitoring via terminal
+                    'gufw'                  # Firewall manager
+                    'hardinfo'              # Hardware info app
+                    'htop'                  # Process viewer
+                    'neofetch'              # Shows system info when you launch terminal
+                    'ntp'                   # Network Time Protocol to set time via network.
+                    'numlockx'              # Turns on numlock in X11
+                    'p7zip'                 # 7z compression program
+                    'rsync'                 # Remote file sync utility
+                    'speedtest-cli'         # Internet speed via terminal
+                    'terminus-font'         # Font package with some bigger fonts for login terminal
+                    'tlp'                   # Advanced laptop power management
+                    'unrar'                 # RAR compression program
+                    'unzip'                 # Zip compression program
+                    'wget'                  # Remote content retrieval
+                    'terminator'            # Terminal emulator
+                    'vim'                   # Terminal Editor
+                    'zenity'                # Display graphical dialog boxes via shell scripts
+                    'zip'                   # Zip compression program
+                    'zsh'                   # ZSH shell
+                    'zsh-completions'       # Tab completion for ZSH
 
-    #  NOTE: Every line Here Is Important Even If It Is Empty. If You Delete Any Line Here, It Will Be A Problem
-    #               You Must Understand How the "FDISK" Partition Works To Understand It
+                    # DISK UTILITIES ------------------------------------------------------
 
-    ################################################################################################################## 
+                    'android-tools'         # ADB for Android
+                    'android-file-transfer' # Android File Transfer
+                    'btrfs-progs'           # BTRFS Support
+                    'dosfstools'            # DOS Support
+                    'exfat-utils'           # Mount exFat drives
+                    'gparted'               # Disk utility
+                    'gvfs-mtp'              # Read MTP Connected Systems
+                    'gvfs-smb'              # More File System Stuff
+                    'nautilus-share'        # File Sharing in Nautilus
+                    'ntfs-3g'               # Open source implementation of NTFS file system
+                    'parted'                # Disk utility
+                    'samba'                 # Samba File Sharing
+                    'smartmontools'         # Disk Monitoring
+                    'smbclient'             # SMB Connection 
+                    'xfsprogs'              # XFS Support
 
-        
- #------    CREATE MSDOS PARTITIONS ON BIOS & UEFI MODE -------#
+                    # GENERAL UTILITIES ---------------------------------------------------
 
-    function MS_PART () {
-    
-        function MSDOS(){
-                        
-            Check_Of_Extender
-            echo "n
-            e
-            
-            
-            +${ES}GB
-            w
-            "| fdisk ${DISK}
-            if [ "$MODE" == "UEFI" ]; then
-                    #___ efi part
-                echo "n
-                l
+                    'flameshot'             # Screenshots
+                    'freerdp'               # RDP Connections
+                    'libvncserver'          # VNC Connections
+                    'nautilus'              # Filesystem browser
+                    'remmina'               # Remote Connection
+                    'veracrypt'             # Disc encryption utility
+                    'variety'               # Wallpaper changer
+
+                    # DEVELOPMENT ---------------------------------------------------------
+
+                    'gedit'                 # Text editor
+                    'clang'                 # C Lang compiler
+                    'cmake'                 # Cross-platform open-source make system
+                    'code'                  # Visual Studio Code
+                    'electron'              # Cross-platform development using Javascript
+                    'git'                   # Version control system
+                    'gcc'                   # C/C++ compiler
+                    'glibc'                 # C libraries
+                    'meld'                  # File/directory comparison
+                    'nodejs'                # Javascript runtime environment
+                    'npm'                   # Node package manager
+                    'python'                # Scripting language
+                    'yarn'                  # Dependency management (Hyper needs this)
+
+                    # MEDIA ---------------------------------------------------------------
+
+                    'kdenlive'              # Movie Render
+                    'obs-studio'            # Record your screen
+                    'celluloid'             # Video player
+                    
+                    # GRAPHICS AND DESIGN -------------------------------------------------
+
+                    'gcolor2'               # Colorpicker
+                    'gimp'                  # GNU Image Manipulation Program
+                    'ristretto'             # Multi image viewer
+
+                    # PRODUCTIVITY --------------------------------------------------------
+
+                    'hunspell'              # Spellcheck libraries
+                    'xpdf'                  # PDF viewer
                 
-                +512M
-                w
-                "| fdisk ${DISK}
-                EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+                    # MEDIA ---------------------------------------------------------------
+
+                    'screenkey'                 # Screencast your keypresses
+
+                    # THEMES --------------------------------------------------------------
+
+                    #ANOTHER PACKAGES
+                    'ark' # compression
+                    'audiocd-kio'
+                    'autoconf' # build
+                    'automake' # build
+                    'bind'
+                    'bind'
+                    'binutils'
+                    'bison'
+                    'bluedevil'
+                    'bluez'
+                    'bluez-libs'
+                    'bluez-utils'
+                    'brave-bin' # Brave Browser
+                    'breeze'
+                    'breeze-gtk'
+                    'bridge-utils'
+                    'btrfs-progs'
+                    'dialog'
+                    'discover'
+                    'dosfstools'
+                    'dtc'
+                    'dxvk-bin' # DXVK DirectX to Vulcan
+                    'egl-wayland'
+                    'exfat-utils'
+                    'exfat-utils'
+                    'extra-cmake-modules'
+                    'extra-cmake-modules'
+                    'filelight'
+                    'flex'
+                    'fuse2'
+                    'fuse3'
+                    'fuseiso'
+                    'gamemode'
+                    'github-desktop-bin' # Github Desktop sync
+                    'gparted' # partition management
+                    'gptfdisk'
+                    'grub'
+                    'grub-customizer'
+                    'gst-libav'
+                    'gst-plugins-good'
+                    'gst-plugins-ugly'
+                    'gwenview'
+                    'haveged'
+                    'htop'
+                    'iptables-nft'
+                    'jdk-openjdk' # Java 17
+                    'kate'
+                    'kcodecs'
+                    'kcoreaddons'
+                    'kde-gtk-config'
+                    'kdeplasma-addons'
+                    'kinfocenter'
+                    'kitty'
+                    'konsole'
+                    'kscreen'
+                    'kscreen'
+                    'kvantum-qt5'
+                    'layer-shell-qt'
+                    'libdvdcss'
+                    'libnewt'
+                    'libtool'
+                    'lightly-git'
+                    'lightlyshaders-git'
+                    'linux'
+                    'linux-firmware'
+                    'linux-headers'
+                    'lsof'
+                    'lutris'
+                    'lzop'
+                    'm4'
+                    'make'
+                    'mangohud' # Gaming FPS Counter
+                    'mangohud-common'
+                    'materia-gtk-theme'             # Desktop Theme
+                    'milou'
+                    'nano'
+                    'neofetch'
+                    'nerd-fonts-fira-code'
+                    'networkmanager'
+                    'nordic-darker-standard-buttons-theme'
+                    'nordic-darker-theme'
+                    'nordic-kde-git'
+                    'nordic-theme'
+                    'noto-fonts-emoji'
+                    'ntfs-3g'
+                    'ntp'
+                    'ocs-url' # install packages from websites
+                    'okular'
+                    'openbsd-netcat'
+                    'openssh'
+                    'os-prober'
+                    'p7zip'
+                    'pacman-contrib'
+                    'papirus-icon-theme'
+                    'papirus-icon-theme'            # Desktop Icons
+                    'patch'
+                    'picom'
+                    'pkgconf'
+                    'plasma-pa'
+                    'pulseaudio'
+                    'pulseaudio-alsa'
+                    'pulseaudio-bluetooth'
+                    'python-notify2'
+                    'python-pip'
+                    'python-psutil'
+                    'python-pyqt5'
+                    'qemu'
+                    'rsync'
+                    'sddm'
+                    'sddm-kcm'
+                    'sddm-nordic-theme-git'
+                    'snap-pac'
+                    'snapper'
+                    'snapper-gui-git'
+                    'spectacle'
+                    'steam'
+                    'sudo'
+                    'swtpm'
+                    'synergy'
+                    'systemsettings'
+                    'terminus-font'
+                    'traceroute'
+                    'ttf-droid'
+                    'ttf-hack'
+                    'ttf-meslo' # Nerdfont package
+                    'ttf-roboto'
+                    'usbutils'
+                    'vim'
+                    'virt-manager'
+                    'virt-viewer'
+                    'wget'
+                    'which'
+                    'wine-gecko'
+                    'wine-mono'
+                    'winetricks'
+                    'xdg-desktop-portal-kde'
+                    'xdg-user-dirs'
+                    'xterm'
+                    'zeroconf-ioslave'
+                    'zip'
+                    'zoom' # video conferences
+                    'zsh'
+                    'zsh-autosuggestions'
+                    'zsh-syntax-highlighting'
+                    )
+                    for PKG in "${PKGS[@]}"; do
+                        sudo pacman -S --noconfirm $PKG
+                    done
+                    ;;
+            esac
+            # determine processor type and install microcode
+            proc_type=$(lscpu | awk '/Vendor ID:/ {print $3}')
+            case "$proc_type" in
+                GenuineIntel)
+                    print "Installing Intel microcode"
+                    pacman -S --noconfirm intel-ucode
+                    proc_ucode=intel-ucode.img
+                    ;;
+                AuthenticAMD)
+                    print "Installing AMD microcode"
+                    pacman -S --noconfirm amd-ucode
+                    proc_ucode=amd-ucode.img
+                    ;;
+            esac	
+
+            # Graphics Drivers find and install
+            if lspci | grep -E "NVIDIA|GeForce"; then
+                pacman -S nvidia --noconfirm --needed
+                nvidia-xconfig
+            elif lspci | grep -E "Radeon"; then
+                pacman -S xf86-video-amdgpu --noconfirm --needed
+            elif lspci | grep -E "Integrated Graphics Controller"; then
+                pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils --needed --noconfirm
             fi
-            echo "n  
-            l
-            
-            +${RooP}GB
-            w
-            "| fdisk ${DISK}
-            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
+            ### enable service
+            systemctl enable cups.service
+            systemctl enable ntpd.service
+            systemctl disable dhcpcd.service
+            systemctl stop dhcpcd.service
+            systemctl enable NetworkManager.service
+            systemctl enable bluetooth
+            #___Desktop Environment 
+            case $ENV in 
+                "1")
+                    #gnome
+                    sudo pacman -S gnome --noconfirm
+                    systemctl stop --now lightdm.service
+                    systemctl disable --now lightdm.service
+                    systemctl stop --now sddm.service
+                    systemctl disable  --now sddm.service
+                    sudo ufw enable --now
+                    sudo systemctl enable --now ufw.service
+                    systemctl enable --now gdm.service
+                    systemctl start --now gdm.service
 
-            case $CH in 
-                y|Y|yes|Yes|YES)
-
-                    case $CS in 
-                        y|Y|yes|Yes|YES)
-                            echo "
-                            n
-                            l
-                            
-                            +${Homep}GB
-                            w
-                            "| fdisk ${DISK}  
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                                                                                    
-                            echo "
-                            n
-                            l
-                            
-                            
-                            +${Swp}GB
-                            w
-                            "| fdisk ${DISK}
-                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-
-                    esac 
-                    case $CS in 
-                        n|N|no|No|NO)
-                            echo "
-                            n
-                            l
-                            
-                            
-                            +${Homep}GB
-                            w
-                            "| fdisk ${DISK}
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-                    esac
                     ;;
-
-                n|N|no|No|NO)
-
-                    case $CS in 
-
-                        y|Y|yes|Yes|YES)
-                            echo "
-                            n
-                            l
-                            
-                            
-                            +${Swp}GB
-                            w
-                            "| fdisk ${DISK}
-                            SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-                    esac
-
-                    case $CS in 
-                        n|N|no|No|NO) 
-                            ;;
-                                ### If Home And Swap Not Created
-                    esac
+                "2")
+                    # "xfce4"
+                    sudo pacman -S  xfce4 xfce4-goodies --noconfirm
+                    systemctl stop --now gdm.service
+                    systemctl disable --now gdm.service
+                    systemctl stop --now sddm.service
+                    systemctl disable --now sddm.service
+                    sudo ufw enable --now
+                    sudo systemctl enable --now ufw.service
+                    echo "exec startxfce-4" > ~/.xinitrc
+                    systemctl enable --now lightdm.service
+                    systemctl start --now lightdm.service
                     ;;
-
+                "3")
+                    # "KDE"
+                    sudo pacman -S xorg plasma plasma-wayland-session kde-applications --noconfirm
+                    systemctl stop --now lightdm.service
+                    systemctl disable --now lightdm.service
+                    systemctl stop --now gdm.service
+                    systemctl disable --now gdm.service
+                    systemctl enable --now sddm.service
+                    sudo ufw enable --now
+                    sudo systemctl enable --now ufw.service
+                    systemctl start --now sddm.service
+                    ;;
             esac
-            }
-
-            case $CH in
-                n|N|no|No|NO)
-                    case $CS in
-                        n|N|no|No|NO)
-
-                            echo "
-                            n
-                            p
-
-
-                            +${RooP}GB
-                            w
-                            "| fdisk ${DISK} 
-                            ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                            ;;
-                        *)
-                            MSDOS
-                            ;;
-
-                    esac
-                    ;;
-                *)
-                    MSDOS
-                    ;;
-                esac
-    }
-    #MS_PART
-
-#------    CREATE GPT PARTITIONS ON BIOS & UEFI MODE -------#
-
-    function GPT(){
-        echo "
-        n  
-
-
-        +${RooP}GB
-        w
-        "| fdisk ${DISK} 
-        ROOT=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-
-        case $CH in 
-            y|Y|yes|Yes|YES)
-
-                case $CS in 
-                    y|Y|yes|Yes|YES)
-
-                        echo "n
-
-
-                        +${Homep}GB
-                        w
-                        " | fdisk ${DISK}  
-                        HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-                                                        
-                        echo "
-                        n
-
-
-                        +${Swp}GB
-                        w
-                        "| fdisk ${DISK}
-                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-
-                esac 
-                case $CS in 
-                    n|N|no|No|NO)
-                        echo "
-                            n
-                            
-                            
-                            +${Homep}GB
-                            w
-                            "| fdisk ${DISK}
-                            HOME=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-                esac
-                ;;
-
-            n|N|no|No|NO)
-
-                case $CS in 
-                    y|Y|yes|Yes|YES)
-
-                        echo "
-                        n
-
-
-                        +${Swp}GB
-                        w
-                        "| fdisk ${DISK}
-                        SWAP=`sudo partx -rgo NR -n -1:-1 ${DISK}` ;;
-
-                esac
-
-                case $CS in 
-                    n|N|no|No|NO) 
-                        ;;
-
-                esac
-                ;;
-        esac   
-                        
-    }
-    #GPT
-
-    function SectionsFormat() {
-
-        echo "y" | mkfs.ext4 "${DISK}${ROOT}"
-        case $CH in 
-            y|Y|yes|Yes|YES)
-
-                case $CS in 
-                    y|Y|yes|Yes|YES)
-                                    
-                        echo "y" | mkfs.ext4 "${DISK}${HOME}" #partition (Home)
-                        mkswap "${DISK}${SWAP}" #partition (Swap)
-                        swapon "${DISK}${SWAP}" ;;
-
-                esac 
-                case $CS in 
-                    n|N|no|No|NO)
-                        echo "y" | mkfs.ext4 "${DISK}${HOME}" ;;
-                esac
-                ;;
-
-            n|N|no|No|NO)
-
-                case $CS in 
-                    y|Y|yes|Yes|YES)
-                                    
-                        mkswap "${DISK}${SWAP}" 
-                        swapon "${DISK}${SWAP}" ;;
-                esac
-
-                case $CS in 
-                    n|N|no|No|NO)
-                        ;;
-                            
-                esac
-                ;;
-        esac 
-    }
-    #Sections_Format
-
-    function MountPoints () {
-                
-        mount "${DISK}${ROOT}" /mnt
-        case $CH in 
-            y|Y|yes|Yes|YES)
-                mkdir /mnt/home
-                mount "${DISK}${HOME}" /mnt/home ;;
-
-            n|N|no|No|NO)
-                        
-                ;;
-        esac
-    }
-    #Mount Points
-
-    function END() {       
-        lsblk
-        echo -e "${w}${bo}\n----------------------------------------------------------------"
-        echo "--   If you did not do the division correctly      -------------"
-        echo "--           Stop Script with (CTRL + Z)           -------------"
-        echo "           And run the script 'help.sh'             ------------"
-        echo "----------------------------------------------------------------"
-        echo "or read the steps mentioned in it and execute them manually  ---"
-        echo "--                and try again                           ------"
-        echo -e "----------------------------------------------------------------\n${rt}"
-        sleep 20
-        clear
-        echo -e "${b}==========================================="
-        echo -e "[---]   ${p}Arch Install on Main Drive${rt}${b}    [---]"
-        echo "===========================================${rt}"
-        pacstrap /mnt --noconfirm base base-devel linux linux-firmware vim nano sudo micro
-        genfstab -U /mnt >> /mnt/etc/fstab
-
-        #### To prepare step 2 ####
-        cp ~/Arctus/step2.sh /mnt/
-        chmod a+x /mnt/step2.sh
-        echo "$DISK" > /mnt/ID
-        echo "$MODE" > /mnt/GrubID
-        pwd=`pwd`
-        sed -i 's/ROOT=.*/ROOT='${ROOT}'/' ${pwd}/help.sh
-        sed -i 's/SWAP=.*/SWAP='${SWAP}'/' ${pwd}/help.sh
-        clear
-        echo "-------------------------------------------------------------"
-        echo "--    You Should Run Step 2 After It Be Ready (./step2)  --"
-        echo "-------------------------------------------------------------"
-        sleep 4
-        echo -e "\n----------------------------"
-        echo    "------   It Ready !!    ----"
-        echo    "----------------------------"
-        arch-chroot /mnt 
-
-        #---After arch-chroot---#
-        umount -R /mnt
-        clear
-        echo "--------------------------------------"
-        echo "--   SYSTEM READY FOR FIRST BOOT    --"
-        echo "--------------------------------------"
-        echo "--          Reboot Now              --"
-        break
-    }
-
-    #END 
-    function ESP() {
-        #___ efi part
-        echo "n
-
-
-        +512M
-        w
-        " | fdisk ${DISK}
-        EFI=`sudo partx -rgo NR -n -1:-1 ${DISK}`
-
-    }
-    #EFI System Partition 
-
-    if [ "$MODE" == "BIOS" ]  ######### IF IS BIOS MODE #######
-        then       
-        clear
-        Determine_Size
-        Extender
-        clear
-        echo -e ""
-        DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
-        if [ "${DT}" == 'msdos' ]; then
-            
-            MS_PART
-            function Sections_Format() {
-
-                echo "y" | mkfs.ext4 "${DISK}${ROOT}"
-                case $CH in 
-                    y|Y|yes|Yes|YES)
-
-                        case $CS in 
-                            y|Y|yes|Yes|YES)
-                                            
-                                echo "y" | mkfs.ext4 "${DISK}${HOME}" #partition (Home)
-                                mkswap "${DISK}${SWAP}" #partition (Swap)
-                                swapon "${DISK}${SWAP}" ;;
-
-                        esac 
-                        case $CS in 
-                            n|N|no|No|NO)
-                                echo "y" | mkfs.ext4 "${DISK}${HOME}" ;;
-                        esac
-                        ;;
-
-                    n|N|no|No|NO)
-
-                        case $CS in 
-                            y|Y|yes|Yes|YES)
-                                            
-                                mkswap "${DISK}${SWAP}" 
-                                swapon "${DISK}${SWAP}" ;;
-                        esac
-
-                        case $CS in 
-                            n|N|no|No|NO)
-                                ;;
-                                    
-                        esac
-                        ;;
-                esac 
-            }
-            Sections_Format
-
-            function Mount_Points () {
-                        
-                mount "${DISK}${ROOT}" /mnt
-                case $CH in 
-                    y|Y|yes|Yes|YES)
-                        mkdir /mnt/home
-                        mount "${DISK}${HOME}" /mnt/home ;;
-
-                    n|N|no|No|NO)
-                                
-                        ;;
-                esac
-            sed -i 's/ROOT=.*/ROOT='${ROOT}'/' ${pwd}/help.sh
-            sed -i 's/SWAP=.*/SWAP='${SWAP}'/' ${pwd}/help.sh
-            }
-            Mount_Points
-        #___________________IF IS GPT ON BIOS _______________#
-        elif [ "${DT}" == 'gpt' ]; then
-            GPT
-            echo "${ROOT}"
-            echo "${HOME}"
-            echo "${SWAP}"
-            sleep 1
-            Sections_Format
-            Mount_Points
-
-        fi
-
-
-
-####______________________________________________________________________________________________________________________##### 
-####______________________________________________________________________________________________________________________#####  
-
-    elif [ "$MODE" == "UEFI" ] # ---------- IF IS UEFI MODE ---------#
-        then
-        clear
-        Determine_Size
-        Extender
-        clear
-        #_____________________ IF MSDOS ON UEFI __________________# 
-
-        DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
-        if [ "${DT}" == 'msdos' ]; then
-            MSPART
-            clear
-
-            #________________________IF IS GPT ON UEFI _______________#
-        elif [ "${DT}" == 'gpt' ]; then
-            
-            ESP
-            GPT      
-        fi
-
-        #_____________ mount the point ___________#
-
-        echo "y" | mkfs.fat -F32 "${DISK}${EFI}"
-
-        Sections_Format  ## Sections_Format
-            #---------  mount the points partitions  --------------#
-
-        Mount_Points 
-        mkdir /mnt/boot
-        mkdir /mnt/boot/efi
-        mount "${DISK}${EFI}" /mnt/boot/efi
-        clear
-        END
-        else
-        echo -e "\n${SP}Choose Number One Or Two ${EP}\n"
-        count=`expr $count + 1`
-        if [ "$count" -eq "$max" ]; then
-            clear
-            count=`expr $count - 3`
-            fi  
-    fi
+            ;;
+        *)
+            echo "You Must Be a Root User To Successfully Complete a Process !! "
+            ;;
+    esac
 fi
-
-##______________________________________________ENJOY WITH ARCH LINUX NOW ______________________________________##
-
-
