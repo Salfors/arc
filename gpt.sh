@@ -25,7 +25,7 @@ SP=${g}${bo}[${rt}${y}${bo}+${rt}${g}${bo}]${rt}${w}${bo} #Start of the success 
 EP=${rt}${g}${bo}[${rt}${y}${bo}+${rt}${g}${bo}]${rt} #End of the success of a Positive sign
 
 #------------------------------------------------------------------------------------------------------------#
-
+clear
 echo -e "${p}${bo}
  ░░░░░  ░░░░░░   ░░░░░░ ░░░░░░░░ ░░    ░░ ░░░░░░░ 
 ▒▒   ▒▒ ▒▒   ▒▒ ▒▒         ▒▒    ▒▒    ▒▒ ▒▒      
@@ -616,7 +616,8 @@ if [ "${os}" != '"Arch Linux"' ]; then
                     ;;
             esac
             ;;
-        *)
+        *)  
+            sleep 3 
             echo "You Must Be a Root User To Successfully Complete a Process !! "
             ;;
     esac
