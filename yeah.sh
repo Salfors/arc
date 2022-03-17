@@ -24,7 +24,7 @@ function Check_Hard_Disk_Status() {
               case $PRI in
                 "1")
 
-                  function ROOT_CREATOR{
+                  function ROOT_CREATOR() {
                     while true
                     do
                       echo -e "\n${b}======================================================"
