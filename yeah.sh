@@ -189,7 +189,7 @@ function Check_Hard_Disk_Status() {
         
                       "3")
                         ##EDIT_HARD_DISK
-                        ;;
+                        echo "good go to edit" ;;
                       # edit hard disk
                       "0")
                         break
@@ -199,7 +199,8 @@ function Check_Hard_Disk_Status() {
                         echo "enter on on there number"
                         count=`expr $count + 1`
                         clean_screen ;;
-                    esac   ;; 
+                    esac
+                  done  ;; 
                 *)
                   ;;
               # here but function delimtez size 
