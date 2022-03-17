@@ -33,10 +33,7 @@ function Check_Hard_Disk_Status() {
                       echo -e "\nNote:Enter Just The Number And Without GB or MB on Next steps"
                       read -p "Please Enter Size For Root Partition : " RooP #Root Partition
                       echo " free space : "
-                      if [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; then
-                          echo "${RooP}"
-                          #break
-                      elif [ -z "${RooP##*[!0-9]*}" ]; then
+                      if [ -z "${RooP##*[!0-9]*}" ]; then
                         echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
                         count=`expr $count + 1`
                       else
@@ -116,9 +113,8 @@ function Check_Hard_Disk_Status() {
                           echo -e "======================================================${rt}\n"
 
                           read -p "Enter Your Home Partition Size Please : " Homep #Home Partition
-                          if [ -z "${Homep//[0-9]/}" -a ! -z "$Homep" ]; then
-                            #break
-                          elif [ -z "${Homep##*[!0-9]*}" ]; then
+
+                          if [ -z "${Homep##*[!0-9]*}" ]; then
                             echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
                             count=`expr $count + 1`
                           else
@@ -158,9 +154,8 @@ function Check_Hard_Disk_Status() {
                           echo -e "[---]  ${p}Determine The Size of the Swap Partition${rt}${b}  [---]"
                           echo -e "======================================================${rt}\n"
                           read -p "Enter Your Swap Partition Size Please : " Swp # Swap Partition
-                          if [ -z "${Swp//[0-9]/}" -a ! -z "$Swp" ]; then
-                            #break
-                          elif [ -z "${Swp##*[!0-9]*}" ]; then
+
+                          if [ -z "${Swp##*[!0-9]*}" ]; then
                             echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
                             count=`expr $count + 1`
                           else
