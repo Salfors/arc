@@ -20,7 +20,8 @@ function Check_Hard_Disk_Status() {
 
           while true  #WHILE 0 
           do 
-            if [ "$PRI" != "" ] ; then
+            if [ "$PRI" != "" ] 
+            then
               #put this inside while loop
               case $PRI in
                 "1")
