@@ -1,4 +1,6 @@
 function Check_Hard_Disk_Status() {
+    count=0
+    mak
 
     dcy=ON  # Simple way to know if you are in the EDIT_HARD_DISK job stage or in the current job
     echo "F
@@ -32,8 +34,8 @@ function Check_Hard_Disk_Status() {
                       read -p "Please Enter Size For Root Partition : " RooP #Root Partition
                       echo " free space : "
                       if [ -z "${RooP//[0-9]/}" -a ! -z "$RooP" ]; then
-                                #echo "${RooP}"
-                                #break
+                          echo "${RooP}"
+                          #break
                       elif [ -z "${RooP##*[!0-9]*}" ]; then
                         echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
                         count=`expr $count + 1`
