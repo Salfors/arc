@@ -200,7 +200,7 @@ function Check_Hard_Disk_Status() {
                         count=`expr $count + 1`
                         clean_screen ;;
                     esac 
-                    ;;
+                    
 
                 *)
                   ;;
