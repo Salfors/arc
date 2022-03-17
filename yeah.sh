@@ -208,20 +208,22 @@ function Check_Hard_Disk_Status() {
               esac
 
               break
-            fi  
+              
             # for break WHILE 0      
 
-            #else
+            else
 
               #echo -e "\n${SM} All Primary Partitions Are In Use. ${EM}\n"
               #EDIT_HARD_DISK
               #Check_Hard_Disk_Status
 
-            #fi
+            fi
 
 
-            if [ 1 -eq "$(echo "${ESE} <= ${ES}" | bc)" ]; then
+            if [ 1 -eq "$(echo "${ESE} <= ${ES}" | bc)" ] then
               echo -e "\n${SM} You Don't Have Enough Space To Install ${EM}\n"
+              echo "You Don't Have Enough Space To Install"
+              break 
               EDIT_HARD_DISK
               Check_Hard_Disk_Status
             fi
