@@ -246,3 +246,4 @@ function Check_Hard_Disk_Status() {
     esac
 
 }
+Check_Hard_Disk_Status
