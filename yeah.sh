@@ -38,8 +38,8 @@ function Check_Hard_Disk_Status() {
                         echo -e "\n${SM} Enter Just The Number And Without GB or MB. ${EM}"
                         count=`expr $count + 1`
                       else
-                          echo -e "\n${SM} You Must Enter Root Partition Size !!! ${EM}\n"
-                          count=`expr $count + 1`
+                        echo -e "\n${SM} You Must Enter Root Partition Size !!! ${EM}\n"
+                        count=`expr $count + 1`
                       fi
                       clean_screen
 
@@ -49,12 +49,12 @@ function Check_Hard_Disk_Status() {
                       case $CONFR in 
                         y|Y|YES|Yes|yes)
                           BRL= # to Break Root Loop
-                            break ;;
+                          break ;;
                         n|N|no|No|NO)
-                            break ;;
+                          break ;;
                         *)
                           echo "Enter the goddamn yes or no" ;;
-                        esac
+                      esac
                       done
 
                       if $BRL >/dev/null 2>&1; then
@@ -202,7 +202,7 @@ function Check_Hard_Disk_Status() {
 
                 *)
                   ;;
-                  # here but function delimtez size 
+              # here but function delimtez size 
               # for 3 or more  part 
               esac
 
