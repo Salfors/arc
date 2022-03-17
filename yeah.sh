@@ -207,7 +207,8 @@ function Check_Hard_Disk_Status() {
               esac
 
               break
-            fi   # for break WHILE 0      
+            fi  
+            # for break WHILE 0      
 
             #else
 
