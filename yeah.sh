@@ -1,7 +1,6 @@
 function Check_Hard_Disk_Status() {
     count=0
-    max=3
-    DISK=/dev/vda
+    mak
 
     dcy=ON  # Simple way to know if you are in the EDIT_HARD_DISK job stage or in the current job
     echo "F
@@ -206,7 +205,6 @@ function Check_Hard_Disk_Status() {
               # for 3 or more  part 
               esac
               break # for break WHILE 0 
-              ;;
 
               
             else
