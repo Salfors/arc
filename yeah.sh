@@ -212,7 +212,7 @@ function Check_Hard_Disk_Status() {
             # for break WHILE 0      
 
             else
-
+              echo "now bitch now"
               #echo -e "\n${SM} All Primary Partitions Are In Use. ${EM}\n"
               #EDIT_HARD_DISK
               #Check_Hard_Disk_Status
