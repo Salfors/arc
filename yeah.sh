@@ -206,7 +206,8 @@ function Check_Hard_Disk_Status() {
               # for 3 or more  part 
               esac
 
-              break  # for break WHILE 0      
+              break
+            fi   # for break WHILE 0      
 
             #else
 
@@ -214,7 +215,7 @@ function Check_Hard_Disk_Status() {
               #EDIT_HARD_DISK
               #Check_Hard_Disk_Status
 
-            fi
+            #fi
 
 
             if [ 1 -eq "$(echo "${ESE} <= ${ES}" | bc)" ]; then
