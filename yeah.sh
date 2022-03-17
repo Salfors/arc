@@ -21,7 +21,6 @@ function Check_Hard_Disk_Status() {
           while true  #WHILE 0 
           do 
           if [ "$PRI" != "" ]; then
-              echo "$PRI"
               #put this inside while loop
               case $PRI in
                 "1")
@@ -75,7 +74,7 @@ function Check_Hard_Disk_Status() {
                       case $CONFOP in
                         y|Y|YES|Yes|yes)
 
-                          EDIT_HARD_DISK
+                          ##EDIT_HARD_DISK
                           break;;
                         n|N|no|No|NO)
                           BWL0= # Confirm is ON for break main loop (WHILE 0 ) To Break While Loop 0
@@ -189,7 +188,7 @@ function Check_Hard_Disk_Status() {
                       ;;
         
                       "3")
-                        EDIT_HARD_DISK
+                        ##EDIT_HARD_DISK
                         ;;
                       # edit hard disk
                       "0")
@@ -199,7 +198,8 @@ function Check_Hard_Disk_Status() {
                       "*")
                         echo "enter on on there number"
                         count=`expr $count + 1`
-                        clean_screen;;
+                        clean_screen ;;
+                      esac
 
                 *)
                   ;;
@@ -207,17 +207,8 @@ function Check_Hard_Disk_Status() {
               # for 3 or more  part 
               esac
 
-              #break
-              echo "fuck you work"
               break
-          else
-
-              #echo -e "\n${SM} All Primary Partitions Are In Use. ${EM}\n"
-              #EDIT_HARD_DISK
-              #Check_Hard_Disk_Status          
-              echo "you bitch"
-              break
-          fi  
+            fi  
             # for break WHILE 0      
 
             #else
