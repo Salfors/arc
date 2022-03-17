@@ -22,6 +22,7 @@ function Check_Hard_Disk_Status() {
           do 
           if [ "$PRI" != "" ]; then
               echo "fuck you work"
+              break
           fi  
             # for break WHILE 0      
 
