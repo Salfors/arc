@@ -199,10 +199,8 @@ function Check_Hard_Disk_Status() {
                         echo "enter on on there number"
                         count=`expr $count + 1`
                         clean_screen ;;
-                    esac;;
-                    
-
-                *)
+                    esac   ;; 
+                "*")
                   ;;
               # here but function delimtez size 
               # for 3 or more  part 
