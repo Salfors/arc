@@ -24,6 +24,9 @@ function Check_Hard_Disk_Status() {
               echo "$PRI"
               echo "fuck you work"
               break
+          else
+              echo "you bitch"
+              break
           fi  
             # for break WHILE 0      
 
