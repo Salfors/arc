@@ -13,6 +13,7 @@ function Check_Hard_Disk_Status() {
     EXT=`grep -o "Extended" status.txt` #Extended
     DT=`sudo parted ${DISK} print | grep -i '^Partition Table' | sed 's/Partition Table: //g'`
     rm -rf status.txt
+    ES=100
     clear
 
     case $DT in
