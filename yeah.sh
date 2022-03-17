@@ -195,12 +195,12 @@ function Check_Hard_Disk_Status() {
                         break
                         ;;
                       #here skip it with break loop (WHILE 1)
-                      "*")
+                      *)
                         echo "enter on on there number"
                         count=`expr $count + 1`
                         clean_screen ;;
                     esac   ;; 
-                "*")
+                *)
                   ;;
               # here but function delimtez size 
               # for 3 or more  part 
